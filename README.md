@@ -1,0 +1,4 @@
+PseudoCQRS
+==========
+
+Pseudo CQRS
