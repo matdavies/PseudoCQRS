@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>PseudoCQRS</id>
+		<version>2.0.0</version>
+		<title>Spawtz CQRS</title>
+		<authors>Liquid Thinking</authors>
+		<owners />
+		<projectUrl>http://www.spawtz.com</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>CQRS Framework</description>
+		<dependencies>
+			<dependency id="CommonServiceLocator" version="1.0" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.dll" target="lib\net40\PseudoCQRS.dll" />
+		<file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.pdb" target="lib\net40\PseudoCQRS.pdb" />
+	</files>
+</package>
