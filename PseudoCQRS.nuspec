@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>PseudoCQRS</id>
-		<version>2.0.0</version>
-		<title>Spawtz CQRS</title>
+		<version>2.0.1</version>
+		<title>Pseudo CQRS</title>
 		<authors>Liquid Thinking</authors>
 		<owners />
 		<projectUrl>http://www.spawtz.com</projectUrl>

@@ -20,13 +20,13 @@ namespace PseudoCQRS.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult Execute()
+		public virtual ActionResult Execute()
 		{
 			return View( this.GetView(), _viewModelFactory.GetViewModel() );
 		}
 
 		[HttpPost]
-		public ActionResult Execute( FormCollection form )
+		public virtual ActionResult Execute( FormCollection form )
 		{
 			var viewModel = _viewModelFactory.GetViewModel();
 			return TryUpdateModel( viewModel ) ? ExecuteCommand( viewModel ) : View( this.GetView(), viewModel );

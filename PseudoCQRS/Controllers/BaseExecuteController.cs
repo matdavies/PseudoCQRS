@@ -18,7 +18,7 @@ namespace PseudoCQRS.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Execute( TViewModel viewModel )
+		public virtual ActionResult Execute( TViewModel viewModel )
 		{
 			ActionResult result;
 			if ( ModelState.IsValid )
