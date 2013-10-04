@@ -7,13 +7,13 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AF22A4E7-5A1C-4298-BA1A-689492C8D0F1}</ProjectGuid>
+    <ProjectGuid>{34058F10-7AAE-49EA-A560-FC5ECC5ED964}</ProjectGuid>
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PseudoCQRS.Examples.NerdDinner</RootNamespace>
     <AssemblyName>PseudoCQRS.Examples.NerdDinner</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -39,30 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4">
-      <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.Net4.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentValidation">
-      <HintPath>..\packages\FluentValidation.4.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentValidation.Mvc">
-      <HintPath>..\packages\FluentValidation.MVC4.4.0.0.1\lib\Net40\FluentValidation.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
     <Reference Include="PseudoCQRS">
-      <HintPath>..\packages\PseudoCQRS.Mvc4.2.0.1\lib\net40\PseudoCQRS.dll</HintPath>
+      <HintPath>..\packages\PseudoCQRS.Mvc4.2.0.0\lib\net40\PseudoCQRS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -94,11 +76,15 @@
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -132,29 +118,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\BaseEntity.cs" />
-    <Compile Include="Entities\Dinner.cs" />
-    <Compile Include="Entities\Host.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\AutoMapperInitializer.cs" />
-    <Compile Include="Infrastructure\EventSubscriberAssembliesProvider.cs" />
-    <Compile Include="Infrastructure\IRepository.cs" />
-    <Compile Include="Infrastructure\NerdDinnerDbSessionManager.cs" />
-    <Compile Include="Infrastructure\NerdDinnerMappingEngine.cs" />
-    <Compile Include="Infrastructure\Repository.cs" />
-    <Compile Include="Infrastructure\UnityControllerFactory.cs" />
-    <Compile Include="Infrastructure\UnityRegistrar.cs" />
-    <Compile Include="Modules\DinnerCreate\DinnerCreateCommand.cs" />
-    <Compile Include="Modules\DinnerCreate\DinnerCreateCommandHandler.cs" />
-    <Compile Include="Modules\DinnerCreate\DinnerCreateCommandResult.cs" />
-    <Compile Include="Modules\DinnerCreate\DinnerCreateController.cs" />
-    <Compile Include="Modules\DinnerCreate\DinnerCreateMapping.cs" />
-    <Compile Include="Modules\DinnerCreate\DinnerCreateViewModel.cs" />
-    <Compile Include="Modules\DinnerCreate\DinnerCreateViewModelProvider.cs" />
-    <Compile Include="Modules\DinnerCreate\DinnerCreateViewModelValidator.cs" />
-    <Compile Include="Modules\EmptyViewModelProviderArgument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -171,12 +137,11 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Dinner\Create.cshtml" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

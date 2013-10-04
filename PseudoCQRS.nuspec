@@ -6,7 +6,7 @@
 		<title>Pseudo CQRS</title>
 		<authors>Liquid Thinking</authors>
 		<owners />
-		<projectUrl>https://github.com/adeel41/PseudoCQRS</projectUrl>
+		<projectUrl>http://www.spawtz.com</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>CQRS Framework</description>
 		<dependencies>
