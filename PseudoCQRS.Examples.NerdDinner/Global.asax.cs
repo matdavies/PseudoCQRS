@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using FluentValidation.Mvc;
+using Microsoft.Practices.Unity;
+using PseudoCQRS.Examples.NerdDinner.Infrastructure;
 
 namespace PseudoCQRS.Examples.NerdDinner
 {
@@ -19,6 +22,12 @@ namespace PseudoCQRS.Examples.NerdDinner
 			WebApiConfig.Register( GlobalConfiguration.Configuration );
 			FilterConfig.RegisterGlobalFilters( GlobalFilters.Filters );
 			RouteConfig.RegisterRoutes( RouteTable.Routes );
+
+			FluentValidationModelValidatorProvider.Configure();
+			AutoMapperInitializer.Initialise();
+			IUnityContainer container = new UnityContainer();
+			UnityRegistrar.Register( container );
+			ControllerBuilder.Current.SetControllerFactory( new UnityControllerFactory( container ) );
 		}
 	}
 }
