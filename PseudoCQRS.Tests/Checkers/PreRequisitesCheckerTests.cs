@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using PseudoCQRS.Checkers;
 using Rhino.Mocks;
 
@@ -8,17 +9,17 @@ namespace PseudoCQRS.Tests.Checkers
 	public class PreRequisitesCheckerTests
 	{
 		private ICheckersExecuter _checkersExecuter;
-		private PreRequisitesChecker _preRequisitesChecker;
+		private PrerequisitesChecker _prerequisitesChecker;
 
 		[SetUp]
 		public void Setup()
 		{
 			_checkersExecuter = MockRepository.GenerateMock<ICheckersExecuter>();
-			_preRequisitesChecker = new PreRequisitesChecker( _checkersExecuter );
+			_prerequisitesChecker = new PrerequisitesChecker( _checkersExecuter );
 		}
 
 
-		private CommandResult ArrangeAndAct(
+		private string ArrangeAndAct(
 			bool authorizationCheckContainsError,
 			bool accessCheckContainsError,
 			bool validationCheckContainsError
@@ -26,26 +27,17 @@ namespace PseudoCQRS.Tests.Checkers
 		{
 			_checkersExecuter
 				.Stub( x => x.ExecuteAuthorizationCheckers( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( new CommandResult
-				{
-					ContainsError = authorizationCheckContainsError
-				} );
+				.Return( authorizationCheckContainsError ? "Error" : String.Empty );
 
 			_checkersExecuter
 				.Stub( x => x.ExecuteAccessCheckers( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( new CommandResult
-				{
-					ContainsError = accessCheckContainsError
-				} );
+				.Return( accessCheckContainsError ? "Error" : String.Empty );
 
 			_checkersExecuter
-				.Stub( x => x.ExecuteValidaitonCheckers( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( new CommandResult
-				{
-					ContainsError = validationCheckContainsError
-				} );
+				.Stub( x => x.ExecuteValidationCheckers( Arg<BlankSimpleTestCommand>.Is.Anything ) )
+				.Return( validationCheckContainsError ? "Error" : String.Empty );
 
-			return _preRequisitesChecker.Check( new BlankSimpleTestCommand() );
+			return _prerequisitesChecker.Check( new BlankSimpleTestCommand() );
 
 		}
 
@@ -53,28 +45,28 @@ namespace PseudoCQRS.Tests.Checkers
 		public void ShouldFailWhenAuthorizationCheckFails()
 		{
 			var result = ArrangeAndAct( true, false, false );
-			Assert.IsTrue( result.ContainsError );
+			Assert.IsNotNullOrEmpty( result );
 		}
 
 		[Test]
 		public void ShouldFailWhenAccessCheckFails()
 		{
 			var result = ArrangeAndAct( false, true, false );
-			Assert.IsTrue( result.ContainsError );
+			Assert.IsNotNullOrEmpty( result );
 		}
 
 		[Test]
 		public void ShouldFaileWhenValidationCheckFails()
 		{
 			var result = ArrangeAndAct( false, false, true );
-			Assert.IsTrue( result.ContainsError );
+			Assert.IsNotNullOrEmpty( result );
 		}
 
 		[Test]
 		public void ShouldBeSuccessfulWhenAllChecksPass()
 		{
 			var result = ArrangeAndAct( false, false, false );
-			Assert.IsFalse( result.ContainsError );
+			Assert.IsNullOrEmpty( result );
 		}
 	}
 }

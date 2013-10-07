@@ -30,10 +30,10 @@ namespace PseudoCQRS.Tests.Controllers
 
 		private ActionResult ArrangeAndAct_WhenModelStateIsValid()
 		{
-			var mapper = MockRepository.GenerateMock<ISpawtzMappingEngine>();
+			var mapper = MockRepository.GenerateMock<IViewModelToCommandMappingEngine>();
 			var mockedServiceLocator = MockRepository.GenerateMock<IServiceLocator>();
 			mockedServiceLocator
-				.Stub( x => x.GetInstance<ISpawtzMappingEngine>() )
+				.Stub( x => x.GetInstance<IViewModelToCommandMappingEngine>() )
 				.Return( mapper );
 			ServiceLocator.SetLocatorProvider( () => mockedServiceLocator );
 			_commandExecutor

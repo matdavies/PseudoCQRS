@@ -2,6 +2,6 @@
 {
 	public interface IValidationChecker<T>
 	{
-		CommandResult Check( T instance );
+		CheckResult Check( T instance );
 	}
 }

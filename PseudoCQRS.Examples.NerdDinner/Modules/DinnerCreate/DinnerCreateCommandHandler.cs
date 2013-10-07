@@ -18,7 +18,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerCreate
 
 		public CommandResult Handle( DinnerCreateCommand cmd )
 		{
-			var host = _repository.Get<Host>( cmd.HostedById );
+			var host = _repository.Get<User>( cmd.HostedById );
 			var dinner = new Dinner( cmd.Title, cmd.EventDate, cmd.Description, host );
 			_repository.Save( dinner );
 			return new DinnerCreateCommandResult

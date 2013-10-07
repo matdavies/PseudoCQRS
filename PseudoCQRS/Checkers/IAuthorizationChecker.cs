@@ -2,6 +2,6 @@
 {
 	public interface IAuthorizationChecker
 	{
-		CommandResult Check();
+		CheckResult Check();
 	}
 }

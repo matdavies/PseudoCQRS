@@ -14,7 +14,7 @@ namespace PseudoCQRS.Tests
 
 		private IViewModelProvider<TestViewModel, TestViewModelProviderArgument> _viewModelProvider;
 		private IViewModelProviderArgumentsProvider _viewModelProviderArgumentsProvider;
-		private IPreRequisitesChecker _preRequisitesChecker;
+		private IPrerequisitesChecker _prerequisitesChecker;
 		private ViewModelFactory<TestViewModel, TestViewModelProviderArgument> _viewModelFactory;
 
 		[SetUp]
@@ -22,22 +22,19 @@ namespace PseudoCQRS.Tests
 		{
 			_viewModelProvider = MockRepository.GenerateMock<IViewModelProvider<TestViewModel, TestViewModelProviderArgument>>();
 			_viewModelProviderArgumentsProvider = MockRepository.GenerateMock<IViewModelProviderArgumentsProvider>();
-			_preRequisitesChecker = MockRepository.GenerateMock<IPreRequisitesChecker>();
+			_prerequisitesChecker = MockRepository.GenerateMock<IPrerequisitesChecker>();
 			_viewModelFactory = new ViewModelFactory<TestViewModel, TestViewModelProviderArgument>(
 				_viewModelProvider,
 				_viewModelProviderArgumentsProvider,
-				_preRequisitesChecker );
+				_prerequisitesChecker );
 		}
 
 		[Test]
 		public void ShouldThrowExceptionWhenPreRequisiteCheckContainsError()
 		{
-			_preRequisitesChecker
+			_prerequisitesChecker
 				.Stub( x => x.Check( Arg<TestViewModelProviderArgument>.Is.Anything ) )
-				.Return( new CommandResult
-				{
-					ContainsError = true
-				} );
+				.Return( "Error" );
 
 			Assert.Throws<ArgumentException>( () => _viewModelFactory.GetViewModel() );
 		}
@@ -45,9 +42,9 @@ namespace PseudoCQRS.Tests
 		[Test]
 		public void ShouldReturnViewModelWhenPreRequisiteCheckReturnsSuccess()
 		{
-			_preRequisitesChecker
+			_prerequisitesChecker
 				.Stub( x => x.Check( Arg<TestViewModelProviderArgument>.Is.Anything ) )
-				.Return( new CommandResult() );
+				.Return( String.Empty );
 
 			_viewModelProvider
 				.Stub( x => x.GetViewModel( Arg<TestViewModelProviderArgument>.Is.Anything ) )

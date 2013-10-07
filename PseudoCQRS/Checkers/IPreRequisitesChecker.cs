@@ -1,7 +1,7 @@
 ﻿namespace PseudoCQRS.Checkers
 {
-	public interface IPreRequisitesChecker
+	public interface IPrerequisitesChecker
 	{
-		CommandResult Check<T>( T instance );
+		string Check<T>( T instance );
 	}
 }

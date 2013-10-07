@@ -19,13 +19,14 @@ namespace PseudoCQRS.Tests.Checkers
 			_checkersExecuter = new CheckersExecuter( _checkersFinder );
 		}
 
-		private CommandResult ExecuteAuthorizationCheckers_ArrangeAndAct( bool containsErrror )
+		private string ExecuteAuthorizationCheckers_ArrangeAndAct( bool containsErrror )
 		{
 			var mockedAuthorizationChecker = MockRepository.GenerateMock<IAuthorizationChecker>();
 			mockedAuthorizationChecker
 				.Stub( x => x.Check() )
-				.Return( new CommandResult
+				.Return( new CheckResult
 				{
+					Message = containsErrror ? "Error" : String.Empty,
 					ContainsError = containsErrror
 				} );
 
@@ -40,24 +41,25 @@ namespace PseudoCQRS.Tests.Checkers
 		public void ExecuteAuthorizationCheckers_ShouldFailWhenCheckerFails()
 		{
 			var result = ExecuteAuthorizationCheckers_ArrangeAndAct( true );
-			Assert.IsTrue( result.ContainsError );
+			Assert.IsNotNullOrEmpty( result );
 		}
 
 		[Test]
 		public void ExecuteAuthorizationChecker_ShouldPassWhenAllCheckersPass()
 		{
 			var result = ExecuteAuthorizationCheckers_ArrangeAndAct( false );
-			Assert.IsFalse( result.ContainsError );
+			Assert.IsNullOrEmpty( result );
 		}
 
 
-		private CommandResult ExecuteAccessCheckers_ArrangeAndAct( bool containsError )
+		private string ExecuteAccessCheckers_ArrangeAndAct( bool containsError )
 		{
 			var mockedAccessChecker = MockRepository.GenerateMock<IAccessChecker>();
 			mockedAccessChecker
 				.Stub( x => x.Check( Arg<String>.Is.Anything, Arg<object>.Is.Anything ) )
-				.Return( new CommandResult
+				.Return( new CheckResult
 				{
+					Message = containsError ? "Error" : String.Empty,
 					ContainsError = containsError
 				} );
 			_checkersFinder
@@ -78,23 +80,24 @@ namespace PseudoCQRS.Tests.Checkers
 		public void ExecuteAccessCheckers_ShouldFailWhenCheckerFails()
 		{
 			var result = ExecuteAccessCheckers_ArrangeAndAct( true );
-			Assert.IsTrue( result.ContainsError );
+			Assert.IsNotNullOrEmpty( result );
 		}
 
 		[Test]
 		public void ExecuteAccessCheckers_ShouldPassWhenCheckerPass()
 		{
 			var result = ExecuteAccessCheckers_ArrangeAndAct( false );
-			Assert.IsFalse( result.ContainsError );
+			Assert.IsNullOrEmpty( result );
 		}
 
-		private CommandResult ExecuteValidationCheckers_ArrangeAndAct( bool containsError )
+		private string ExecuteValidationCheckers_ArrangeAndAct( bool containsError )
 		{
 			var mockedValidationChecker = MockRepository.GenerateMock<IValidationChecker<BlankSimpleTestCommand>>();
 			mockedValidationChecker
 				.Stub( x => x.Check( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( new CommandResult
+				.Return( new CheckResult
 				{
+					Message = containsError ? "Error" : String.Empty,
 					ContainsError = containsError
 				} );
 			_checkersFinder
@@ -103,22 +106,22 @@ namespace PseudoCQRS.Tests.Checkers
 				{
 					mockedValidationChecker
 				} );
-		
-			return _checkersExecuter.ExecuteValidaitonCheckers( new BlankSimpleTestCommand() );
+
+			return _checkersExecuter.ExecuteValidationCheckers( new BlankSimpleTestCommand() );
 		}
 
 		[Test]
 		public void ExecuteValidationCheckers_ShouldFailWhenCheckerFails()
 		{
 			var result = ExecuteValidationCheckers_ArrangeAndAct( true );
-			Assert.IsTrue( result.ContainsError );
+			Assert.IsNotNullOrEmpty( result );
 		}
 
 		[Test]
 		public void ExecuteValidationCheckers_ShouldPassWhenCheckerPass()
 		{
 			var result = ExecuteValidationCheckers_ArrangeAndAct( false );
-			Assert.IsFalse( result.ContainsError );
+			Assert.IsNullOrEmpty( result );
 		}
 	}
 }

@@ -17,7 +17,7 @@ namespace PseudoCQRS.Controllers
 
 		protected ActionResult ExecuteCommand( TViewModel viewModel )
 		{
-			var command = SpawtzMapper.Map<TViewModel, TCommand>( viewModel );
+			var command = Mapper.Map<TViewModel, TCommand>( viewModel );
 			var result = _commandExecutor.ExecuteCommand( command );
 			return result.ContainsError ? OnFailureExecution( viewModel ) : OnSuccessfulExecution( viewModel, result );
 		}

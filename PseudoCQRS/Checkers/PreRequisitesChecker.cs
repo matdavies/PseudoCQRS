@@ -1,24 +1,25 @@
-﻿namespace PseudoCQRS.Checkers
+﻿using System;
+
+namespace PseudoCQRS.Checkers
 {
-	public class PreRequisitesChecker : IPreRequisitesChecker
+	public class PrerequisitesChecker : IPrerequisitesChecker
 	{
 		private readonly ICheckersExecuter _checkersExecuter;
 
-		public PreRequisitesChecker( ICheckersExecuter checkersExecuter )
+		public PrerequisitesChecker( ICheckersExecuter checkersExecuter )
 		{
 			_checkersExecuter = checkersExecuter;
 		}
 
-		public CommandResult Check<T>( T instance )
+		public string Check<T>( T instance )
 		{
 			// Refactor: can we do something like DoActionsWhileFalse( x => x.ContainsError,  action1, action2, action3 )
-			var result = new CommandResult();
-			result = _checkersExecuter.ExecuteAuthorizationCheckers( instance );
-			if ( !result.ContainsError )
+			string result = _checkersExecuter.ExecuteAuthorizationCheckers( instance );
+			if ( String.IsNullOrEmpty( result ) )
 			{
 				result = _checkersExecuter.ExecuteAccessCheckers( instance );
-				if ( !result.ContainsError )
-					result = _checkersExecuter.ExecuteValidaitonCheckers( instance );
+				if ( String.IsNullOrEmpty( result ) )
+					result = _checkersExecuter.ExecuteValidationCheckers( instance );
 			}
 
 			return result;

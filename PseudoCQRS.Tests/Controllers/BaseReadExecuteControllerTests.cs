@@ -11,7 +11,7 @@ namespace PseudoCQRS.Tests.Controllers
 	[TestFixture]
 	public class BaseReadExecuteControllerTests
 	{
-		private ISpawtzMappingEngine _mapper;
+		private IViewModelToCommandMappingEngine _mapper;
 		private IServiceLocator _mockedServiceLocator;
 
 		private DummyReadExecuteController _controller;
@@ -21,10 +21,10 @@ namespace PseudoCQRS.Tests.Controllers
 		[SetUp]
 		public void Setup()
 		{
-			_mapper = MockRepository.GenerateMock<ISpawtzMappingEngine>();
+			_mapper = MockRepository.GenerateMock<IViewModelToCommandMappingEngine>();
 			_mockedServiceLocator = MockRepository.GenerateMock<IServiceLocator>();
 			_mockedServiceLocator
-				.Stub( x => x.GetInstance<ISpawtzMappingEngine>() )
+				.Stub( x => x.GetInstance<IViewModelToCommandMappingEngine>() )
 				.Return( _mapper );
 			ServiceLocator.SetLocatorProvider( () => _mockedServiceLocator );
 

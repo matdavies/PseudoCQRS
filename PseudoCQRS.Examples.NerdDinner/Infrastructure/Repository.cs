@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using PseudoCQRS.Examples.NerdDinner.Entities;
 
 namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
@@ -16,20 +15,25 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 		}
 
 
-		public T Get<T>( int id ) where T : BaseEntity
+		public T GetSingleOrDefault<T>( Func<T, bool> predicate ) where T : BaseEntity
 		{
 			T result = default( T );
 			if ( InternalStorageDictionary.ContainsKey( typeof( T ) ) )
-				result = (T)InternalStorageDictionary[ typeof( T ) ].SingleOrDefault( x => x.Id == id );
+				result = InternalStorageDictionary[ typeof( T ) ].Cast<T>().SingleOrDefault( predicate );
 
 			return result;
+		}
+
+		public T Get<T>( int id ) where T : BaseEntity
+		{
+			return GetSingleOrDefault<T>( x => x.Id == id );
 		}
 
 		public IEnumerable<T> GetAll<T>() where T : BaseEntity
 		{
 			var list = new List<T>();
-			if ( InternalStorageDictionary.ContainsKey( typeof ( T ) ) )
-				list = InternalStorageDictionary[ typeof ( T ) ].Select( x => (T) x ).ToList();
+			if ( InternalStorageDictionary.ContainsKey( typeof( T ) ) )
+				list = InternalStorageDictionary[ typeof( T ) ].Select( x => (T)x ).ToList();
 
 			return list;
 		}

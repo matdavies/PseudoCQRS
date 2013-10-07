@@ -85,7 +85,7 @@
     <Compile Include="Controllers\Helpers\DummyReadViewModel.cs" />
     <Compile Include="Controllers\Helpers\DummyReadViewModelProviderArgument.cs" />
     <Compile Include="Controllers\SessionBasedMessageManagerTests.cs" />
-    <Compile Include="Controllers\SpawtzMapperTests.cs" />
+    <Compile Include="Controllers\MapperTests.cs" />
     <Compile Include="DbAttributesTests.cs" />
     <Compile Include="Helpers\MemoryCacheTests.cs" />
     <Compile Include="TestHelpers\HttpContextHelper.cs" />

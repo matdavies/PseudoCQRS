@@ -1,4 +1,6 @@
-﻿namespace PseudoCQRS.Checkers
+﻿using System;
+
+namespace PseudoCQRS.Checkers
 {
 	public class CheckersExecuter : ICheckersExecuter
 	{
@@ -9,42 +11,50 @@
 			_checkersFinder = checkersFinder;
 		}
 
-		public CommandResult ExecuteAuthorizationCheckers( object instance )
+		public string ExecuteAuthorizationCheckers( object instance )
 		{
-			var result = new CommandResult();
+			var result = String.Empty;
 
 			foreach ( var checker in _checkersFinder.FindAuthorizationCheckers( instance ) )
 			{
-				result = checker.Check();
-				if ( result.ContainsError )
+				var checkResult = checker.Check();
+				if ( checkResult.ContainsError )
+				{
+					result = checkResult.Message;
 					break;
+				}
 			}
 
 			return result;
 		}
 
-		public CommandResult ExecuteAccessCheckers( object instance )
+		public string ExecuteAccessCheckers( object instance )
 		{
-			var result = new CommandResult();
+			var result = String.Empty;
 			foreach ( var accessCheckerDetails in _checkersFinder.FindAccessCheckers( instance ) )
 			{
-				result = accessCheckerDetails.AccessChecker.Check( accessCheckerDetails.PropertyName, instance );
-				if ( result.ContainsError )
+				var checkResult = accessCheckerDetails.AccessChecker.Check( accessCheckerDetails.PropertyName, instance );
+				if ( checkResult.ContainsError )
+				{
+					result = checkResult.Message;
 					break;
+				}
 			}
 			return result;
 		}
 
-		public CommandResult ExecuteValidaitonCheckers<T>( T instance )
+		public string ExecuteValidationCheckers<T>( T instance )
 		{
-			var result = new CommandResult();
-
+			var result = String.Empty;
 
 			foreach ( var checker in _checkersFinder.FindValidationCheckers<T>( instance ) )
 			{
-				result = checker.Check( instance );
-				if ( result.ContainsError )
+				var checkResult = checker.Check( instance );
+				if ( checkResult.ContainsError )
+				{
+					result = checkResult.Message;
 					break;
+				}
 			}
 
 			return result;

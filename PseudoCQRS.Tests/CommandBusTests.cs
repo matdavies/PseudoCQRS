@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using PseudoCQRS.Checkers;
 using Rhino.Mocks;
 
@@ -9,7 +10,7 @@ namespace PseudoCQRS.Tests
 	{
 		private ICommandHandlerProvider _commandHandlerProvider;
 		private IDbSessionManager _dbSessionManager;
-		private IPreRequisitesChecker _preRequisitesChecker;
+		private IPrerequisitesChecker _prerequisitesChecker;
 		private CommandBus _bus;
 
 		[SetUp]
@@ -17,22 +18,22 @@ namespace PseudoCQRS.Tests
 		{
 			_commandHandlerProvider = MockRepository.GenerateMock<ICommandHandlerProvider>();
 			_dbSessionManager = MockRepository.GenerateMock<IDbSessionManager>();
-			_preRequisitesChecker = MockRepository.GenerateMock<IPreRequisitesChecker>();
+			_prerequisitesChecker = MockRepository.GenerateMock<IPrerequisitesChecker>();
 
-			_bus = new CommandBus( _commandHandlerProvider, _dbSessionManager, _preRequisitesChecker );
+			_bus = new CommandBus( _commandHandlerProvider, _dbSessionManager, _prerequisitesChecker );
 		}
 
-		private CommandResult ExecuteArrangeAndAct( 
+		private CommandResult ExecuteArrangeAndAct(
 			ICommandHandler<BlankSimpleTestCommand> getCommandHandlerRetVal = null,
-			CommandResult commandPreHandleResult = null )
+			string commandPreHandleResult = "" )
 		{
 			_commandHandlerProvider
 				.Stub( x => x.GetCommandHandler<BlankSimpleTestCommand>() )
 				.Return( getCommandHandlerRetVal );
 
-			_preRequisitesChecker
+			_prerequisitesChecker
 				.Stub( x => x.Check( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( commandPreHandleResult ?? new CommandResult() );
+				.Return( String.IsNullOrEmpty( commandPreHandleResult ) ? String.Empty : commandPreHandleResult );
 
 			return _bus.Execute( new BlankSimpleTestCommand() );
 		}
@@ -61,10 +62,7 @@ namespace PseudoCQRS.Tests
 		public void ShouldNotCallHandler_WhenPreHandlerReturnsFalse()
 		{
 			var handler = MockRepository.GenerateMock<ICommandHandler<BlankSimpleTestCommand>>();
-			ExecuteArrangeAndAct( handler, new CommandResult
-			{
-				ContainsError = true
-			} );
+			ExecuteArrangeAndAct( handler, "Error" );
 
 			handler.AssertWasNotCalled( x => x.Handle( Arg<BlankSimpleTestCommand>.Is.Anything ) );
 		}
@@ -73,13 +71,10 @@ namespace PseudoCQRS.Tests
 		public void ShouldReturnFalseWhenPreHandlerReturnsFalse()
 		{
 			var handler = MockRepository.GenerateMock<ICommandHandler<BlankSimpleTestCommand>>();
-			var result = ExecuteArrangeAndAct( handler, new CommandResult
-			{
-				ContainsError = true
-			} );
+			var result = ExecuteArrangeAndAct( handler, "Error" );
 
 			Assert.IsTrue( result.ContainsError );
-			
+
 		}
 
 		[DbTransaction]
@@ -102,7 +97,7 @@ namespace PseudoCQRS.Tests
 		public void ShouldCommitTransactionWhenDbTransactionAttributeIsApplied()
 		{
 			ExecuteArrangeAndAct( new CommandHandlerWithTransactionAttribute() );
-			_dbSessionManager.AssertWasCalled( x => x.CommitTransaction() );			
+			_dbSessionManager.AssertWasCalled( x => x.CommitTransaction() );
 		}
 
 

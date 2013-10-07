@@ -28,6 +28,8 @@ namespace PseudoCQRS.Examples.NerdDinner
 			IUnityContainer container = new UnityContainer();
 			UnityRegistrar.Register( container );
 			ControllerBuilder.Current.SetControllerFactory( new UnityControllerFactory( container ) );
+
+			// todo: add some demo data
 		}
 	}
 }

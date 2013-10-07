@@ -9,24 +9,24 @@ namespace PseudoCQRS
 	{
 		private readonly IViewModelProvider<TViewModel, TArg> _viewModelProvider;
 		private readonly IViewModelProviderArgumentsProvider _argumentsProvider;
-		private readonly IPreRequisitesChecker _preRequisitesChecker;
+		private readonly IPrerequisitesChecker _prerequisitesChecker;
 
 		public ViewModelFactory(
 			IViewModelProvider<TViewModel, TArg> viewModelProvider,
 			IViewModelProviderArgumentsProvider argumentsProvider,
-			IPreRequisitesChecker preRequisitesChecker )
+			IPrerequisitesChecker prerequisitesChecker )
 		{
 			_viewModelProvider = viewModelProvider;
 			_argumentsProvider = argumentsProvider;
-			_preRequisitesChecker = preRequisitesChecker;
+			_prerequisitesChecker = prerequisitesChecker;
 		}
 
 		public TViewModel GetViewModel()
 		{
 			var args = _argumentsProvider.GetArguments<TArg>();
-			var checkResult = _preRequisitesChecker.Check( args );
-			if ( checkResult.ContainsError )
-				throw new ArgumentException( checkResult.Message );
+			var checkResult = _prerequisitesChecker.Check( args );
+			if ( !String.IsNullOrEmpty( checkResult ) )
+				throw new ArgumentException( checkResult );
 
 			return _viewModelProvider.GetViewModel( args );
 		}

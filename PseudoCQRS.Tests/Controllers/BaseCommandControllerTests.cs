@@ -14,7 +14,7 @@ namespace PseudoCQRS.Tests.Controllers
 		private const string ErrorMessage = "Error Message returned from CommandBus";
 		private const string SuccessMessage = "Success Message returned from CommandBus";
 
-		private ISpawtzMappingEngine _mapper;
+		private IViewModelToCommandMappingEngine _mapper;
 		private IServiceLocator _mockedServiceLocator;
 		private ICommandExecutor _commandExecutor;
 		private IMessageManager _messageManager;
@@ -24,10 +24,10 @@ namespace PseudoCQRS.Tests.Controllers
 		[SetUp]
 		public void Setup()
 		{
-			_mapper = MockRepository.GenerateMock<ISpawtzMappingEngine>();
+			_mapper = MockRepository.GenerateMock<IViewModelToCommandMappingEngine>();
 			_mockedServiceLocator = MockRepository.GenerateMock<IServiceLocator>();
 			_mockedServiceLocator
-				.Stub( x => x.GetInstance<ISpawtzMappingEngine>() )
+				.Stub( x => x.GetInstance<IViewModelToCommandMappingEngine>() )
 				.Return( _mapper );
 			ServiceLocator.SetLocatorProvider( () => _mockedServiceLocator );
 

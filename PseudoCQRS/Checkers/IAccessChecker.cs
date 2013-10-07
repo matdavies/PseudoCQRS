@@ -2,6 +2,6 @@
 {
 	public interface IAccessChecker
 	{
-		CommandResult Check( string propertyName, object instance );
+		CheckResult Check( string propertyName, object instance );
 	}
 }

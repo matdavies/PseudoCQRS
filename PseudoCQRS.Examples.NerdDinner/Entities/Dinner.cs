@@ -10,14 +10,14 @@ namespace PseudoCQRS.Examples.NerdDinner.Entities
 		public string Title { get; protected set; }
 		public DateTime EventDate { get; protected set; }
 		public string Description { get; protected set; }
-		public Host HostedBy { get; protected set; }
+		public User HostedBy { get; protected set; }
 
 		public Dinner()
 		{
 
 		}
 
-		public Dinner( string title, DateTime eventDate, string description, Host hostedBy )
+		public Dinner( string title, DateTime eventDate, string description, User hostedBy )
 		{
 			this.Title = title;
 			this.EventDate = eventDate;

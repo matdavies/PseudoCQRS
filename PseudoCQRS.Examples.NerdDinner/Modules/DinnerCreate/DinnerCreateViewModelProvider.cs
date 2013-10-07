@@ -20,7 +20,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerCreate
 			return new DinnerCreateViewModel
 			{
 				EventDate = DateTime.Today.ToShortDateString(),
-				Hosts =  _repository.GetAll<Host>().ToDictionary( x => x.Id, x => x.Name )
+				Hosts =  _repository.GetAll<User>().ToDictionary( x => x.Id, x => x.Name )
 			};
 		}
 	}

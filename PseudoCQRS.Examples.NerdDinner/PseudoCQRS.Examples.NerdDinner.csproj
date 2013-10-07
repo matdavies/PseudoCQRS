@@ -62,7 +62,7 @@
       <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="PseudoCQRS">
-      <HintPath>..\packages\PseudoCQRS.Mvc4.2.0.1\lib\net40\PseudoCQRS.dll</HintPath>
+      <HintPath>..\packages\PseudoCQRS.Mvc4.2.0.2\lib\net40\PseudoCQRS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -85,13 +85,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -134,7 +127,7 @@
   <ItemGroup>
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Dinner.cs" />
-    <Compile Include="Entities\Host.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +139,7 @@
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Infrastructure\UnityControllerFactory.cs" />
     <Compile Include="Infrastructure\UnityRegistrar.cs" />
+    <Compile Include="Modules\AdminAuthorizationChecker.cs" />
     <Compile Include="Modules\DinnerCreate\DinnerCreateCommand.cs" />
     <Compile Include="Modules\DinnerCreate\DinnerCreateCommandHandler.cs" />
     <Compile Include="Modules\DinnerCreate\DinnerCreateCommandResult.cs" />
@@ -154,11 +148,13 @@
     <Compile Include="Modules\DinnerCreate\DinnerCreateViewModel.cs" />
     <Compile Include="Modules\DinnerCreate\DinnerCreateViewModelProvider.cs" />
     <Compile Include="Modules\DinnerCreate\DinnerCreateViewModelValidator.cs" />
-    <Compile Include="Modules\DinnersList\DinnerListItemViewModel.cs" />
-    <Compile Include="Modules\DinnersList\DinnersListController.cs" />
-    <Compile Include="Modules\DinnersList\DinnersListViewModel.cs" />
-    <Compile Include="Modules\DinnersList\DinnersListViewModelProvider.cs" />
     <Compile Include="Modules\EmptyViewModelProviderArgument.cs" />
+    <Compile Include="Modules\Login\LoginCommand.cs" />
+    <Compile Include="Modules\Login\LoginCommandHandler.cs" />
+    <Compile Include="Modules\Login\LoginController.cs" />
+    <Compile Include="Modules\Login\LoginMapping.cs" />
+    <Compile Include="Modules\Login\LoginViewModel.cs" />
+    <Compile Include="Modules\Login\LoginViewModelProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +179,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Dinner\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

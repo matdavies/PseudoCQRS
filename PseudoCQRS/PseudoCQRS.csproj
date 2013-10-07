@@ -77,6 +77,7 @@
     <Compile Include="Checkers\BaseCheckAttribute.cs" />
     <Compile Include="Checkers\CheckersExecuter.cs" />
     <Compile Include="Checkers\AccessCheckerAttributeDetails.cs" />
+    <Compile Include="Checkers\CheckResult.cs" />
     <Compile Include="Checkers\IAccessChecker.cs" />
     <Compile Include="Checkers\IAuthorizationChecker.cs" />
     <Compile Include="Checkers\ICheckersExecuter.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="CommandHandlerProvider.cs" />
     <Compile Include="Checkers\ICheckersFinder.cs" />
     <Compile Include="Checkers\CheckersFinder.cs" />
-    <Compile Include="Checkers\PreRequisitesChecker.cs" />
+    <Compile Include="Checkers\PrerequisitesChecker.cs" />
     <Compile Include="CommandResult.cs" />
     <Compile Include="Controllers\BaseCommandController.cs" />
     <Compile Include="Controllers\BaseExecuteController.cs" />
@@ -101,10 +102,10 @@
     <Compile Include="Controllers\SessionBasedErrorManager.cs" />
     <Compile Include="Controllers\ExtensionMethods\ControllerExtensionMethods.cs" />
     <Compile Include="Controllers\IMessageManager.cs" />
-    <Compile Include="Controllers\ISpawtzMappingEngine.cs" />
+    <Compile Include="Controllers\IViewModelToCommandMappingEngine.cs" />
     <Compile Include="DbSessionManagerAttribute.cs" />
     <Compile Include="DbTransactionAttribute.cs" />
-    <Compile Include="Checkers\IPreRequisitesChecker.cs" />
+    <Compile Include="Checkers\IPrerequisitesChecker.cs" />
     <Compile Include="ExtensionMethods\ReflectionExtensionMethods.cs" />
     <Compile Include="Helpers\IMemoryCache.cs" />
     <Compile Include="Helpers\MemoryCache.cs" />
@@ -112,7 +113,7 @@
     <Compile Include="IEventSubscriberAssembliesProvider.cs" />
     <Compile Include="IViewModelFactory.cs" />
     <Compile Include="IViewModelProvider.cs" />
-    <Compile Include="Controllers\SpawtzMapper.cs" />
+    <Compile Include="Controllers\Mapper.cs" />
     <Compile Include="EventPublisher.cs" />
     <Compile Include="ICommandBus.cs" />
     <Compile Include="ICommandHandler.cs" />

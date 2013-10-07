@@ -7,16 +7,16 @@ namespace PseudoCQRS
 	{
 		private readonly ICommandHandlerProvider _commandHandlerProvider;
 		private readonly IDbSessionManager _dbSessionManager;
-		private readonly IPreRequisitesChecker _preRequisitesChecker;
+		private readonly IPrerequisitesChecker _prerequisitesChecker;
 
 		public CommandBus(
 			ICommandHandlerProvider commandHandlerProvider,
 			IDbSessionManager dbSessionManager,
-			IPreRequisitesChecker preRequisitesChecker )
+			IPrerequisitesChecker prerequisitesChecker )
 		{
 			_commandHandlerProvider = commandHandlerProvider;
 			_dbSessionManager = dbSessionManager;
-			_preRequisitesChecker = preRequisitesChecker;
+			_prerequisitesChecker = prerequisitesChecker;
 		}
 
 		public CommandResult Execute<TCommand>( TCommand command )
@@ -36,9 +36,11 @@ namespace PseudoCQRS
 				if ( hasTransactionAttribute )
 					_dbSessionManager.OpenTransaction();
 
-				result = _preRequisitesChecker.Check( command );
-				if ( !result.ContainsError )
+				var checkResult = _prerequisitesChecker.Check( command );
+				if ( String.IsNullOrEmpty( checkResult ) )
 					result = handler.Handle( command );
+				else
+					result.Message = checkResult;
 
 				if ( hasTransactionAttribute )
 					_dbSessionManager.CommitTransaction();

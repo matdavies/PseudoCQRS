@@ -21,49 +21,49 @@ namespace PseudoCQRS.Tests.Checkers
 
 		public class TestValidationChecker : IValidationChecker<TestCommandForCheckersFinder>
 		{
-			public CommandResult Check( TestCommandForCheckersFinder instance )
+			public CheckResult Check( TestCommandForCheckersFinder instance )
 			{
-				return new CommandResult();
+				return new CheckResult();
 			}
 		}
 
 		public class TestValidationChecker2 : IValidationChecker<TestCommandForCheckersFinder>
 		{
-			public CommandResult Check( TestCommandForCheckersFinder instance )
+			public CheckResult Check( TestCommandForCheckersFinder instance )
 			{
-				return new CommandResult();
+				return new CheckResult();
 			}
 		}
 
 		public class TestAuthorizationChecker : IAuthorizationChecker
 		{
-			public CommandResult Check()
+			public CheckResult Check()
 			{
-				return new CommandResult();
+				return new CheckResult();
 			}
 		}
 
 		public class TestAccessChecker1 : IAccessChecker
 		{
-			public CommandResult Check( string propertyName, object instance )
+			public CheckResult Check( string propertyName, object instance )
 			{
-				return new CommandResult();
+				return new CheckResult();
 			}
 		}
 
 		public class TestAccessChecker2 : IAccessChecker
 		{
-			public CommandResult Check( string propertyName, object instance )
+			public CheckResult Check( string propertyName, object instance )
 			{
-				return new CommandResult();
+				return new CheckResult();
 			}
 		}
 
 		public class TestAccessChecker3 : IAccessChecker
 		{
-			public CommandResult Check( string propertyName, object instance )
+			public CheckResult Check( string propertyName, object instance )
 			{
-				return new CommandResult();
+				return new CheckResult();
 			}
 		}
 
