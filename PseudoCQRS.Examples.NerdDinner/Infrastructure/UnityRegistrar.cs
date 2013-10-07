@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using PseudoCQRS.Controllers;

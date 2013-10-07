@@ -32,6 +32,10 @@ namespace PseudoCQRS.Tests
 		[Test]
 		public void ShouldCallSubscriptionServiceGetSubscriptions()
 		{
+			_subscriptionService
+				.Stub( x => x.GetSubscriptions<TestingEvent>() )
+				.Return( new List<IEventSubscriber<TestingEvent>>() );
+
 			_publisher.Publish<TestingEvent>( new TestingEvent() );
 
 			_subscriptionService.AssertWasCalled( x => x.GetSubscriptions<TestingEvent>() );
@@ -106,7 +110,7 @@ namespace PseudoCQRS.Tests
 				.Return( new List<IEventSubscriber<TestingEvent>> { new AsyncSubscriber() } );
 
 			_sharedStringBuilder.Append( "Started, " );
-			_publisher.PublishSynchnously<TestingEvent>( new TestingEvent() );
+			_publisher.PublishSynchronously<TestingEvent>( new TestingEvent() );
 			_sharedStringBuilder.Append( "Ended, " );
 			Thread.Sleep( 2000 );
 			Assert.AreEqual( "Started, Executing Subscriber, Ended, ", _sharedStringBuilder.ToString() );

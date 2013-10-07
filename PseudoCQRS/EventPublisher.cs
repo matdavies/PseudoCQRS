@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 
 namespace PseudoCQRS
 {
@@ -18,7 +19,7 @@ namespace PseudoCQRS
 			PublishInternal( @event, true );
 		}
 
-		public void PublishSynchnously<T>( T @event )
+		public void PublishSynchronously<T>( T @event )
 		{
 			PublishInternal( @event, false );
 		}
@@ -26,39 +27,23 @@ namespace PseudoCQRS
 		private void PublishInternal<T>( T @event, bool doAsync )
 		{
 			var subscribers = _subscriptionService.GetSubscriptions<T>();
-			if ( subscribers != null )
+			foreach ( var subscriber in subscribers )
 			{
-				foreach ( var subscriber in subscribers )
+				if ( doAsync && subscriber.IsAsynchronous )
 				{
-					if ( doAsync && subscriber.IsAsynchronous )
-					{
-						var t = new Thread( () =>
-						{
-
-							subscriber.Notify( @event );
-							_dbSessionManager.CloseSession();
-							/*
-							try
-							{
-								subscriber.Notify( @event );
-								_dbSessionManager.CloseSession();
-							}
-							catch ( Exception exception )
-							{
-
-								File.AppendAllText( @"D:\EventPublisherExceptions.txt", String.Format( "{0} {1}", exception.Message, exception.StackTrace ) + "]\r\n\r\n" );
-								throw;
-							}
-							*/
-						});
-						t.Start();
-					}
-					else
+					var t = new Thread( () =>
 					{
 						subscriber.Notify( @event );
-					}
+						_dbSessionManager.CloseSession();
+					} );
+					t.Start();
+				}
+				else
+				{
+					subscriber.Notify( @event );
 				}
 			}
+
 		}
 	}
 }

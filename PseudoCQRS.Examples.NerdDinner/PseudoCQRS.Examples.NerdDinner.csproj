@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AF22A4E7-5A1C-4298-BA1A-689492C8D0F1}</ProjectGuid>
+    <ProjectGuid>{34058F10-7AAE-49EA-A560-FC5ECC5ED964}</ProjectGuid>
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -154,6 +154,10 @@
     <Compile Include="Modules\DinnerCreate\DinnerCreateViewModel.cs" />
     <Compile Include="Modules\DinnerCreate\DinnerCreateViewModelProvider.cs" />
     <Compile Include="Modules\DinnerCreate\DinnerCreateViewModelValidator.cs" />
+    <Compile Include="Modules\DinnersList\DinnerListItemViewModel.cs" />
+    <Compile Include="Modules\DinnersList\DinnersListController.cs" />
+    <Compile Include="Modules\DinnersList\DinnersListViewModel.cs" />
+    <Compile Include="Modules\DinnersList\DinnersListViewModelProvider.cs" />
     <Compile Include="Modules\EmptyViewModelProviderArgument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -171,7 +175,9 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Dinner\List.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
