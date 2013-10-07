@@ -19,7 +19,6 @@ namespace PseudoCQRS.Examples.NerdDinner
 		{
 			AreaRegistration.RegisterAllAreas();
 
-			WebApiConfig.Register( GlobalConfiguration.Configuration );
 			FilterConfig.RegisterGlobalFilters( GlobalFilters.Filters );
 			RouteConfig.RegisterRoutes( RouteTable.Routes );
 
@@ -28,8 +27,7 @@ namespace PseudoCQRS.Examples.NerdDinner
 			IUnityContainer container = new UnityContainer();
 			UnityRegistrar.Register( container );
 			ControllerBuilder.Current.SetControllerFactory( new UnityControllerFactory( container ) );
-
-			// todo: add some demo data
+			DummyDataCreator.PopulateRepository();
 		}
 	}
 }

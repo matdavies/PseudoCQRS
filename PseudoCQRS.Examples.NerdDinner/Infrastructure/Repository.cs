@@ -43,7 +43,8 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 			var list = new List<BaseEntity>();
 			if ( InternalStorageDictionary.ContainsKey( typeof( T ) ) )
 				list = InternalStorageDictionary[ typeof( T ) ];
-
+			else
+				InternalStorageDictionary.Add( typeof( T ), list );
 
 			if ( obj.Id == 0 )
 			{
@@ -55,6 +56,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 				list.RemoveAll( x => x.Id == obj.Id );
 
 			list.Add( obj );
+			
 			return obj.Id;
 		}
 	}
