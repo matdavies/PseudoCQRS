@@ -3,7 +3,6 @@ using PseudoCQRS.Controllers.ExtensionMethods;
 
 namespace PseudoCQRS.Controllers
 {
-	[DbSessionManager]
 	public abstract class BaseReadController<TViewModel, TArgs> : Controller, IViewPath
 		where TViewModel : class 
 		where TArgs : new()
@@ -17,7 +16,6 @@ namespace PseudoCQRS.Controllers
 			_viewModelFactory = viewModelFactory;
 		}
 
-		//[HttpGet]
 		public virtual ActionResult Execute()
 		{
 			return View( this.GetView(), _viewModelFactory.GetViewModel() );

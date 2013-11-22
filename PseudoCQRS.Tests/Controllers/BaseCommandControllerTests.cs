@@ -18,6 +18,7 @@ namespace PseudoCQRS.Tests.Controllers
 		private IServiceLocator _mockedServiceLocator;
 		private ICommandExecutor _commandExecutor;
 		private IMessageManager _messageManager;
+	    private IReferrerProvider _referrerProvider;
 		private DummyExecuteController _controller;
 
 
@@ -33,7 +34,8 @@ namespace PseudoCQRS.Tests.Controllers
 
 			_commandExecutor = MockRepository.GenerateMock<ICommandExecutor>();
 			_messageManager = MockRepository.GenerateMock<IMessageManager>();
-			_controller = new DummyExecuteController( _commandExecutor, _messageManager );
+		    _referrerProvider = MockRepository.GenerateMock<IReferrerProvider>();
+			_controller = new DummyExecuteController( _commandExecutor, _messageManager, _referrerProvider );
 
 			var routeData = new RouteData();
 			routeData.Values.Add( "controller", "DummyDeleteFile" );
@@ -41,33 +43,6 @@ namespace PseudoCQRS.Tests.Controllers
 
 		}
 
-		private ActionResult ArrangeAndAct( bool commandBusError = false )
-		{
-			_commandExecutor
-				.Stub( x => x.ExecuteCommand<DummyExecuteCommand>( null ) )
-				.IgnoreArguments()
-				.Return( new CommandResult
-				{
-					ContainsError = commandBusError,
-					Message = commandBusError ? ErrorMessage : SuccessMessage,
-				} );
-
-			return _controller.Execute( new DummyExecuteViewModel() );
-		}
-
-		[Test]
-		public void ShouldReturnSuccessActionResult_WhenNoErrorReturnedFromCommandBus()
-		{
-			var result = ArrangeAndAct();
-			Assert.AreEqual( "Success", ( (ContentResult)result ).Content );
-		}
-
-		[Test]
-		public void ShouldReturnOnFailureActionResult_WhenCommandBusReturnsAnError()
-		{
-			var result = ArrangeAndAct( commandBusError: true );
-			Assert.AreEqual( "Error", ( (ContentResult)result ).Content );
-		}
 
 	}
 }

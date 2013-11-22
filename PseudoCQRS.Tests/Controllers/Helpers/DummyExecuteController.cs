@@ -2,23 +2,10 @@
 
 namespace PseudoCQRS.Tests.Controllers.Helpers
 {
-	public class DummyExecuteController : BaseExecuteController<DummyExecuteViewModel, DummyExecuteCommand>
-	{
+    public class DummyExecuteController : BaseExecuteController<DummyExecuteViewModel, DummyExecuteCommand>
+    {
+        public DummyExecuteController( ICommandExecutor commandExecutor, IMessageManager messageManager, IReferrerProvider referrerProvider )
+            : base( commandExecutor, messageManager, referrerProvider ) {}
 
-
-		public DummyExecuteController( ICommandExecutor commandExecutor, IMessageManager messageManager )
-			: base( commandExecutor, messageManager )
-		{
-		}
-
-		public override System.Web.Mvc.ActionResult OnFailureExecution( DummyExecuteViewModel viewModel )
-		{
-			return Content( "Error" );
-		}
-
-		public override System.Web.Mvc.ActionResult OnSuccessfulExecution( DummyExecuteViewModel viewModel, CommandResult command )
-		{
-			return Content( "Success" );
-		}
-	}
+    }
 }

@@ -98,7 +98,9 @@
     <Compile Include="Controllers\BaseReadExecuteController.cs" />
     <Compile Include="Controllers\CommandExecutor.cs" />
     <Compile Include="Controllers\ICommandExecutor.cs" />
+    <Compile Include="Controllers\IReferrerProvider.cs" />
     <Compile Include="Controllers\IViewPath.cs" />
+    <Compile Include="Controllers\ReferrerProvider.cs" />
     <Compile Include="Controllers\SessionBasedErrorManager.cs" />
     <Compile Include="Controllers\ExtensionMethods\ControllerExtensionMethods.cs" />
     <Compile Include="Controllers\IMessageManager.cs" />

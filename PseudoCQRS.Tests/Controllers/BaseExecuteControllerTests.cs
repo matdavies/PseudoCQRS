@@ -7,67 +7,87 @@ using Rhino.Mocks;
 
 namespace PseudoCQRS.Tests.Controllers
 {
-	[TestFixture]
-	public class BaseExecuteControllerTests
-	{
-		private ICommandExecutor _commandExecutor;
-		private IMessageManager _messageManager;
-		private DummyExecuteController _controller;
+    [TestFixture]
+    public class BaseExecuteControllerTests
+    {
+        private ICommandExecutor _commandExecutor;
+        private IMessageManager _messageManager;
+        private IReferrerProvider _referrerProvider;
+        private DummyExecuteController _controller;
 
-		[SetUp]
-		public void Setup()
-		{
-			_commandExecutor = MockRepository.GenerateMock<ICommandExecutor>();
-			_messageManager = MockRepository.GenerateMock<IMessageManager>();
-			_controller = new DummyExecuteController( _commandExecutor, _messageManager );
-		}
+        [SetUp]
+        public void Setup()
+        {
+            _commandExecutor = MockRepository.GenerateMock<ICommandExecutor>();
+            _messageManager = MockRepository.GenerateMock<IMessageManager>();
+            _referrerProvider = MockRepository.GenerateMock<IReferrerProvider>();
+            _controller = new DummyExecuteController( _commandExecutor, _messageManager, _referrerProvider );
+        }
 
-		private ActionResult ArrangeAndAct_WhenModalStateIsNotValid()
-		{
-			_controller.ModelState.AddModelError( "TestError", "Error Message" );
-			return _controller.Execute( new DummyExecuteViewModel() );
-		}
+        private ActionResult ArrangeAndAct_WhenModelStateIsNotValid( string url )
+        {
+            _controller.ModelState.AddModelError( "TestError", "Error Message" );
 
-		private ActionResult ArrangeAndAct_WhenModelStateIsValid()
-		{
-			var mapper = MockRepository.GenerateMock<IViewModelToCommandMappingEngine>();
-			var mockedServiceLocator = MockRepository.GenerateMock<IServiceLocator>();
-			mockedServiceLocator
-				.Stub( x => x.GetInstance<IViewModelToCommandMappingEngine>() )
-				.Return( mapper );
-			ServiceLocator.SetLocatorProvider( () => mockedServiceLocator );
-			_commandExecutor
-				.Stub( x => x.ExecuteCommand<DummyExecuteCommand>( null ) )
-				.IgnoreArguments()
-				.Return( new CommandResult
-				{
-					ContainsError = false,
-				} );
+            _referrerProvider
+                .Stub( x => x.GetAbsoluteUri() )
+                .Return( url );
 
-			return _controller.Execute( new DummyExecuteViewModel() );
-		}
+            return _controller.Execute( new DummyExecuteViewModel() );
+        }
 
-		[Test]
-		public void ShouldSetValidationFailue_WhenModalStateIsNotValid()
-		{
-			ArrangeAndAct_WhenModalStateIsNotValid();
-			_messageManager
-				.AssertWasCalled( x => x.SetErrorMessage( Arg<string>.Is.Anything ) );
-		}
+        private ActionResult ArrangeAndAct_WhenModelStateIsValid()
+        {
+            var mapper = MockRepository.GenerateMock<IViewModelToCommandMappingEngine>();
+            var mockedServiceLocator = MockRepository.GenerateMock<IServiceLocator>();
+            mockedServiceLocator
+                .Stub( x => x.GetInstance<IViewModelToCommandMappingEngine>() )
+                .Return( mapper );
+            ServiceLocator.SetLocatorProvider( () => mockedServiceLocator );
+            _commandExecutor
+                .Stub( x => x.ExecuteCommand<DummyExecuteCommand>( null ) )
+                .IgnoreArguments()
+                .Return( new CommandResult
+                {
+                    ContainsError = false,
+                    Message = "Success"
+                } );
 
-		[Test]
-		public void ShouldReturnErrorActionResult_WhenModalStateIsNotValid()
-		{
-			Assert.AreEqual( "Error", ( (ContentResult)ArrangeAndAct_WhenModalStateIsNotValid() ).Content );
-		}
+            _referrerProvider
+                .Stub( x => x.GetAbsoluteUri() )
+                .Return( "localhost" );
 
-		[Test]
-		public void ShouldExecuteCommand_WhenModalStateIsValid()
-		{
-			var result = ArrangeAndAct_WhenModelStateIsValid();
-			_commandExecutor
-				.AssertWasCalled( x => x.ExecuteCommand( Arg<DummyExecuteCommand>.Is.Anything ) );
-		}
+            return _controller.Execute( new DummyExecuteViewModel() );
+        }
 
-	}
+        [Test]
+        public void ShouldSetValidationFailue_WhenModalStateIsNotValid()
+        {
+            ArrangeAndAct_WhenModelStateIsNotValid( "localhost" );
+            _messageManager
+                .AssertWasCalled( x => x.SetErrorMessage( Arg<string>.Is.Anything ) );
+        }
+
+        [Test]
+        public void Execute_WhenViewModelInValid_ReturnsRedirectResult()
+        {
+            var actionResult = ArrangeAndAct_WhenModelStateIsNotValid( "localhost" );
+            Assert.IsInstanceOf<RedirectResult>( actionResult );
+            //Assert.AreEqual("Error Message", ((ContentResult)ArrangeAndAct_WhenModelStateIsNotValid()).Content);
+        }
+
+        [Test]
+        public void ShouldExecuteCommand_WhenModalStateIsValid()
+        {
+            var result = ArrangeAndAct_WhenModelStateIsValid();
+            _commandExecutor
+                .AssertWasCalled( x => x.ExecuteCommand( Arg<DummyExecuteCommand>.Is.Anything ) );
+        }
+
+        [Test]
+        public void Execute_WhenViewModelValid_ReturnsRedirectResult()
+        {
+            var actionResult = ArrangeAndAct_WhenModelStateIsValid();
+            Assert.IsInstanceOf<RedirectResult>( actionResult );
+        }
+    }
 }

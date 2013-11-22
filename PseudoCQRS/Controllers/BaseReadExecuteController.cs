@@ -7,17 +7,27 @@ namespace PseudoCQRS.Controllers
 		where TViewModel : class
 		where TArgs : new()
 	{
-		private readonly IViewModelFactory<TViewModel, TArgs> _viewModelFactory;
+        private readonly IViewModelFactory<TViewModel, TArgs> _viewModelFactory;
 
 		public abstract string ViewPath { get; }
+
+        public abstract ActionResult OnSuccessfulExecution(TViewModel viewModel, CommandResult cmdResult);
+
 
 		protected BaseReadExecuteController(
 			ICommandExecutor commandExecutor,
 			IViewModelFactory<TViewModel, TArgs> viewModelFactory )
-			: base( commandExecutor )
+            :base(commandExecutor)
 		{
 			_viewModelFactory = viewModelFactory;
 		}
+
+        private ActionResult GetActionResult(TViewModel viewModel)
+        {
+            var result = ExecuteCommand( viewModel );
+            return result.ContainsError ? OnFailureExecution(viewModel) : OnSuccessfulExecution(viewModel, result);
+        }
+
 
 		[HttpGet]
 		public virtual ActionResult Execute()
@@ -29,10 +39,10 @@ namespace PseudoCQRS.Controllers
 		public virtual ActionResult Execute( FormCollection form )
 		{
 			var viewModel = _viewModelFactory.GetViewModel();
-			return TryUpdateModel( viewModel ) ? ExecuteCommand( viewModel ) : View( this.GetView(), viewModel );
+            return TryUpdateModel(viewModel) ? GetActionResult(viewModel) : View(this.GetView(), viewModel);
 		}
 
-		public override ActionResult OnFailureExecution( TViewModel viewModel )
+		public virtual ActionResult OnFailureExecution( TViewModel viewModel )
 		{
 			return View( this.GetView(), viewModel );
 		}
