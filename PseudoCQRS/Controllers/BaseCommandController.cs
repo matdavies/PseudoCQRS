@@ -14,12 +14,10 @@ namespace PseudoCQRS.Controllers
 		}
 
 	    public BaseCommandController()
-	    {
-	        _commandExecutor = ServiceLocator.Current.GetInstance<ICommandExecutor>();
-	    }
+	        : this( ServiceLocator.Current.GetInstance<ICommandExecutor>() ) {}
 
 
-        protected CommandResult ExecuteCommand(TViewModel viewModel)
+	    protected CommandResult ExecuteCommand(TViewModel viewModel)
         {
             var command = Mapper.Map<TViewModel, TCommand>(viewModel);
             var result = _commandExecutor.ExecuteCommand(command);

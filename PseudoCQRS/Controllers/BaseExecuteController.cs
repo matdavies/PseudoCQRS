@@ -21,9 +21,11 @@ namespace PseudoCQRS.Controllers
         }
 
         public BaseExecuteController()
+            : this(  
+            ServiceLocator.Current.GetInstance<ICommandExecutor>(), 
+            ServiceLocator.Current.GetInstance<IMessageManager>(), 
+            ServiceLocator.Current.GetInstance<IReferrerProvider>() )
         {
-            _messageManager = ServiceLocator.Current.GetInstance<IMessageManager>();
-            _referrerProvider = ServiceLocator.Current.GetInstance<IReferrerProvider>();
         }
 
         public virtual ActionResult OnCompletion( TViewModel viewModel, CommandResult commandResult )

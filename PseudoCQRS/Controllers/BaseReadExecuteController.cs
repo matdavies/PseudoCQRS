@@ -24,9 +24,9 @@ namespace PseudoCQRS.Controllers
         }
 
         public BaseReadExecuteController()
-        {
-            _viewModelFactory = ServiceLocator.Current.GetInstance<IViewModelFactory<TViewModel, TArgs>>();
-        }
+            : this(
+                ServiceLocator.Current.GetInstance<ICommandExecutor>(),
+                ServiceLocator.Current.GetInstance<IViewModelFactory<TViewModel, TArgs>>() ) {}
 
 
         private ActionResult GetActionResult( TViewModel viewModel )
