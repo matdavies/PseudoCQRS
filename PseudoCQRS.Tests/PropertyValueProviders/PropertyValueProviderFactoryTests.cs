@@ -10,8 +10,8 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		[Test]
 		public void ShouldReturnAllPropertyValueProviders()
 		{
-			var factroy = new PropertyValueProviderFactory();
-			Assert.AreEqual( 4, factroy.GetPropertyValueProviders().Count() );
+			var factory = new PropertyValueProviderFactory();
+			Assert.AreEqual( 5, factory.GetPropertyValueProviders().Count() );
 		}
 	}
 }
