@@ -34,7 +34,6 @@ namespace PseudoCQRS.Tests.Helpers
 
             var httpContext = new HttpContext( request, new HttpResponse( new StringWriter() ) );
 
-            //var fields = request.GetType().GetFields( BindingFlags.Instance | BindingFlags.NonPublic );
             var field = request.GetType().GetField( "_referrer", BindingFlags.Instance | BindingFlags.NonPublic );
             field.SetValue( request, new Uri( "http://localhost" ) );
 

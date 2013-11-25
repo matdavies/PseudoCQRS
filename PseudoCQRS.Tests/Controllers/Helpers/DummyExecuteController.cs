@@ -7,5 +7,9 @@ namespace PseudoCQRS.Tests.Controllers.Helpers
         public DummyExecuteController( ICommandExecutor commandExecutor, IMessageManager messageManager, IReferrerProvider referrerProvider )
             : base( commandExecutor, messageManager, referrerProvider ) {}
 
+        public DummyExecuteController()
+        {
+            
+        }
     }
 }

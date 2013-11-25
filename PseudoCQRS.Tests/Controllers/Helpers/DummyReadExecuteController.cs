@@ -12,6 +12,11 @@ namespace PseudoCQRS.Tests.Controllers.Helpers
 		{
 		}
 
+	    public DummyReadExecuteController()
+	    {
+	        
+	    }
+
 		public override ActionResult OnFailureExecution( DummyReadExecuteViewModel viewModel )
 		{
 			var actionResult = base.OnFailureExecution( viewModel );

@@ -84,6 +84,7 @@
     <Compile Include="Controllers\Helpers\DummyReadController.cs" />
     <Compile Include="Controllers\Helpers\DummyReadViewModel.cs" />
     <Compile Include="Controllers\Helpers\DummyReadViewModelProviderArgument.cs" />
+    <Compile Include="Controllers\Helpers\HasSetAllDependenciesControllerHelper.cs" />
     <Compile Include="Controllers\ReferrerProviderTests.cs" />
     <Compile Include="Controllers\SessionBasedMessageManagerTests.cs" />
     <Compile Include="Controllers\MapperTests.cs" />

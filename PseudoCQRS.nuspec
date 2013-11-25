@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>PseudoCQRS</id>
-		<version>3.0.0</version>
-		<title>Pseudo CQRS</title>
+		<version>3.0.1</version>
+		<title>Pseudo CQRS Mvc3</title>
 		<authors>Liquid Thinking</authors>
 		<owners />
 		<projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
@@ -16,5 +16,5 @@
 	<files>
 		<file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.dll" target="lib\net40\PseudoCQRS.dll" />
 		<file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.pdb" target="lib\net40\PseudoCQRS.pdb" />
-	</files>
+  </files>
 </package>

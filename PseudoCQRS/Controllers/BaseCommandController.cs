@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Microsoft.Practices.ServiceLocation;
 
 namespace PseudoCQRS.Controllers
 {
@@ -11,6 +12,12 @@ namespace PseudoCQRS.Controllers
 		{
 			_commandExecutor = commandExecutor;
 		}
+
+	    public BaseCommandController()
+	    {
+	        _commandExecutor = ServiceLocator.Current.GetInstance<ICommandExecutor>();
+	    }
+
 
         protected CommandResult ExecuteCommand(TViewModel viewModel)
         {

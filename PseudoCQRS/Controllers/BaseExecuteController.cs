@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Practices.ServiceLocation;
 
 namespace PseudoCQRS.Controllers
 {
@@ -13,10 +14,16 @@ namespace PseudoCQRS.Controllers
             ICommandExecutor commandExecutor,
             IMessageManager messageManager,
             IReferrerProvider referrerProvider )
-            :base(commandExecutor)
+            : base( commandExecutor )
         {
             _messageManager = messageManager;
             _referrerProvider = referrerProvider;
+        }
+
+        public BaseExecuteController()
+        {
+            _messageManager = ServiceLocator.Current.GetInstance<IMessageManager>();
+            _referrerProvider = ServiceLocator.Current.GetInstance<IReferrerProvider>();
         }
 
         public virtual ActionResult OnCompletion( TViewModel viewModel, CommandResult commandResult )
@@ -30,7 +37,7 @@ namespace PseudoCQRS.Controllers
             ActionResult result;
             if ( ModelState.IsValid )
             {
-                var cmdResult = ExecuteCommand(viewModel);
+                var cmdResult = ExecuteCommand( viewModel );
                 result = OnCompletion( viewModel, cmdResult );
             }
             else

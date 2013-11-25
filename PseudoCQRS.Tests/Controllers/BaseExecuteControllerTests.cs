@@ -89,5 +89,29 @@ namespace PseudoCQRS.Tests.Controllers
             var actionResult = ArrangeAndAct_WhenModelStateIsValid();
             Assert.IsInstanceOf<RedirectResult>( actionResult );
         }
+
+        [Test]
+        public void HasSetAllDependencies()
+        {
+            var messageManager = MockRepository.GenerateMock<IMessageManager>();
+            var commandExecutor = MockRepository.GenerateMock<ICommandExecutor>();
+            var referrerProvider = MockRepository.GenerateMock<IReferrerProvider>();
+
+            var locator = MockRepository.GenerateMock<IServiceLocator>();
+            locator
+                .Stub(x => x.GetInstance<ICommandExecutor>())
+                .Return(commandExecutor);
+            locator
+                .Stub( x => x.GetInstance<IMessageManager>() )
+                .Return( messageManager );
+            locator
+                .Stub( x => x.GetInstance<IReferrerProvider>() )
+                .Return( referrerProvider );
+
+            ServiceLocator.SetLocatorProvider( () => locator );
+            var controller = new DummyExecuteController();
+
+            HasSetAllDependenciesControllerHelper.AssertFieldsAreNotNull( controller );
+        }
     }
 }
