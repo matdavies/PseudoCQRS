@@ -6,6 +6,7 @@ namespace PseudoCQRS.PropertyValueProviders
 	{
 		private readonly List<IPropertyValueProvider> _propertyValueProviders = new List<IPropertyValueProvider>()
 		{
+            new CookiePropertyValueProvider(),
 			new SessionPropertyValueProvider(),
 			new RouteDataPropertyValueProvider(),
 			new QueryStringPropertyValueProvider(),
