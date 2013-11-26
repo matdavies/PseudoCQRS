@@ -4,6 +4,7 @@ using PseudoCQRS.Controllers.ExtensionMethods;
 
 namespace PseudoCQRS.Controllers
 {
+    [DbSessionManager]
     public abstract class BaseReadController<TViewModel, TArgs> : Controller, IViewPath
         where TViewModel : class
         where TArgs : new()
