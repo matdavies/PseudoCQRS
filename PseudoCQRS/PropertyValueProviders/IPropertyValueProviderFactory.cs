@@ -2,8 +2,9 @@
 
 namespace PseudoCQRS.PropertyValueProviders
 {
-	public interface IPropertyValueProviderFactory
-	{
-		IEnumerable<IPropertyValueProvider> GetPropertyValueProviders();
-	}
+    public interface IPropertyValueProviderFactory
+    {
+        IEnumerable<IPropertyValueProvider> GetPropertyValueProviders();
+        IPersistablePropertyValueProvider GetPersistablePropertyValueProvider( PersistanceLocation location );
+    }
 }

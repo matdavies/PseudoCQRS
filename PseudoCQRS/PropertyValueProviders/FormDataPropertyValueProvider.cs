@@ -7,12 +7,12 @@ namespace PseudoCQRS.PropertyValueProviders
 {
 	public class FormDataPropertyValueProvider : BasePropertyValueProvider, IPropertyValueProvider
 	{
-		public string GetKey( Type objectType, string propertyName )
+	    private string GetKey( Type objectType, string propertyName )
 		{
 			return propertyName;
 		}
 
-		public bool HasValue( string key )
+		public bool HasValue<T>( string key )
 		{
 			var hasValue = HttpContext.Current.Request.Form[ key ] != null;
 			if ( !hasValue && HttpContext.Current.Request.Form[ key + "_Exists" ] != null )
@@ -23,7 +23,7 @@ namespace PseudoCQRS.PropertyValueProviders
 
 		public object GetValue( Type propertyType, string key )
 		{
-			object val = HttpContext.Current.Request.Form[ key ];
+		    object val = HttpContext.Current.Request.Form[ GetKey( propertyType, key ) ];
 			if ( PropertyIsListAndValueIsNull( propertyType, val ) )
 				return GetEmptyListProperty( propertyType );
 

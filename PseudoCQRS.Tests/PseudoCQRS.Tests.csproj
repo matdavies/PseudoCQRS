@@ -81,6 +81,9 @@
     <Compile Include="CommandHandlerFinderTests.cs" />
     <Compile Include="CommandHandlerProviderTests.cs" />
     <Compile Include="Controllers\BaseReadControllerTests.cs" />
+    <Compile Include="Controllers\Helpers\DummyCommandCommand.cs" />
+    <Compile Include="Controllers\Helpers\DummyCommandController.cs" />
+    <Compile Include="Controllers\Helpers\DummyCommandViewModel.cs" />
     <Compile Include="Controllers\Helpers\DummyReadController.cs" />
     <Compile Include="Controllers\Helpers\DummyReadViewModel.cs" />
     <Compile Include="Controllers\Helpers\DummyReadViewModelProviderArgument.cs" />
@@ -105,7 +108,6 @@
     <Compile Include="Controllers\Helpers\DummyReadExecuteViewModelArgs.cs" />
     <Compile Include="EventPublisherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyValueProviders\CommonPropertyValueProviderTests.cs" />
     <Compile Include="PropertyValueProviders\CookiePropertyValueProviderTests.cs" />
     <Compile Include="PropertyValueProviders\FormDataPropertyValueProviderTests.cs" />
     <Compile Include="PropertyValueProviders\PropertyValueProviderFactoryTests.cs" />

@@ -11,9 +11,6 @@ namespace PseudoCQRS.Tests.Controllers
 	[TestFixture]
 	public class BaseCommandControllerTests
 	{
-		private const string ErrorMessage = "Error Message returned from CommandBus";
-		private const string SuccessMessage = "Success Message returned from CommandBus";
-
 		private IViewModelToCommandMappingEngine _mapper;
 		private IServiceLocator _mockedServiceLocator;
 		private ICommandExecutor _commandExecutor;
@@ -42,6 +39,22 @@ namespace PseudoCQRS.Tests.Controllers
 			_controller.ControllerContext = new ControllerContext { RouteData = routeData };
 
 		}
+
+        [Test]
+        public void HasSetAllDependencies()
+        {
+            var commandExecutor = MockRepository.GenerateMock<ICommandExecutor>();
+
+            var locator = MockRepository.GenerateMock<IServiceLocator>();
+            locator
+                .Stub(x => x.GetInstance<ICommandExecutor>())
+                .Return(commandExecutor);
+
+            ServiceLocator.SetLocatorProvider(() => locator);
+            var controller = new DummyCommandController();
+
+            HasSetAllDependenciesControllerHelper.AssertFieldsAreNotNull(controller);
+        }
 
 
 	}

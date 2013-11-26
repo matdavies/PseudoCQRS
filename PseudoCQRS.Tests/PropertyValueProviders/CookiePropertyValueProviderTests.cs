@@ -10,8 +10,6 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 	[TestFixture]
 	public class CookiePropertyValueProviderTests
 	{
-		private const string KeyFormat = @"{0}:{1}";
-
 		private CookiePropertyValueProvider _valueProvider;
 
 		[SetUp]
@@ -21,43 +19,31 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			_valueProvider = new CookiePropertyValueProvider();
 		}
 
-		private class TempClass
-		{
-		}
-
-		[Test]
-		public void GetKeyShouldCreateCorrectly()
-		{
-			var klassType = typeof ( TempClass );
-			const string propertyName = "Testing";
-			var result = _valueProvider.GetKey( klassType , propertyName );
-			var expected = String.Format( KeyFormat, klassType.FullName, propertyName );
-
-			Assert.AreEqual( expected, result );
-		}
-
 		[Test]
 		public void HasValueShouldReturnTrueWhenValueExists()
 		{
 			const string testKey = "MyTestKey";
-			HttpContext.Current.Request.Cookies.Add( new HttpCookie( testKey ) );
+            const string fullKey = "System.String:" + testKey;
+            HttpContext.Current.Request.Cookies.Add(new HttpCookie(fullKey));
 
-			Assert.IsTrue( _valueProvider.HasValue( testKey ) );
+			Assert.IsTrue( _valueProvider.HasValue<string>( testKey ) );
 		}
 
 		[Test]
 		public void HasValueShouldReturnFalseWhenValueDoNotExists()
 		{
 			const string testKey = "MyTestKey";
-			Assert.IsFalse( _valueProvider.HasValue( testKey ) );			
+            const string fullKey = "System.String:" + testKey;
+            Assert.IsFalse(_valueProvider.HasValue<string>(fullKey));			
 		}
 
 		[Test]
 		public void GetValueShouldReturnValue()
 		{
 			const string testKey = "MyTestKey";
-			const string value = "12345";
-			HttpContext.Current.Request.Cookies.Add( new HttpCookie( testKey, value ) );
+            const string fullKey = "System.String:" + testKey;
+            const string value = "12345";
+			HttpContext.Current.Request.Cookies.Add( new HttpCookie( fullKey, value ) );
 			var retVal = _valueProvider.GetValue( typeof ( string ), testKey );
 
 			Assert.AreEqual( value, retVal );
@@ -67,11 +53,12 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		public void SetValueShouldSetValueInResponse()
 		{
 			const string testKey = "MyTestKey";
+		    const string fullKey = "System.String:" + testKey;
 			const string value = "12345";
-			_valueProvider.SetValue( testKey, value );
+			_valueProvider.SetValue<string>( testKey, value );
 
-			Assert.IsTrue( HttpContext.Current.Response.Cookies.AllKeys.Contains( testKey ) );
-			Assert.AreEqual( value, HttpContext.Current.Response.Cookies[testKey].Value );
+			Assert.IsTrue( HttpContext.Current.Response.Cookies.AllKeys.Contains( fullKey ) );
+			Assert.AreEqual( value, HttpContext.Current.Response.Cookies[fullKey].Value );
 
 		}
 	}

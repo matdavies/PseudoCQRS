@@ -73,7 +73,7 @@ DocProject/Help/Html2
 DocProject/Help/html
 
 # Nuget packages
-#*.nupkg
+PseudoCQRS*.nupkg
 
 # Click-Once directory
 publish

@@ -20,12 +20,6 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			HttpContext.Current = HttpContextHelper.GetHttpContext();
 		}
 
-		[Test]
-		public void GetKeyShouldReturnPropertyNameAsKey()
-		{
-			CommonPropertyValueProviderTests.GetKeyShouldReturnPropertyNameAsKey( _valueProvider );
-		}
-
 
 		[Test]
 		public void HasValueShouldReturnTrueWhenFormContainsKey()
@@ -37,14 +31,14 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			form.Add( key, value );
 			HttpContextHelper.SetRequestForm( form );
 
-			Assert.IsTrue( _valueProvider.HasValue( key ) );
+			Assert.IsTrue( _valueProvider.HasValue<string>( key ) );
 		}
 
 		[Test]
 		public void HasValueShouldReturnFalseWhenFormDoesNotContainKey()
 		{
 			const string key = "id";
-			Assert.IsFalse( _valueProvider.HasValue( key ) );
+			Assert.IsFalse( _valueProvider.HasValue<string>( key ) );
 		}
 
 		[Test]
@@ -57,7 +51,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			form.Add( keyName + "_Exists", String.Empty );
 			HttpContextHelper.SetRequestForm( form );
 
-			Assert.IsTrue( _valueProvider.HasValue( keyName ) );
+			Assert.IsTrue( _valueProvider.HasValue<string>( keyName ) );
 		}
 
 		[Test]
@@ -77,7 +71,6 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		public void GetValueShouldReturnEmptyListWhenListIsNull()
 		{
 			const string key = "MyKey";
-
 			var form = new NameValueCollection();
 			form.Add( key, null );
 			HttpContextHelper.SetRequestForm( form );

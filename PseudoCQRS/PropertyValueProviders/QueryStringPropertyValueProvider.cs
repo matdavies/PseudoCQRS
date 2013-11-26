@@ -5,12 +5,7 @@ namespace PseudoCQRS.PropertyValueProviders
 {
 	public class QueryStringPropertyValueProvider : BasePropertyValueProvider, IPropertyValueProvider
 	{
-		public string GetKey( Type objectType, string propertyName )
-		{
-			return propertyName;
-		}
-
-		public bool HasValue( string key )
+	    public bool HasValue<T>( string key )
 		{
 			return HttpContext.Current.Request.QueryString[ key ] != null;
 		}
