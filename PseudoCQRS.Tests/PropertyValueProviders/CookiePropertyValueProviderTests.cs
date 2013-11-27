@@ -41,10 +41,10 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		public void GetValueShouldReturnValue()
 		{
 			const string testKey = "MyTestKey";
-            const string fullKey = "System.String:" + testKey;
+            const string fullKey = "System.Object:" + testKey;
             const string value = "12345";
 			HttpContext.Current.Request.Cookies.Add( new HttpCookie( fullKey, value ) );
-			var retVal = _valueProvider.GetValue( typeof ( string ), testKey );
+			var retVal = _valueProvider.GetValue<Object>( testKey,typeof ( string ));
 
 			Assert.AreEqual( value, retVal );
 		}

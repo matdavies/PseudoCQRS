@@ -17,9 +17,9 @@ namespace PseudoCQRS.PropertyValueProviders
             return HttpContext.Current.Session[ GetKey( typeof ( T ), key ) ] != null;
         }
 
-        public object GetValue( Type propertyType, string key )
+        public object GetValue<T>( string key, Type propertyType )
         {
-            return ConvertValue( HttpContext.Current.Session[ GetKey( propertyType, key ) ].ToString(), propertyType );
+            return ConvertValue( HttpContext.Current.Session[ GetKey( typeof(T), key ) ].ToString(), propertyType );
         }
 
         public void SetValue<T>( string key, object value )

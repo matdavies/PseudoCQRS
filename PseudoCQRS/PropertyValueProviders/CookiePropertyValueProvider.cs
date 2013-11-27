@@ -14,12 +14,12 @@ namespace PseudoCQRS.PropertyValueProviders
 
         public bool HasValue<T>( string key )
         {
-            return HttpContext.Current.Request.Cookies[ GetKey( typeof(T), key ) ] != null;
+            return HttpContext.Current.Request.Cookies[ GetKey( typeof ( T ), key ) ] != null;
         }
 
-        public object GetValue( Type propertyType, string key )
+        public object GetValue<T>( string key, Type propertyType )
         {
-            return ConvertValue( HttpContext.Current.Request.Cookies[ GetKey( propertyType, key ) ].Value, propertyType );
+            return ConvertValue( HttpContext.Current.Request.Cookies[ GetKey( typeof ( T ), key ) ].Value, propertyType );
         }
 
         public void SetValue<T>( string key, object value )

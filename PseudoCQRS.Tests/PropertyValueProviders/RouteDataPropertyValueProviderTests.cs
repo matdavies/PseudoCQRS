@@ -51,7 +51,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			const string value = "1324";
 			HttpContext.Current.Request.RequestContext.RouteData.Values.Add( key, value );
 
-			Assert.AreEqual( value, _valueProvider.GetValue( typeof( string ), key ) );
+			Assert.AreEqual( value, _valueProvider.GetValue<object>( key,typeof( string ) ) );
 
 		}
 

@@ -6,7 +6,7 @@ namespace PseudoCQRS.PropertyValueProviders
 	{
 //		string GetKey( Type objectType, string propertyName );
 		bool HasValue<T>( string key );
-		object GetValue( Type propertyType, string key );
+		object GetValue<T>( string key, Type propertyType );
 
 	}
 }

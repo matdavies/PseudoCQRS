@@ -25,7 +25,7 @@ namespace PseudoCQRS
                 foreach ( var kvp in properties )
                 {
                     if ( propertyValueProvider.HasValue<TArg>( kvp.Key ) )
-                        kvp.Value.SetValue( retVal, propertyValueProvider.GetValue( kvp.Value.PropertyType, kvp.Key ), null );
+                        kvp.Value.SetValue( retVal, propertyValueProvider.GetValue<TArg>( kvp.Key,kvp.Value.PropertyType  ), null );
                 }
             }
             return retVal;

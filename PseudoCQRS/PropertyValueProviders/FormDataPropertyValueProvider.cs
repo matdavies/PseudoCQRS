@@ -21,7 +21,7 @@ namespace PseudoCQRS.PropertyValueProviders
 			return hasValue;
 		}
 
-		public object GetValue( Type propertyType, string key )
+		public object GetValue<T>(  string key, Type propertyType )
 		{
 		    object val = HttpContext.Current.Request.Form[ GetKey( propertyType, key ) ];
 			if ( PropertyIsListAndValueIsNull( propertyType, val ) )

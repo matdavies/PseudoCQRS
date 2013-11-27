@@ -95,7 +95,7 @@ namespace PseudoCQRS.Tests
             return values.ContainsKey( key );
         }
 
-        public object GetValue( Type propertyType, string key )
+        public object GetValue<T>(  string key, Type propertyType )
         {
             return Convert.ChangeType( values[ key ], propertyType );
         }

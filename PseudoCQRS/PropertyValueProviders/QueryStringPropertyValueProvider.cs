@@ -10,7 +10,7 @@ namespace PseudoCQRS.PropertyValueProviders
 			return HttpContext.Current.Request.QueryString[ key ] != null;
 		}
 
-		public object GetValue( Type propertyType, string key )
+		public object GetValue<T>(  string key, Type propertyType)
 		{
 			return ConvertValue( HttpContext.Current.Request.QueryString[ key ], propertyType );
 		}
