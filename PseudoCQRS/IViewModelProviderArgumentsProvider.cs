@@ -7,6 +7,6 @@ namespace PseudoCQRS
     public interface IViewModelProviderArgumentsProvider
 	{
 		TArg GetArguments<TArg>() where TArg : new();
-        void Persist<TArg>( Expression<Func<TArg, object>> expression, PersistanceLocation location ) where TArg : new();
+        void Persist<TArg>() where TArg : new();
 	}
 }

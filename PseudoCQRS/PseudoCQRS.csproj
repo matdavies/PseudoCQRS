@@ -74,6 +74,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Attributes\PersistAttribute.cs" />
     <Compile Include="Checkers\BaseCheckAttribute.cs" />
     <Compile Include="Checkers\CheckersExecuter.cs" />
     <Compile Include="Checkers\AccessCheckerAttributeDetails.cs" />
@@ -108,7 +109,6 @@
     <Compile Include="DbSessionManagerAttribute.cs" />
     <Compile Include="DbTransactionAttribute.cs" />
     <Compile Include="Checkers\IPrerequisitesChecker.cs" />
-    <Compile Include="ExtensionMethods\ExpressionExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\ReflectionExtensionMethods.cs" />
     <Compile Include="Helpers\IMemoryCache.cs" />
     <Compile Include="Helpers\MemoryCache.cs" />
@@ -149,6 +149,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (

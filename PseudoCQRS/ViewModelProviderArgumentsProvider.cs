@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq.Expressions;
+using System.Linq;
+using PseudoCQRS.Attributes;
 using PseudoCQRS.PropertyValueProviders;
 
 namespace PseudoCQRS
@@ -25,20 +26,25 @@ namespace PseudoCQRS
                 foreach ( var kvp in properties )
                 {
                     if ( propertyValueProvider.HasValue<TArg>( kvp.Key ) )
-                        kvp.Value.SetValue( retVal, propertyValueProvider.GetValue<TArg>( kvp.Key,kvp.Value.PropertyType  ), null );
+                        kvp.Value.SetValue( retVal, propertyValueProvider.GetValue<TArg>( kvp.Key, kvp.Value.PropertyType ), null );
                 }
             }
             return retVal;
         }
 
-        public void Persist<TArg>( Expression<Func<TArg, object>> expression, PersistanceLocation location ) where TArg : new()
+        public void Persist<TArg>() where TArg : new()
         {
-            var persistablePropertyKeyValueProvider = _propertyValueProviderFactory.GetPersistablePropertyValueProvider( location );
+            Persist( GetArguments<TArg>() );
+        }
 
-            var propertyName = expression.GetMemberNameFromExpression();
-            var val = expression.Compile()( GetArguments<TArg>() );
-
-            persistablePropertyKeyValueProvider.SetValue<TArg>( propertyName, val );
+        internal void Persist<TArg>( TArg arguments )
+        {
+            foreach ( var property in typeof ( TArg ).GetProperties().Where( x => Attribute.IsDefined( x, typeof ( PersistAttribute ) ) ) )
+            {
+                var persistLocation = ( Attribute.GetCustomAttribute( property, typeof ( PersistAttribute ) ) as PersistAttribute ).PersistanceLocation;
+                var propertyValueProvider = _propertyValueProviderFactory.GetPersistablePropertyValueProvider( persistLocation );
+                propertyValueProvider.SetValue<TArg>( property.Name, property.GetValue( arguments, null ) );
+            }
         }
     }
 }

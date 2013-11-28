@@ -34,3 +34,7 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("3.0.5.0")]
 [assembly: AssemblyFileVersion("3.0.5.0")]
+[assembly: InternalsVisibleTo("PseudoCQRS.Tests") ]
+[assembly: InternalsVisibleTo( "NUnit.Framework" )]
+[assembly: InternalsVisibleTo( "Rhino.Mocks" )]
+[assembly: InternalsVisibleTo( "DynamicProxyGenAssembly2" )]
