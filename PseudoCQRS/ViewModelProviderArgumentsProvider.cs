@@ -43,7 +43,9 @@ namespace PseudoCQRS
             {
                 var persistLocation = ( Attribute.GetCustomAttribute( property, typeof ( PersistAttribute ) ) as PersistAttribute ).PersistanceLocation;
                 var propertyValueProvider = _propertyValueProviderFactory.GetPersistablePropertyValueProvider( persistLocation );
-                propertyValueProvider.SetValue<TArg>( property.Name, property.GetValue( arguments, null ) );
+                var propertyValue = property.GetValue( arguments, null );
+                if ( propertyValue != null )
+                    propertyValueProvider.SetValue<TArg>( property.Name, propertyValue );
             }
         }
     }

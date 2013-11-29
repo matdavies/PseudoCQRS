@@ -77,6 +77,26 @@ namespace PseudoCQRS.Tests
         }
 
         [Test]
+        public void Persist_WhenCalled_IfPropertyValueIsNullDoesNotCallSetValue()
+        {
+            const string session1Value = "Session 1 Value";
+
+            var testClass = new TestClass
+            {
+                Session1 = session1Value,
+                Session2 = null
+            };
+
+            var cookieValueProvider = MockRepository.GenerateMock<IPersistablePropertyValueProvider>();
+            var sessionValueProvider = MockRepository.GenerateMock<IPersistablePropertyValueProvider>();
+
+            ArrangeAct_Persist( cookieValueProvider, sessionValueProvider, testClass );
+
+            sessionValueProvider.AssertWasCalled( x => x.SetValue<TestClass>( "Session1", session1Value ) );
+            sessionValueProvider.AssertWasNotCalled( x => x.SetValue<TestClass>( "Session2", null ) );
+        }
+
+        [Test]
         public void Persist_WhenCalled_SmokeTest()
         {
             const string cookie1Value = "Cookie 1 Value";
@@ -142,49 +162,6 @@ namespace PseudoCQRS.Tests
             [Persist( PersistanceLocation.Session )]
             public String Session2 { get; set; }
         }
-
-
-        //private void Persist_ArrangeAndAct( IPersistablePropertyValueProvider persistablePropertyValueProvider = null )
-        //{
-        //    _persistablePropertyKeyValueProvider = persistablePropertyValueProvider ?? MockRepository.GenerateMock<IPersistablePropertyValueProvider>();
-
-        //    _propertyValueProviderFactory = StubGetPropertyValueProviders();
-        //    _propertyValueProviderFactory
-        //        .Stub( x => x.GetPersistablePropertyValueProvider( Arg<PersistanceLocation>.Is.Anything ) )
-        //        .Return( _persistablePropertyKeyValueProvider );
-
-        //    var argumentProvider = new ViewModelProviderArgumentsProvider( _propertyValueProviderFactory );
-        //    argumentProvider.Persist<TestArguments>( x => x.LeagueId, PersistanceLocation.Session );
-        //    argumentProvider.Persist<TestArguments>(x => x.Filter, PersistanceLocation.Session);
-        //}
-
-        //[Test]
-        //public void Persist_CallCorrectly_GetPersistablePropertyValueProvider()
-        //{
-        //    Persist_ArrangeAndAct();
-        //    _propertyValueProviderFactory
-        //        .AssertWasCalled( x => x.GetPersistablePropertyValueProvider( PersistanceLocation.Session ) );
-        //}
-
-        //[Test]
-        //public void Persist_PersistablePropertyValueProvider_CallsSetKeyAndSaveValue()
-        //{
-        //    const string key = "LeagueId";
-        //    _persistablePropertyKeyValueProvider = MockRepository.GenerateMock<IPersistablePropertyValueProvider>();
-
-        //    Persist_ArrangeAndAct( _persistablePropertyKeyValueProvider );
-        //    _persistablePropertyKeyValueProvider.AssertWasCalled( x => x.SetValue<TestArguments>( key, 1 ) );
-        //}
-
-        //[Test]
-        //public void Persist_PersistablePropertyValueProvider_CallsSetKeyForStringPropertyAndSaveValue()
-        //{
-        //    const string key = "Filter";
-        //    _persistablePropertyKeyValueProvider = MockRepository.GenerateMock<IPersistablePropertyValueProvider>();
-
-        //    Persist_ArrangeAndAct( _persistablePropertyKeyValueProvider );
-        //    _persistablePropertyKeyValueProvider.AssertWasCalled( x => x.SetValue<TestArguments>( key, "TestVal" ) );
-        //}
     }
 
     public class TestPropertyValueProvider : IPropertyValueProvider
