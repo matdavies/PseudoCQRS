@@ -109,9 +109,11 @@
     <Compile Include="DbSessionManagerAttribute.cs" />
     <Compile Include="DbTransactionAttribute.cs" />
     <Compile Include="Checkers\IPrerequisitesChecker.cs" />
+    <Compile Include="AssemblyListProvider.cs" />
     <Compile Include="ExtensionMethods\ReflectionExtensionMethods.cs" />
-    <Compile Include="Helpers\IMemoryCache.cs" />
-    <Compile Include="Helpers\MemoryCache.cs" />
+    <Compile Include="Helpers\IObjectLookupCache.cs" />
+    <Compile Include="Helpers\ObjectLookupCache.cs" />
+    <Compile Include="IAssemblyListProvider.cs" />
     <Compile Include="IDbSessionManager.cs" />
     <Compile Include="IEventSubscriberAssembliesProvider.cs" />
     <Compile Include="IViewModelFactory.cs" />

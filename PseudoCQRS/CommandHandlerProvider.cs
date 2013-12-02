@@ -1,17 +1,16 @@
-﻿using System;
-using PseudoCQRS.Helpers;
+﻿using PseudoCQRS.Helpers;
 
 namespace PseudoCQRS
 {
 	public class CommandHandlerProvider : ICommandHandlerProvider
 	{
 		private readonly ICommandHandlerFinder _commandHandlerFinder;
-		private readonly IMemoryCache _memoryKeyValueProvider;
+		private readonly IObjectLookupCache _cache;
 
-		public CommandHandlerProvider( ICommandHandlerFinder commandHandlerFinder, IMemoryCache memoryKeyValueProvider )
+        public CommandHandlerProvider(ICommandHandlerFinder commandHandlerFinder, IObjectLookupCache cache)
 		{
 			_commandHandlerFinder = commandHandlerFinder;
-			_memoryKeyValueProvider = memoryKeyValueProvider;
+			_cache = cache;
 		}
 		
 
@@ -19,12 +18,12 @@ namespace PseudoCQRS
 		{
 			var commandTypeFullName = typeof(TCommand).FullName;
 
-			var handler = _memoryKeyValueProvider.GetValue<ICommandHandler<TCommand>>( commandTypeFullName, null );
+			var handler = _cache.GetValue<ICommandHandler<TCommand>>( commandTypeFullName, null );
 			if ( handler == null )
 			{
 				handler = _commandHandlerFinder.FindHandlerForCommand<TCommand>();
 				if ( handler != null )
-					_memoryKeyValueProvider.SetValue<ICommandHandler<TCommand>>( commandTypeFullName, handler );
+					_cache.SetValue<ICommandHandler<TCommand>>( commandTypeFullName, handler );
 			}
 
 			return handler;

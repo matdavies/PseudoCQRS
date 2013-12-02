@@ -9,11 +9,11 @@ namespace PseudoCQRS
 {
 	public class SubscriptionService : ISubscriptionService
 	{
-		private readonly IMemoryCache _cache;
+        private readonly IObjectLookupCache _cache;
 		private readonly IEventSubscriberAssembliesProvider _eventSubscriberAssembliesProvider;
 
-		public SubscriptionService( 
-			IMemoryCache cache, 
+		public SubscriptionService(
+            IObjectLookupCache cache, 
 			IEventSubscriberAssembliesProvider eventSubscriberAssembliesProvider )
 		{
 			_cache = cache;

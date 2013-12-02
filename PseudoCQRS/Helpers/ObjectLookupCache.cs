@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace PseudoCQRS.Helpers
 {
-	public class MemoryCache : IMemoryCache
+    public class ObjectLookupCache : IObjectLookupCache
 	{
 		private static readonly Dictionary<string, object> InternalCache;
 
-		static MemoryCache()
+		static ObjectLookupCache()
 		{
 			InternalCache = new Dictionary<string, object>();
 		}

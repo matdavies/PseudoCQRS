@@ -92,7 +92,8 @@
     <Compile Include="Controllers\SessionBasedMessageManagerTests.cs" />
     <Compile Include="Controllers\MapperTests.cs" />
     <Compile Include="DbAttributesTests.cs" />
-    <Compile Include="Helpers\MemoryCacheTests.cs" />
+    <Compile Include="AssemblyListProviderTests.cs" />
+    <Compile Include="Helpers\ObjectLookupCacheTests.cs" />
     <Compile Include="TestHelpers\HttpContextHelper.cs" />
     <Compile Include="Checkers\PreRequisitesCheckerTests.cs" />
     <Compile Include="Controllers\BaseCommandControllerTests.cs" />

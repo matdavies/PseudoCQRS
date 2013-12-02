@@ -5,14 +5,14 @@ using PseudoCQRS.Helpers;
 namespace PseudoCQRS.Tests.Helpers
 {
 	[TestFixture]
-	public class MemoryCacheTests
+	public class ObjectLookupCacheTests
 	{
-		private MemoryCache _cache;
+		private ObjectLookupCache _cache;
 
 		[SetUp]
 		public void Setup()
 		{
-			_cache = new MemoryCache();
+			_cache = new ObjectLookupCache();
 		}
 
 		[Test]

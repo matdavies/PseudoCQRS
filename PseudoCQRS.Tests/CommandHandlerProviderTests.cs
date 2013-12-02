@@ -9,15 +9,15 @@ namespace PseudoCQRS.Tests
 	public class CommandHandlerProviderTests
 	{
 		private ICommandHandlerFinder _commandHandlerFinder;
-		private IMemoryCache _keyValueProvider;
+        private IObjectLookupCache _cache;
 		private CommandHandlerProvider _provider;
 
 		[SetUp]
 		public void Setup()
 		{
 			_commandHandlerFinder = MockRepository.GenerateMock<ICommandHandlerFinder>();
-			_keyValueProvider = MockRepository.GenerateMock<IMemoryCache>();
-			_provider = new CommandHandlerProvider( _commandHandlerFinder, _keyValueProvider );
+            _cache = MockRepository.GenerateMock<IObjectLookupCache>();
+			_provider = new CommandHandlerProvider( _commandHandlerFinder, _cache );
 		}
 
 		private ICommandHandler<BlankSimpleTestCommand> ExecuteArrangeAndAct(
@@ -29,7 +29,7 @@ namespace PseudoCQRS.Tests
 				.IgnoreArguments()
 				.Return( commandHandlerFinderRetVal );
 
-			_keyValueProvider
+			_cache
 				.Stub( x => x.GetValue<ICommandHandler<BlankSimpleTestCommand>>( typeof( BlankSimpleTestCommand ).FullName, null ) )
 				.IgnoreArguments()
 				.Return( keyValueProviderRetVal );
@@ -58,7 +58,7 @@ namespace PseudoCQRS.Tests
 			var handler = MockRepository.GenerateMock<ICommandHandler<BlankSimpleTestCommand>>();
 			var result = ExecuteArrangeAndAct( commandHandlerFinderRetVal: handler );
 
-			_keyValueProvider.AssertWasCalled( x => x.SetValue<ICommandHandler<BlankSimpleTestCommand>>(
+			_cache.AssertWasCalled( x => x.SetValue<ICommandHandler<BlankSimpleTestCommand>>(
 				Arg<string>.Is.Same( typeof( BlankSimpleTestCommand ).FullName ),
 				Arg<ICommandHandler<BlankSimpleTestCommand>>.Is.Anything )
 			);

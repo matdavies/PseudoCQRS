@@ -15,7 +15,7 @@ namespace PseudoCQRS.Tests
 		private IServiceLocator _mockedServiceLocator;
 		private IEventSubscriberAssembliesProvider _eventSubscriberAssembliesProvider;
 
-		private IMemoryCache _cache;
+        private IObjectLookupCache _cache;
 		private SubscriptionService _service;
 
 		[SetUp]
@@ -31,7 +31,7 @@ namespace PseudoCQRS.Tests
 
 			ServiceLocator.SetLocatorProvider( () => _mockedServiceLocator );
 
-			_cache = MockRepository.GenerateMock<IMemoryCache>();
+            _cache = MockRepository.GenerateMock<IObjectLookupCache>();
 
 			_service = new SubscriptionService( _cache, _eventSubscriberAssembliesProvider );
 		}
