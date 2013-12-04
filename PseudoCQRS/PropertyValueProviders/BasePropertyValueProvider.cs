@@ -21,7 +21,7 @@ namespace PseudoCQRS.PropertyValueProviders
                 return returnValue;
             }
 
-            if ( propertyType == typeof ( DateTime ) )
+            if ( propertyType == typeof ( DateTime ) || propertyType == typeof ( DateTime? ) )
             {
                 DateTime outVal = DateTime.MinValue;
                 var possibleFormats = new string[]
