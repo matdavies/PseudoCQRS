@@ -25,8 +25,8 @@ namespace PseudoCQRS
 		{
 			var args = _argumentsProvider.GetArguments<TArg>();
 			var checkResult = _prerequisitesChecker.Check( args );
-			if ( !String.IsNullOrEmpty( checkResult ) )
-				throw new ArgumentException( checkResult );
+			if ( checkResult.ContainsError )
+				throw new ArgumentException( checkResult.Message );
 
 			return _viewModelProvider.GetViewModel( args );
 		}

@@ -12,7 +12,7 @@ namespace PseudoCQRS.Controllers
 
         public abstract string ViewPath { get; }
 
-        public abstract ActionResult OnSuccessfulExecution( TViewModel viewModel, CommandResult cmdResult );
+        public abstract ActionResult OnSuccessfulExecution( TViewModel viewModel, CommandResult commandResult );
 
 
         protected BaseReadExecuteController(

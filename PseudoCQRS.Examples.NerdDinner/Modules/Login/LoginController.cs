@@ -12,7 +12,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.Login
 		public LoginController( ICommandExecutor commandExecutor, IViewModelFactory<LoginViewModel, EmptyViewModelProviderArgument> viewModelFactory ) 
 			: base( commandExecutor, viewModelFactory ) {}
 
-		public override ActionResult OnSuccessfulExecution( LoginViewModel viewModel, CommandResult cmdResult )
+		public override ActionResult OnSuccessfulExecution( LoginViewModel viewModel, CommandResult commandResult )
 		{
 			return RedirectToAction( "Index", "Home" );
 		}

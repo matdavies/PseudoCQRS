@@ -17,9 +17,9 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerCreate
 			
 		}
 
-		public override ActionResult OnSuccessfulExecution( DinnerCreateViewModel viewModel, CommandResult cmdResult )
+		public override ActionResult OnSuccessfulExecution( DinnerCreateViewModel viewModel, CommandResult commandResult )
 		{
-			return RedirectToAction( "Details", "Dinner", new { ((DinnerCreateCommandResult)cmdResult).Id } );
+			return RedirectToAction( "Details", "Dinner", new { ((DinnerCreateCommandResult)commandResult).Id } );
 		}
 
 		public override string ViewPath

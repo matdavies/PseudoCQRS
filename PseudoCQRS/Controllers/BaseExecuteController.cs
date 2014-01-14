@@ -39,8 +39,8 @@ namespace PseudoCQRS.Controllers
             ActionResult result;
             if ( ModelState.IsValid )
             {
-                var cmdResult = ExecuteCommand( viewModel );
-                result = OnCompletion( viewModel, cmdResult );
+                var commandResult = ExecuteCommand( viewModel );
+                result = OnCompletion( viewModel, commandResult );
             }
             else
             {

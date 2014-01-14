@@ -15,7 +15,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.Login
 			_repository = repository;
 		}
 
-		public CommandResult Handle( LoginCommand cmd )
+		public CommandResult Handle( LoginCommand command )
 		{
 			var result = new CommandResult
 			{
@@ -23,7 +23,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.Login
 				Message = "invalid username/password"
 			};
 
-			var user = _repository.GetSingleOrDefault<User>( x => x.Username.ToLower().Equals( cmd.Username.ToLower() ) && x.Password.Equals( cmd.Password ) );
+			var user = _repository.GetSingleOrDefault<User>( x => x.Username.ToLower().Equals( command.Username.ToLower() ) && x.Password.Equals( command.Password ) );
 			if ( user != null )
 				result = new CommandResult();
 

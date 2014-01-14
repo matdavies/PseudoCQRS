@@ -37,10 +37,10 @@ namespace PseudoCQRS
 					_dbSessionManager.OpenTransaction();
 
 				var checkResult = _prerequisitesChecker.Check( command );
-				if ( String.IsNullOrEmpty( checkResult ) )
+				if ( !checkResult.ContainsError )
 					result = handler.Handle( command );
 				else
-					result.Message = checkResult;
+					result.Message = checkResult.Message;
 
 				if ( hasTransactionAttribute )
 					_dbSessionManager.CommitTransaction();

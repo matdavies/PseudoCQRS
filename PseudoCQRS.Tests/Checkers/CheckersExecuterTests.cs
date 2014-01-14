@@ -19,7 +19,7 @@ namespace PseudoCQRS.Tests.Checkers
 			_checkersExecuter = new CheckersExecuter( _checkersFinder );
 		}
 
-		private string ExecuteAuthorizationCheckers_ArrangeAndAct( bool containsErrror )
+		private CheckResult ExecuteAuthorizationCheckers_ArrangeAndAct( bool containsErrror )
 		{
 			var mockedAuthorizationChecker = MockRepository.GenerateMock<IAuthorizationChecker>();
 			mockedAuthorizationChecker
@@ -41,18 +41,18 @@ namespace PseudoCQRS.Tests.Checkers
 		public void ExecuteAuthorizationCheckers_ShouldFailWhenCheckerFails()
 		{
 			var result = ExecuteAuthorizationCheckers_ArrangeAndAct( true );
-			Assert.IsNotNullOrEmpty( result );
+			Assert.IsTrue( result.ContainsError );
 		}
 
 		[Test]
 		public void ExecuteAuthorizationChecker_ShouldPassWhenAllCheckersPass()
 		{
 			var result = ExecuteAuthorizationCheckers_ArrangeAndAct( false );
-			Assert.IsNullOrEmpty( result );
+			Assert.IsFalse( result.ContainsError );
 		}
 
 
-		private string ExecuteAccessCheckers_ArrangeAndAct( bool containsError )
+		private CheckResult ExecuteAccessCheckers_ArrangeAndAct( bool containsError )
 		{
 			var mockedAccessChecker = MockRepository.GenerateMock<IAccessChecker>();
 			mockedAccessChecker
@@ -80,17 +80,17 @@ namespace PseudoCQRS.Tests.Checkers
 		public void ExecuteAccessCheckers_ShouldFailWhenCheckerFails()
 		{
 			var result = ExecuteAccessCheckers_ArrangeAndAct( true );
-			Assert.IsNotNullOrEmpty( result );
+			Assert.IsTrue( result.ContainsError );
 		}
 
 		[Test]
 		public void ExecuteAccessCheckers_ShouldPassWhenCheckerPass()
 		{
 			var result = ExecuteAccessCheckers_ArrangeAndAct( false );
-			Assert.IsNullOrEmpty( result );
+			Assert.IsFalse( result.ContainsError );
 		}
 
-		private string ExecuteValidationCheckers_ArrangeAndAct( bool containsError )
+		private CheckResult ExecuteValidationCheckers_ArrangeAndAct( bool containsError )
 		{
 			var mockedValidationChecker = MockRepository.GenerateMock<IValidationChecker<BlankSimpleTestCommand>>();
 			mockedValidationChecker
@@ -114,14 +114,14 @@ namespace PseudoCQRS.Tests.Checkers
 		public void ExecuteValidationCheckers_ShouldFailWhenCheckerFails()
 		{
 			var result = ExecuteValidationCheckers_ArrangeAndAct( true );
-			Assert.IsNotNullOrEmpty( result );
+			Assert.IsTrue( result.ContainsError );
 		}
 
 		[Test]
 		public void ExecuteValidationCheckers_ShouldPassWhenCheckerPass()
 		{
 			var result = ExecuteValidationCheckers_ArrangeAndAct( false );
-			Assert.IsNullOrEmpty( result );
+			Assert.IsFalse( result.ContainsError );
 		}
 	}
 }

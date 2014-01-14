@@ -19,23 +19,32 @@ namespace PseudoCQRS.Tests.Checkers
 		}
 
 
-		private string ArrangeAndAct(
+		private CheckResult ArrangeAndAct(
 			bool authorizationCheckContainsError,
 			bool accessCheckContainsError,
 			bool validationCheckContainsError
 			)
 		{
+
+		    var errorResult = new CheckResult()
+		    {
+		        ContainsError = true,
+		        Message = "Error"
+		    };
+
+		    var successResult = new CheckResult();
+
 			_checkersExecuter
 				.Stub( x => x.ExecuteAuthorizationCheckers( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( authorizationCheckContainsError ? "Error" : String.Empty );
+				.Return( authorizationCheckContainsError ? errorResult : successResult );
 
 			_checkersExecuter
 				.Stub( x => x.ExecuteAccessCheckers( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( accessCheckContainsError ? "Error" : String.Empty );
+				.Return( accessCheckContainsError ? errorResult : successResult );
 
 			_checkersExecuter
 				.Stub( x => x.ExecuteValidationCheckers( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( validationCheckContainsError ? "Error" : String.Empty );
+				.Return( validationCheckContainsError ? errorResult : successResult );
 
 			return _prerequisitesChecker.Check( new BlankSimpleTestCommand() );
 
@@ -45,28 +54,28 @@ namespace PseudoCQRS.Tests.Checkers
 		public void ShouldFailWhenAuthorizationCheckFails()
 		{
 			var result = ArrangeAndAct( true, false, false );
-			Assert.IsNotNullOrEmpty( result );
+			Assert.IsTrue( result.ContainsError );
 		}
 
 		[Test]
 		public void ShouldFailWhenAccessCheckFails()
 		{
 			var result = ArrangeAndAct( false, true, false );
-			Assert.IsNotNullOrEmpty( result );
+			Assert.IsTrue( result.ContainsError );
 		}
 
 		[Test]
-		public void ShouldFaileWhenValidationCheckFails()
+		public void ShouldFailWhenValidationCheckFails()
 		{
 			var result = ArrangeAndAct( false, false, true );
-			Assert.IsNotNullOrEmpty( result );
+			Assert.IsTrue( result.ContainsError );
 		}
 
 		[Test]
 		public void ShouldBeSuccessfulWhenAllChecksPass()
 		{
 			var result = ArrangeAndAct( false, false, false );
-			Assert.IsNullOrEmpty( result );
+			Assert.IsFalse( result.ContainsError );
 		}
 	}
 }

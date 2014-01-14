@@ -16,16 +16,16 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerCreate
 			_repository = repository;
 		}
 
-		public CommandResult Handle( DinnerCreateCommand cmd )
+		public CommandResult Handle( DinnerCreateCommand command )
 		{
-			var host = _repository.Get<User>( cmd.HostedById );
-			var dinner = new Dinner( cmd.Title, cmd.EventDate, cmd.Description, host );
+			var host = _repository.Get<User>( command.HostedById );
+			var dinner = new Dinner( command.Title, command.EventDate, command.Description, host );
 			_repository.Save( dinner );
 			return new DinnerCreateCommandResult
 			{
 				Id = dinner.Id,
 				ContainsError = false,
-				Message = "dinner " + cmd.Title + " created"
+				Message = "dinner " + command.Title + " created"
 			};
 		}
 	}

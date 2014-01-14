@@ -11,16 +11,16 @@ namespace PseudoCQRS.Checkers
 			_checkersFinder = checkersFinder;
 		}
 
-		public string ExecuteAuthorizationCheckers( object instance )
+		public CheckResult ExecuteAuthorizationCheckers( object instance )
 		{
-			var result = String.Empty;
+			var result = new CheckResult();
 
 			foreach ( var checker in _checkersFinder.FindAuthorizationCheckers( instance ) )
 			{
 				var checkResult = checker.Check();
 				if ( checkResult.ContainsError )
 				{
-					result = checkResult.Message;
+				    result = checkResult;
 					break;
 				}
 			}
@@ -28,31 +28,31 @@ namespace PseudoCQRS.Checkers
 			return result;
 		}
 
-		public string ExecuteAccessCheckers( object instance )
+		public CheckResult ExecuteAccessCheckers( object instance )
 		{
-			var result = String.Empty;
+			var result = new CheckResult();
 			foreach ( var accessCheckerDetails in _checkersFinder.FindAccessCheckers( instance ) )
 			{
 				var checkResult = accessCheckerDetails.AccessChecker.Check( accessCheckerDetails.PropertyName, instance );
 				if ( checkResult.ContainsError )
 				{
-					result = checkResult.Message;
+					result = checkResult;
 					break;
 				}
 			}
 			return result;
 		}
 
-		public string ExecuteValidationCheckers<T>( T instance )
+		public CheckResult ExecuteValidationCheckers<T>( T instance )
 		{
-			var result = String.Empty;
+		    var result = new CheckResult();
 
-			foreach ( var checker in _checkersFinder.FindValidationCheckers<T>( instance ) )
+			foreach ( var checker in _checkersFinder.FindValidationCheckers( instance ) )
 			{
 				var checkResult = checker.Check( instance );
 				if ( checkResult.ContainsError )
 				{
-					result = checkResult.Message;
+					result = checkResult;
 					break;
 				}
 			}

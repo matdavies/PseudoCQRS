@@ -33,7 +33,7 @@ namespace PseudoCQRS.Tests
 
 			_prerequisitesChecker
 				.Stub( x => x.Check( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( String.IsNullOrEmpty( commandPreHandleResult ) ? String.Empty : commandPreHandleResult );
+				.Return( String.IsNullOrEmpty( commandPreHandleResult ) ? new CheckResult() : new CheckResult() { ContainsError =  true, Message = commandPreHandleResult } );
 
 			return _bus.Execute( new BlankSimpleTestCommand() );
 		}
@@ -80,7 +80,7 @@ namespace PseudoCQRS.Tests
 		[DbTransaction]
 		internal class CommandHandlerWithTransactionAttribute : ICommandHandler<BlankSimpleTestCommand>
 		{
-			public CommandResult Handle( BlankSimpleTestCommand cmd )
+			public CommandResult Handle( BlankSimpleTestCommand command )
 			{
 				return new CommandResult();
 			}

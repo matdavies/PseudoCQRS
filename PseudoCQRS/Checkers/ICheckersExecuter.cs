@@ -2,8 +2,8 @@
 {
 	public interface ICheckersExecuter
 	{
-		string ExecuteAuthorizationCheckers( object instance );
-		string ExecuteAccessCheckers( object instance );
-		string ExecuteValidationCheckers<T>( T instance );
+		CheckResult ExecuteAuthorizationCheckers( object instance );
+		CheckResult ExecuteAccessCheckers( object instance );
+		CheckResult ExecuteValidationCheckers<T>( T instance );
 	}
 }

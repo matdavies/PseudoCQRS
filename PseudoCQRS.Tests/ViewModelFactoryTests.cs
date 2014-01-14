@@ -34,7 +34,7 @@ namespace PseudoCQRS.Tests
 		{
 			_prerequisitesChecker
 				.Stub( x => x.Check( Arg<TestViewModelProviderArgument>.Is.Anything ) )
-				.Return( "Error" );
+				.Return( new CheckResult { ContainsError = true, Message =  "Error" } );
 
 			Assert.Throws<ArgumentException>( () => _viewModelFactory.GetViewModel() );
 		}
@@ -44,7 +44,7 @@ namespace PseudoCQRS.Tests
 		{
 			_prerequisitesChecker
 				.Stub( x => x.Check( Arg<TestViewModelProviderArgument>.Is.Anything ) )
-				.Return( String.Empty );
+				.Return( new CheckResult() );
 
 			_viewModelProvider
 				.Stub( x => x.GetViewModel( Arg<TestViewModelProviderArgument>.Is.Anything ) )

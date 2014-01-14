@@ -36,7 +36,7 @@ namespace PseudoCQRS.Tests
 
         public class TestCommandHandler : ICommandHandler<TestCommand>
         {
-            public CommandResult Handle( TestCommand cmd )
+            public CommandResult Handle( TestCommand command )
             {
                 return new CommandResult();
             }

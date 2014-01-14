@@ -2,6 +2,6 @@
 {
 	public interface ICommandHandler<TCommand>
 	{
-		CommandResult Handle( TCommand cmd );
+		CommandResult Handle( TCommand command );
 	}
 }

@@ -2,6 +2,6 @@
 {
 	public interface IPrerequisitesChecker
 	{
-		string Check<T>( T instance );
+		CheckResult Check<T>( T instance );
 	}
 }
