@@ -23,7 +23,12 @@ namespace PseudoCQRS.Controllers
 
         public virtual ActionResult Execute()
         {
-            return View( this.GetView(), _viewModelFactory.GetViewModel() );
+            return GetViewResult( _viewModelFactory.GetViewModel() );
+        }
+
+        protected virtual ViewResult GetViewResult( TViewModel viewModel )
+        {
+            return View( this.GetView(), viewModel );
         }
     }
 }
