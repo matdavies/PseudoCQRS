@@ -7,6 +7,7 @@ using Microsoft.Practices.Unity;
 using PseudoCQRS.Controllers;
 using PseudoCQRS.Examples.NerdDinner.Modules;
 using PseudoCQRS.Examples.NerdDinner.Modules.DinnerCreate;
+using PseudoCQRS.Examples.NerdDinner.Modules.DinnerList;
 
 namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 {
@@ -18,9 +19,10 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 			container.RegisterType<IMessageManager, SessionBasedMessageManager>();
 			container.RegisterType( typeof( IViewModelFactory<,> ), typeof( ViewModelFactory<,> ) );
 			container.RegisterType<IEventSubscriberAssembliesProvider, EventSubscriberAssembliesProvider>();
-			container.RegisterType<ISpawtzMappingEngine, NerdDinnerMappingEngine>();
+			container.RegisterType<IViewModelToCommandMappingEngine, NerdDinnerMappingEngine>();
 			container.RegisterType<IDbSessionManager, NerdDinnerDbSessionManager>();
 			container.RegisterType<IViewModelProvider<DinnerCreateViewModel, EmptyViewModelProviderArgument>, DinnerCreateViewModelProvider>();
+			container.RegisterType<IViewModelProvider<List<DinnerListViewModel>, DinnerListArguments>, DinnerListViewModelProvider>();
 			container.RegisterType<IRepository, Repository>();
 
 			ServiceLocator.SetLocatorProvider( () => new UnityServiceLocator( container ) );

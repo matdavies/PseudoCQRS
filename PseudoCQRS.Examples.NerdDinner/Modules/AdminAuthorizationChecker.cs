@@ -16,7 +16,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules
 			_repository = repository;
 		}
 
-		public CommandResult Check()
+		public CheckResult Check()
 		{
 			throw new NotImplementedException();
 		}

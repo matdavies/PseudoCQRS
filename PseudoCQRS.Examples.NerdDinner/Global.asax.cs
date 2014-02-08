@@ -23,9 +23,11 @@ namespace PseudoCQRS.Examples.NerdDinner
 			RouteConfig.RegisterRoutes( RouteTable.Routes );
 
 			FluentValidationModelValidatorProvider.Configure();
-			AutoMapperInitializer.Initialise();
 			IUnityContainer container = new UnityContainer();
 			UnityRegistrar.Register( container );
+
+			AutoMapperInitializer.Initialise();
+
 			ControllerBuilder.Current.SetControllerFactory( new UnityControllerFactory( container ) );
 			DummyDataCreator.PopulateRepository();
 		}

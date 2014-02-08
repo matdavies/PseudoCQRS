@@ -9,8 +9,6 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.Login
 {
 	public class LoginController : BaseReadExecuteController<LoginViewModel, EmptyViewModelProviderArgument, LoginCommand>
 	{
-		public LoginController( ICommandExecutor commandExecutor, IViewModelFactory<LoginViewModel, EmptyViewModelProviderArgument> viewModelFactory ) 
-			: base( commandExecutor, viewModelFactory ) {}
 
 		public override ActionResult OnSuccessfulExecution( LoginViewModel viewModel, CommandResult commandResult )
 		{

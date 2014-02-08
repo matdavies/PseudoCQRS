@@ -1,5 +1,13 @@
-﻿@{
+﻿@model List<PseudoCQRS.Examples.NerdDinner.Modules.DinnerList.DinnerListViewModel>
+@{
     ViewBag.Title = "List";
 }
-@model PseudoCQRS.Examples.NerdDinner.Modules.DinnersList.DinnersListViewModel
-<h2>List</h2>
+<h2>List of Dinners</h2>
+@foreach ( var dinner in Model )
+{
+	<div>
+		<h3>@dinner.Title</h3>
+		<div>Date: @dinner.DateTime</div>
+	</div>
+}
+<a href="/DinnerCreate/Execute">Create a dinner</a>

@@ -16,7 +16,7 @@ namespace PseudoCQRS.Examples.NerdDinner
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
-				defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+				defaults: new { controller = "DinnerList", action = "Execute", id = UrlParameter.Optional }
 			);
 		}
 	}
