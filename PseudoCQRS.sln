@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PseudoCQRS", "PseudoCQRS\PseudoCQRS.csproj", "{7FC22CF5-DB6D-4D85-A4FA-40915D4DBD3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PseudoCQRS.Tests", "PseudoCQRS.Tests\PseudoCQRS.Tests.csproj", "{BA0C9D58-3ECC-4F51-8503-B7CDFB5FFDBF}"
@@ -8,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D151869-1F20-4FA6-9710-1F6B42DADDBF}"
 	ProjectSection(SolutionItems) = preProject
 		PseudoCQRS.Mvc4.nuspec = PseudoCQRS.Mvc4.nuspec
+		PseudoCQRS.Mvc5.1.nuspec = PseudoCQRS.Mvc5.1.nuspec
 		PseudoCQRS.nuspec = PseudoCQRS.nuspec
 	EndProjectSection
 EndProject
@@ -18,6 +21,7 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 		Mvc3|Any CPU = Mvc3|Any CPU
 		Mvc4|Any CPU = Mvc4|Any CPU
+		Mvc51|Any CPU = Mvc51|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -27,6 +31,8 @@ Global
 		{7FC22CF5-DB6D-4D85-A4FA-40915D4DBD3B}.Mvc3|Any CPU.Build.0 = Mvc3|Any CPU
 		{7FC22CF5-DB6D-4D85-A4FA-40915D4DBD3B}.Mvc4|Any CPU.ActiveCfg = Mvc4|Any CPU
 		{7FC22CF5-DB6D-4D85-A4FA-40915D4DBD3B}.Mvc4|Any CPU.Build.0 = Mvc4|Any CPU
+		{7FC22CF5-DB6D-4D85-A4FA-40915D4DBD3B}.Mvc51|Any CPU.ActiveCfg = Mvc51|Any CPU
+		{7FC22CF5-DB6D-4D85-A4FA-40915D4DBD3B}.Mvc51|Any CPU.Build.0 = Mvc51|Any CPU
 		{7FC22CF5-DB6D-4D85-A4FA-40915D4DBD3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FC22CF5-DB6D-4D85-A4FA-40915D4DBD3B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA0C9D58-3ECC-4F51-8503-B7CDFB5FFDBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -35,6 +41,8 @@ Global
 		{BA0C9D58-3ECC-4F51-8503-B7CDFB5FFDBF}.Mvc3|Any CPU.Build.0 = Mvc3|Any CPU
 		{BA0C9D58-3ECC-4F51-8503-B7CDFB5FFDBF}.Mvc4|Any CPU.ActiveCfg = Mvc4|Any CPU
 		{BA0C9D58-3ECC-4F51-8503-B7CDFB5FFDBF}.Mvc4|Any CPU.Build.0 = Mvc4|Any CPU
+		{BA0C9D58-3ECC-4F51-8503-B7CDFB5FFDBF}.Mvc51|Any CPU.ActiveCfg = Mvc51|Any CPU
+		{BA0C9D58-3ECC-4F51-8503-B7CDFB5FFDBF}.Mvc51|Any CPU.Build.0 = Mvc51|Any CPU
 		{BA0C9D58-3ECC-4F51-8503-B7CDFB5FFDBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA0C9D58-3ECC-4F51-8503-B7CDFB5FFDBF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34058F10-7AAE-49EA-A560-FC5ECC5ED964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -43,6 +51,7 @@ Global
 		{34058F10-7AAE-49EA-A560-FC5ECC5ED964}.Mvc3|Any CPU.Build.0 = Release|Any CPU
 		{34058F10-7AAE-49EA-A560-FC5ECC5ED964}.Mvc4|Any CPU.ActiveCfg = Release|Any CPU
 		{34058F10-7AAE-49EA-A560-FC5ECC5ED964}.Mvc4|Any CPU.Build.0 = Release|Any CPU
+		{34058F10-7AAE-49EA-A560-FC5ECC5ED964}.Mvc51|Any CPU.ActiveCfg = Release|Any CPU
 		{34058F10-7AAE-49EA-A560-FC5ECC5ED964}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34058F10-7AAE-49EA-A560-FC5ECC5ED964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
