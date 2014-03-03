@@ -4,59 +4,59 @@ using PseudoCQRS.Controllers.ExtensionMethods;
 
 namespace PseudoCQRS.Controllers
 {
-    public abstract class BaseReadExecuteController<TViewModel, TArgs, TCommand> : BaseCommandController<TViewModel, TCommand>, IViewPath
-        where TViewModel : class
-        where TArgs : new()
-    {
-        private readonly IViewModelFactory<TViewModel, TArgs> _viewModelFactory;
+	public abstract class BaseReadExecuteController<TViewModel, TArgs, TCommand> : BaseCommandController<TViewModel, TCommand>, IViewPath
+		where TViewModel : class
+		where TArgs : new()
+	{
+		private readonly IViewModelFactory<TViewModel, TArgs> _viewModelFactory;
 
-        public abstract string ViewPath { get; }
+		public abstract string ViewPath { get; }
 
-        public abstract ActionResult OnSuccessfulExecution( TViewModel viewModel, CommandResult commandResult );
-
-
-        protected BaseReadExecuteController(
-            ICommandExecutor commandExecutor,
-            IViewModelFactory<TViewModel, TArgs> viewModelFactory )
-            : base( commandExecutor )
-        {
-            _viewModelFactory = viewModelFactory;
-        }
-
-        public BaseReadExecuteController()
-            : this(
-                ServiceLocator.Current.GetInstance<ICommandExecutor>(),
-                ServiceLocator.Current.GetInstance<IViewModelFactory<TViewModel, TArgs>>() ) {}
+		public abstract ActionResult OnSuccessfulExecution( TViewModel viewModel, CommandResult commandResult );
 
 
-        private ActionResult GetActionResult( TViewModel viewModel )
-        {
-            var result = ExecuteCommand( viewModel );
-            return result.ContainsError ? OnFailureExecution( viewModel ) : OnSuccessfulExecution( viewModel, result );
-        }
+		protected BaseReadExecuteController(
+			ICommandExecutor commandExecutor,
+			IViewModelFactory<TViewModel, TArgs> viewModelFactory )
+			: base( commandExecutor )
+		{
+			_viewModelFactory = viewModelFactory;
+		}
+
+		public BaseReadExecuteController()
+			: this(
+				ServiceLocator.Current.GetInstance<ICommandExecutor>(),
+				ServiceLocator.Current.GetInstance<IViewModelFactory<TViewModel, TArgs>>() ) {}
 
 
-        [HttpGet]
-        public virtual ActionResult Execute()
-        {
-            return GetViewResult( _viewModelFactory.GetViewModel() );
-        }
+		protected virtual ActionResult GetActionResult( TViewModel viewModel )
+		{
+			var result = ExecuteCommand( viewModel );
+			return result.ContainsError ? OnFailureExecution( viewModel ) : OnSuccessfulExecution( viewModel, result );
+		}
 
-        [HttpPost]
-        public virtual ActionResult Execute( FormCollection form )
-        {
-            var viewModel = _viewModelFactory.GetViewModel();
-            return TryUpdateModel( viewModel ) ? GetActionResult( viewModel ) : GetViewResult( viewModel );
-        }
 
-        protected virtual ViewResult GetViewResult( TViewModel viewModel )
-        {
-            return View( this.GetView(), viewModel );
-        }
+		[HttpGet]
+		public virtual ActionResult Execute()
+		{
+			return GetViewResult( _viewModelFactory.GetViewModel() );
+		}
 
-        public virtual ActionResult OnFailureExecution( TViewModel viewModel )
-        {
-            return View( this.GetView(), viewModel );
-        }
-    }
+		[HttpPost]
+		public virtual ActionResult Execute( FormCollection form )
+		{
+			var viewModel = _viewModelFactory.GetViewModel();
+			return TryUpdateModel( viewModel ) ? GetActionResult( viewModel ) : GetViewResult( viewModel );
+		}
+
+		protected virtual ViewResult GetViewResult( TViewModel viewModel )
+		{
+			return View( this.GetView(), viewModel );
+		}
+
+		public virtual ActionResult OnFailureExecution( TViewModel viewModel )
+		{
+			return View( this.GetView(), viewModel );
+		}
+	}
 }
