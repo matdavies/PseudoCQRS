@@ -1,30 +1,44 @@
 ﻿@model PseudoCQRS.Examples.NerdDinner.Modules.DinnerCreate.DinnerCreateViewModel
 @{
-    ViewBag.Title = "Create";
+	ViewBag.Title = "Create";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create Dinner</h2>
+<h1>Create Dinner</h1>
+	<div class="panel-body">
+		@using ( Html.BeginForm() )
+		{
+			<h4>Title:</h4>
+			@Html.TextBoxFor( x => x.Title, new
+			{
+				@class = "form-control"
+			} )
+			@Html.ValidationMessageFor( x => x.Title )
+			<br />
 
-@using ( Html.BeginForm() )
-{
-	<h4>Title:</h4>
-	@Html.TextBoxFor( x => x.Title )
-	@Html.ValidationMessageFor(x => x.Title)
-	<br/>
+			<h4>Description</h4>
+			@Html.TextAreaFor( x => x.Description, 10, 30, new
+			{
+				@class = "form-control"
+			} )
+			@Html.ValidationMessageFor( x => x.Description )
+			<br />
 
-	<h4>Description</h4>
-	@Html.TextAreaFor( x => x.Description, 10, 30, null )
-	@Html.ValidationMessageFor(x => x.Description)
-	<br />
+			<h4>Event Date</h4>
+			@Html.TextBoxFor( x => x.EventDate, new
+			{
+				@class = "form-control"
+			} )
+			@Html.ValidationMessageFor( x => x.EventDate )
+			<br />
 
-	<h4>Event Date</h4>
-	@Html.TextBoxFor( x => x.EventDate )
-	@Html.ValidationMessageFor(x => x.EventDate)
-	<br/>
-
-	<h4>Host</h4>
-	@Html.DropDownListFor( x => x.HostedById, new SelectList( Model.Hosts, "key", "value" ) )
-	<br/>
-	<br/>
-	<button type="submit">Create Dinner</button>
-}
+			<h4>Host</h4>
+			@Html.DropDownListFor( x => x.HostedById, new SelectList( Model.Hosts, "key", "value" ), new
+			{
+				@class = "form-control"
+			} )
+			<br />
+			<br />
+			<button type="submit" class="btn btn-primary">Create Dinner</button>
+		}
+	</div>

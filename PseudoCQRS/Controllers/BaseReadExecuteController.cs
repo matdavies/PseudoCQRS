@@ -36,7 +36,7 @@ namespace PseudoCQRS.Controllers
 		}
 
 
-		[HttpGet]
+		[AcceptVerbs( HttpVerbs.Get | HttpVerbs.Head )]
 		public virtual ActionResult Execute()
 		{
 			return GetViewResult( _viewModelFactory.GetViewModel() );

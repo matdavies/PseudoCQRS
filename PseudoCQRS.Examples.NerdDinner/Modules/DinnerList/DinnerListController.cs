@@ -7,7 +7,7 @@ using PseudoCQRS.Controllers;
 
 namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerList
 {
-    public class DinnerListController : BaseReadController<List<DinnerListViewModel>, DinnerListArguments>
+    public class DinnerListController : BaseReadController<DinnerListViewModel, DinnerListArguments>
     {
 	    public override string ViewPath
 	    {

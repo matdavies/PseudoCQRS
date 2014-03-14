@@ -36,14 +36,23 @@ namespace PseudoCQRS
 				if ( hasTransactionAttribute )
 					_dbSessionManager.OpenTransaction();
 
-				var checkResult = _prerequisitesChecker.Check( command );
-				if ( !checkResult.ContainsError )
-					result = handler.Handle( command );
-				else
-					result.Message = checkResult.Message;
+				try
+				{
+					var checkResult = _prerequisitesChecker.Check( command );
+					if ( !checkResult.ContainsError )
+						result = handler.Handle( command );
+					else
+						result.Message = checkResult.Message;
 
-				if ( hasTransactionAttribute )
-					_dbSessionManager.CommitTransaction();
+					if ( hasTransactionAttribute )
+						_dbSessionManager.CommitTransaction();
+				}
+				catch ( Exception )
+				{
+					if ( hasTransactionAttribute )
+						_dbSessionManager.RollbackTransaction();
+					throw;
+				}
 			}
 
 

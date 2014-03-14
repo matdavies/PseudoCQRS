@@ -1,10 +1,15 @@
-﻿namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerList
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerList
 {
 	public class DinnerListViewModel
 	{
-		public int Id { get; set; }
-		public string Title { get; set; }
-		public string DateTime { get; set; }
-		public string HostedBy { get; set; }
+		public int HostedByUserId { get; set; }
+		public Dictionary<int, string> Hosts { get; set; }
+		public List<DinnerViewModel> Dinners { get; set; }
+
 	}
 }

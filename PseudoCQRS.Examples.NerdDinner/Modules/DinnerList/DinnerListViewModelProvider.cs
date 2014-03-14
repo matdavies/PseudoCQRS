@@ -6,7 +6,7 @@ using PseudoCQRS.Examples.NerdDinner.Infrastructure;
 
 namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerList
 {
-	public class DinnerListViewModelProvider : IViewModelProvider<List<DinnerListViewModel>, DinnerListArguments>
+	public class DinnerListViewModelProvider : IViewModelProvider<DinnerListViewModel, DinnerListArguments>
 	{
 		private readonly IRepository _repository;
 
@@ -15,24 +15,39 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerList
 			_repository = repository;
 		}
 
-		public List<DinnerListViewModel> GetViewModel( DinnerListArguments arguments )
+		public DinnerListViewModel GetViewModel( DinnerListArguments arguments )
+		{
+			return new DinnerListViewModel
+			{
+				Dinners = GetDinners( arguments ),
+				Hosts = GetHosts(),
+				HostedByUserId = arguments.HostedByUserId
+			};
+		}
+
+		private Dictionary<int, string> GetHosts()
+		{
+			return _repository.GetAll<User>().ToDictionary( x => x.Id, x => x.Name );
+		}
+
+		private List<DinnerViewModel> GetDinners( DinnerListArguments arguments )
 		{
 			return _repository
 				.GetAll<Dinner>()
 				.Where( dinner => DinnerShouldBeIncluded( arguments, dinner ) )
-				.Select( dinner => new DinnerListViewModel()
+				.Select( dinner => new DinnerViewModel()
 				{
 					Id = dinner.Id,
 					Title = dinner.Title,
 					DateTime = dinner.EventDate.ToString( "dd/MM/yyyy" ),
-					HostedBy =  dinner.HostedBy.Name
+					HostedBy = dinner.HostedBy.Name
 				} ).ToList();
 		}
 
 		private static bool DinnerShouldBeIncluded( DinnerListArguments arguments, Dinner dinner )
 		{
 			return 
-				dinner.EventDate >= DateTime.Now 
+				dinner.EventDate >= DateTime.Now.Date
 				&& 
 				( 
 					arguments.HostedByUserId == 0 

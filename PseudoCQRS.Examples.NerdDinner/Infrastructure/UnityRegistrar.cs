@@ -22,7 +22,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 			container.RegisterType<IViewModelToCommandMappingEngine, NerdDinnerMappingEngine>();
 			container.RegisterType<IDbSessionManager, NerdDinnerDbSessionManager>();
 			container.RegisterType<IViewModelProvider<DinnerCreateViewModel, EmptyViewModelProviderArgument>, DinnerCreateViewModelProvider>();
-			container.RegisterType<IViewModelProvider<List<DinnerListViewModel>, DinnerListArguments>, DinnerListViewModelProvider>();
+			container.RegisterType<IViewModelProvider<DinnerListViewModel, DinnerListArguments>, DinnerListViewModelProvider>();
 			container.RegisterType<IRepository, Repository>();
 
 			ServiceLocator.SetLocatorProvider( () => new UnityServiceLocator( container ) );
