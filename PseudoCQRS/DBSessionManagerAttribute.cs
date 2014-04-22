@@ -15,7 +15,8 @@ namespace PseudoCQRS
 
 		public override void OnResultExecuted( ResultExecutedContext filterContext )
 		{
-			ServiceLocator.Current.GetInstance<IDbSessionManager>().CloseSession();
+			if ( !filterContext.IsChildAction )
+				ServiceLocator.Current.GetInstance<IDbSessionManager>().CloseSession();
 		}
 	}
 }
