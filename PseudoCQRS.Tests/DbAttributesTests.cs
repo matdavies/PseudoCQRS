@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.ServiceLocation;
+﻿using System.Web.Mvc;
+using Microsoft.Practices.ServiceLocation;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -43,7 +44,7 @@ namespace PseudoCQRS.Tests
 		public void DbSessionManagerAttribute_ShouldCloseSessionOnResultExcecuted()
 		{
 			var attribute = new DbSessionManagerAttribute();
-			attribute.OnResultExecuted( null );
+			attribute.OnResultExecuted( new ResultExecutedContext() );
 			_dbSessionManager.AssertWasCalled( x => x.CloseSession() );
 		}
 
