@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-	<metadata>
-		<id>PseudoCQRS</id>
-		<version>4.0.3</version>
-		<title>Pseudo CQRS Mvc3</title>
-		<authors>Liquid Thinking</authors>
-		<owners />
-		<projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>CQRS Framework</description>
-		<dependencies>
-			<dependency id="CommonServiceLocator" version="1.0" />
-		</dependencies>
-	</metadata>
-	<files>
-		<file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.dll" target="lib\net40\PseudoCQRS.dll" />
-		<file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.pdb" target="lib\net40\PseudoCQRS.pdb" />
-  </files>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>PseudoCQRS</id>
+        <version>4.0.4</version>
+        <title>Pseudo CQRS Mvc3</title>
+        <authors>Liquid Thinking</authors>
+        <projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>CQRS Framework</description>
+        <releaseNotes>Changed so db session manager only called if action is not a child action</releaseNotes>
+        <dependencies>
+            <dependency id="CommonServiceLocator" version="1.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.dll" target="lib\net40\PseudoCQRS.dll" />
+        <file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.pdb" target="lib\net40\PseudoCQRS.pdb" />
+    </files>
 </package>
