@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using NUnit.Framework;
 using PseudoCQRS.Checkers;
 using PseudoCQRS.Configuration;
@@ -452,7 +450,7 @@ namespace PseudoCQRS.Tests.Configuration
 		public void CommandHandlerFinder_WhenNotOverriden_ShouldMapDefaultImplementationCommandHandlerFinder()
 		{
 			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( ICommandHandlerFinder ),
-																typeof ( ICommandHandlerFinder ) );
+																typeof ( CommandHandlerFinder ) );
 		}
 
 		[Test]

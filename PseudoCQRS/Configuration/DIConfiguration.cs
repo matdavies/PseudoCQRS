@@ -57,7 +57,7 @@ namespace PseudoCQRS.Configuration
 			SetImplementation( mappings, typeof ( IPropertyValueProviderFactory ), typeof ( PropertyValueProviderFactory ) );
 			SetImplementation( mappings, typeof ( IAssemblyListProvider ), typeof ( AssemblyListProvider ) );
 			SetImplementation( mappings, typeof ( ICommandBus ), typeof ( CommandBus ) );
-			SetImplementation( mappings, typeof ( ICommandHandlerFinder ), typeof ( ICommandHandlerFinder ) );
+			SetImplementation( mappings, typeof ( ICommandHandlerFinder ), typeof ( CommandHandlerFinder ) );
 			SetImplementation( mappings, typeof ( ICommandHandlerProvider ), typeof ( CommandHandlerProvider ) );
 			SetImplementation( mappings, typeof ( IEventPublisher ), typeof ( EventPublisher ) );
 			SetImplementation( mappings, typeof ( ISubscriptionService ), typeof ( SubscriptionService ) );
