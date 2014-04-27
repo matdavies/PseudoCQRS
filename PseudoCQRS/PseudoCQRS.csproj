@@ -10,7 +10,7 @@
     <RootNamespace>PseudoCQRS</RootNamespace>
     <AssemblyName>PseudoCQRS</AssemblyName>
     <FileAlignment>512</FileAlignment>
-		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
     <Prefer32Bit>false</Prefer32Bit>
-		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mvc3|AnyCPU'">
     <OutputPath>bin\Mvc3\</OutputPath>
@@ -43,7 +43,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mvc4|AnyCPU'">
     <OutputPath>bin\Mvc4\</OutputPath>
@@ -54,7 +54,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mvc51|AnyCPU'">
     <OutputPath>bin\Mvc51\</OutputPath>
@@ -65,7 +65,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-		<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -120,6 +120,8 @@
     <Compile Include="Checkers\CheckersFinder.cs" />
     <Compile Include="Checkers\PrerequisitesChecker.cs" />
     <Compile Include="CommandResult.cs" />
+    <Compile Include="Configuration\DIConfiguration.cs" />
+    <Compile Include="Configuration\OverridableServicesContainer.cs" />
     <Compile Include="Controllers\BaseCommandController.cs" />
     <Compile Include="Controllers\BaseExecuteController.cs" />
     <Compile Include="Controllers\BaseReadController.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="DbTransactionAttribute.cs" />
     <Compile Include="Checkers\IPrerequisitesChecker.cs" />
     <Compile Include="AssemblyListProvider.cs" />
+    <Compile Include="ExtensionMethods\DictionaryExtentionMethods.cs" />
     <Compile Include="ExtensionMethods\ReflectionExtensionMethods.cs" />
     <Compile Include="Helpers\IObjectLookupCache.cs" />
     <Compile Include="Helpers\ObjectLookupCache.cs" />

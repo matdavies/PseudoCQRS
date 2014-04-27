@@ -8,7 +8,6 @@ namespace PseudoCQRS.Controllers
 		public static TTo Map<TFrom, TTo>( TFrom viewModel )
 		{
 			IViewModelToCommandMappingEngine mappingEngine = null;
-
 			try
 			{
 				mappingEngine = ServiceLocator.Current.GetInstance<IViewModelToCommandMappingEngine>();
