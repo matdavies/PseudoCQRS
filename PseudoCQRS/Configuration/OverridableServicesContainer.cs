@@ -17,87 +17,84 @@ namespace PseudoCQRS.Configuration
 			_overrides = new Dictionary<Type, Type>();
 		}
 
-		private void AddOverride( Type interfaceType, Type implementationType )
+		private void AddOverride<TInterface, TImplementation>()
 		{
-			if ( implementationType.GetInterfaces().All( x => x != interfaceType ) )
-				throw new Exception( "Implementation type do not inherit from interface type" );
-
-			_overrides.Add( interfaceType, implementationType );
+			_overrides.Add( typeof ( TInterface ), typeof ( TImplementation ) );
 		}
 
-		public void CheckersExecuter( Type checkersExecutorType )
+		public void CheckersExecutor<TCheckersExecutor>() where TCheckersExecutor : ICheckersExecuter
 		{
-			AddOverride( typeof ( ICheckersExecuter ), checkersExecutorType );
+			AddOverride<ICheckersExecuter, TCheckersExecutor>();
 		}
 
-		public void CheckersFinder( Type checkersFinderType )
+		public void CheckersFinder<TCheckersFinder>() where TCheckersFinder : ICheckersFinder
 		{
-			AddOverride( typeof ( ICheckersFinder ), checkersFinderType );
+			AddOverride<ICheckersFinder, TCheckersFinder>();
 		}
 
-		public void PrerequisitesChecker( Type prerequisitesCheckerType )
+		public void PrerequisitesChecker<TPrerequisitesChecker>() where TPrerequisitesChecker : IPrerequisitesChecker
 		{
-			AddOverride( typeof( IPrerequisitesChecker ), prerequisitesCheckerType );
+			AddOverride<IPrerequisitesChecker, TPrerequisitesChecker>();
 		}
 
-		public void CommandExecutor( Type commandExecutorType )
+		public void CommandExecutor<TCommandExecutor>() where TCommandExecutor : ICommandExecutor
 		{
-			AddOverride( typeof( ICommandExecutor ), commandExecutorType );
+			AddOverride<ICommandExecutor, TCommandExecutor>();
 		}
 
-		public void MessageManager( Type messageManagerType )
+		public void MessageManager<TMessageManager>() where TMessageManager : IMessageManager
 		{
-			AddOverride( typeof( IMessageManager ), messageManagerType );
+			AddOverride<IMessageManager, TMessageManager>();
 		}
 
-		public void ReferrerProvider( Type referrerProviderType )
+		public void ReferrerProvider<TReferrerProvider>() where TReferrerProvider : IReferrerProvider
 		{
-			AddOverride( typeof( IReferrerProvider ), referrerProviderType );
+			AddOverride<IReferrerProvider, TReferrerProvider>();
 		}
 
-		public void ObjectLookupCache( Type objectLookupCacheType )
+		public void ObjectLookupCache<TObjectLookupCache>() where TObjectLookupCache : IObjectLookupCache
 		{
-			AddOverride( typeof ( IObjectLookupCache ), objectLookupCacheType );
+			AddOverride<IObjectLookupCache, TObjectLookupCache>();
 		}
 
-		public void PropertyValueProviderFactory( Type propertyValueProviderFactoryType )
+		public void PropertyValueProviderFactory<TPropertyValueProviderFactory>() where TPropertyValueProviderFactory : IPropertyValueProviderFactory
 		{
-			AddOverride( typeof(IPropertyValueProviderFactory), propertyValueProviderFactoryType );
+			AddOverride<IPropertyValueProviderFactory, TPropertyValueProviderFactory>();
 		}
 
-		public void AssemblyListProvider( Type assemblyListProvider )
+		public void AssemblyListProvider<TAssemblyListProvider>() where TAssemblyListProvider : IAssemblyListProvider
 		{
-			AddOverride( typeof ( IAssemblyListProvider ), assemblyListProvider );
+			AddOverride<IAssemblyListProvider, TAssemblyListProvider>();
 		}
 
-		public void CommandBus( Type commandBusType )
+		public void CommandBus<TCommandBus>() where TCommandBus : ICommandBus
 		{
-			AddOverride( typeof ( ICommandBus ), commandBusType );
+			AddOverride<ICommandBus, TCommandBus>();
 		}
 
-		public void CommandHandlerFinder( Type commandHandlerFinderType )
+		public void CommandHandlerFinder<TCommandHandlerFinder>() where TCommandHandlerFinder : ICommandHandlerFinder
 		{
-			AddOverride( typeof ( ICommandHandlerFinder ), commandHandlerFinderType );
+			AddOverride<ICommandHandlerFinder, TCommandHandlerFinder>();
 		}
 
-		public void CommandHandlerProvider( Type commandHandlerProviderType )
+		public void CommandHandlerProvider<TCommandHandlerProvider>() where TCommandHandlerProvider : ICommandHandlerProvider
 		{
-			AddOverride( typeof(ICommandHandlerProvider), commandHandlerProviderType );
+			AddOverride<ICommandHandlerProvider, TCommandHandlerProvider>();
 		}
 
-		public void EventPublisher( Type eventPublisherType )
+		public void EventPublisher<TEventPublisher>() where TEventPublisher : IEventPublisher
 		{
-			AddOverride( typeof(IEventPublisher), eventPublisherType );
+			AddOverride<IEventPublisher, TEventPublisher>();
 		}
 
-		public void SubscriptionService( Type subscriptionServiceType )
+		public void SubscriptionService<TSubscriptionService>() where TSubscriptionService : ISubscriptionService
 		{
-			AddOverride( typeof(ISubscriptionService), subscriptionServiceType );
+			AddOverride<ISubscriptionService, TSubscriptionService>();
 		}
 
-		public void ViewModelProviderArgumentsProvider( Type viewModelProviderArgumentsProviderType )
+		public void ViewModelProviderArgumentsProvider<TViewModelProviderArgumentsProvider>() where TViewModelProviderArgumentsProvider : IViewModelProviderArgumentsProvider
 		{
-			AddOverride( typeof ( IViewModelProviderArgumentsProvider ), viewModelProviderArgumentsProviderType );
+			AddOverride<IViewModelProviderArgumentsProvider, TViewModelProviderArgumentsProvider>();
 		}
 
 		internal Dictionary<Type, Type> GetOverrides()

@@ -207,170 +207,163 @@ namespace PseudoCQRS.Tests.Configuration
 
 		#endregion
 
-		#region Get Overriden Implementations Tests.
+		#region Get Overridden Implementations Tests.
 
 		[Test]
-		public void CheckersExecutor_WhenOverriden_ShouldReturnOverridenImplementationCheckersExecutor()
+		public void CheckersExecutor_WhenOverridden_ShouldReturnOverriddenImplementationCheckersExecutor()
 		{
 			Type implementationCheckersExecutorType = typeof ( DummyCheckersExecutor );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.CheckersExecuter( implementationCheckersExecutorType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( ICheckersExecuter ),
+				x => x.CheckersExecutor<DummyCheckersExecutor>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( ICheckersExecuter ),
 																	implementationCheckersExecutorType, getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void CheckersFinder_WhenOverriden_ShouldReturnOverridenImplementationCheckersFinder()
+		public void CheckersFinder_WhenOverridden_ShouldReturnOverriddenImplementationCheckersFinder()
 		{
 			Type implementationCheckersFinderType = typeof ( DummyCheckersFinder );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.CheckersFinder( implementationCheckersFinderType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( ICheckersFinder ), implementationCheckersFinderType,
+				x => x.CheckersFinder<DummyCheckersFinder>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( ICheckersFinder ), implementationCheckersFinderType,
 																	getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void PrerequisitesChecker_WhenOverriden_ShouldReturnOverridenImplementationPrerequisitesChecker()
+		public void PrerequisitesChecker_WhenOverridden_ShouldReturnOverriddenImplementationPrerequisitesChecker()
 		{
 			Type implementationPrerequisitesCheckerType = typeof ( DummyPrerequisitesChecker );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.PrerequisitesChecker( implementationPrerequisitesCheckerType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( IPrerequisitesChecker ),
+				x => x.PrerequisitesChecker<DummyPrerequisitesChecker>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( IPrerequisitesChecker ),
 																	implementationPrerequisitesCheckerType, getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void CommandExecutor_WhenOverriden_ShouldReturnOverridenImplementationCommandExecutor()
+		public void CommandExecutor_WhenOverridden_ShouldReturnOverriddenImplementationCommandExecutor()
 		{
 			Type implementationCommandExecutorType = typeof ( DummyCommandExecutor );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.CommandExecutor( implementationCommandExecutorType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( ICommandExecutor ), implementationCommandExecutorType,
+				x => x.CommandExecutor<DummyCommandExecutor>( );
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( ICommandExecutor ), implementationCommandExecutorType,
 																	getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void MessageManager_WhenOverriden_ShouldReturnOverridenImplementationMessageManager()
+		public void MessageManager_WhenOverridden_ShouldReturnOverriddenImplementationMessageManager()
 		{
 			Type implementationMessageManagerType = typeof ( DummyMessageManager );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.MessageManager( implementationMessageManagerType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( IMessageManager ), implementationMessageManagerType,
+				x => x.MessageManager<DummyMessageManager>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( IMessageManager ), implementationMessageManagerType,
 																	getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void ReferrerProvider_WhenOverriden_ShouldReturnOverridenImplementationReferrerProvider()
+		public void ReferrerProvider_WhenOverridden_ShouldReturnOverriddenImplementationReferrerProvider()
 		{
 			Type implementationReferrerProviderType = typeof ( DummyReferrerProvider );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.ReferrerProvider( implementationReferrerProviderType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( IReferrerProvider ),
+				x => x.ReferrerProvider<DummyReferrerProvider>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( IReferrerProvider ),
 																	implementationReferrerProviderType, getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void ObjectLookupCache_WhenOverriden_ShouldReturnOverridenImplementationObjectLookupCache()
+		public void ObjectLookupCache_WhenOverridden_ShouldReturnOverriddenImplementationObjectLookupCache()
 		{
 			Type implementationObjectLookupCacheType = typeof ( DummyObjectLookupCache );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.ObjectLookupCache( implementationObjectLookupCacheType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( IObjectLookupCache ),
+				x => x.ObjectLookupCache<DummyObjectLookupCache>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( IObjectLookupCache ),
 																	implementationObjectLookupCacheType, getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void PropertyValueProviderFactory_WhenOverriden_ShouldReturnOverridenImplementationPropertyValueProviderFactory
+		public void PropertyValueProviderFactory_WhenOverridden_ShouldReturnOverriddenImplementationPropertyValueProviderFactory
 			()
 		{
 			Type implementationPropertyValueProviderFactoryType = typeof ( DummyPropertyValueProviderFactory );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.PropertyValueProviderFactory( implementationPropertyValueProviderFactoryType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( IPropertyValueProviderFactory ),
+				x => x.PropertyValueProviderFactory<DummyPropertyValueProviderFactory>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( IPropertyValueProviderFactory ),
 																	implementationPropertyValueProviderFactoryType, getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void AssemblyListProvider_WhenOverriden_ShouldReturnOverridenImplementationAssemblyListProvider()
+		public void AssemblyListProvider_WhenOverridden_ShouldReturnOverriddenImplementationAssemblyListProvider()
 		{
 			Type implementationAssemblyListProviderType = typeof ( DummyAssemblyListProvider );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.AssemblyListProvider( implementationAssemblyListProviderType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( IAssemblyListProvider ),
+				x => x.AssemblyListProvider<DummyAssemblyListProvider>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( IAssemblyListProvider ),
 																	implementationAssemblyListProviderType, getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void CommandBus_WhenOverriden_ShouldReturnOverridenImplementationCommandBus()
+		public void CommandBus_WhenOverridden_ShouldReturnOverriddenImplementationCommandBus()
 		{
 			Type implementationCommandBusType = typeof ( DummyCommandBus );
-			Action<OverridableServicesContainer> getServiceToOverrideAction = x => x.CommandBus( implementationCommandBusType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( ICommandBus ), implementationCommandBusType,
+			Action<OverridableServicesContainer> getServiceToOverrideAction = x => x.CommandBus<DummyCommandBus>( );
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( ICommandBus ), implementationCommandBusType,
 																	getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void CommandHandlerFinder_WhenOverriden_ShouldReturnOverridenImplementationCommandHandlerFinder()
+		public void CommandHandlerFinder_WhenOverridden_ShouldReturnOverriddenImplementationCommandHandlerFinder()
 		{
 			Type implementationCommandHandlerFinderType = typeof ( DummyCommandHandlerFinder );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.CommandHandlerFinder( implementationCommandHandlerFinderType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( ICommandHandlerFinder ),
+				x => x.CommandHandlerFinder<DummyCommandHandlerFinder>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( ICommandHandlerFinder ),
 																	implementationCommandHandlerFinderType, getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void CommandHandlerProvider_WhenOverriden_ShouldReturnOverridenImplementationCommandHandlerProvider()
+		public void CommandHandlerProvider_WhenOverridden_ShouldReturnOverriddenImplementationCommandHandlerProvider()
 		{
 			Type implementationCommandHandlerProviderType = typeof ( DummyCommandHandlerProvider );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.CommandHandlerProvider( implementationCommandHandlerProviderType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( ICommandHandlerProvider ),
+				x => x.CommandHandlerProvider<DummyCommandHandlerProvider>();
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( ICommandHandlerProvider ),
 																	implementationCommandHandlerProviderType, getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void EventPublisher_WhenOverriden_ShouldReturnOverridenImplementationEventPublisher()
+		public void EventPublisher_WhenOverridden_ShouldReturnOverriddenImplementationEventPublisher()
 		{
 			Type implementationEventPublisherType = typeof ( DummyEventPublisher );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.EventPublisher( implementationEventPublisherType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( IEventPublisher ), implementationEventPublisherType,
+				x => x.EventPublisher<DummyEventPublisher>(  );
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( IEventPublisher ), implementationEventPublisherType,
 																	getServiceToOverrideAction );
 		}
 
 		[Test]
-		public void SubscriptionService_WhenOverriden_ShouldReturnOverridenImplementationSubscriptionService()
+		public void SubscriptionService_WhenOverridden_ShouldReturnOverriddenImplementationSubscriptionService()
 		{
 			Type implementationSubscriptionServiceType = typeof ( DummySubscriptionService );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.SubscriptionService( implementationSubscriptionServiceType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( ISubscriptionService ),
+				x => x.SubscriptionService<DummySubscriptionService>(  );
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( ISubscriptionService ),
 																	implementationSubscriptionServiceType, getServiceToOverrideAction );
 		}
 
-		//[Test]
-		//public void ViewModelFactory_WhenOverriden_ShouldReturnOverridenImplementationViewModelFactory()
-		//{
-		//	Type implementationViewModelFactoryType = typeof( DummyViewModelFactory<DummyViewModel,DummyViewModelProviderArgument> );
-		//	Action<OverridableServicesContainer> getServiceToOverrideAction = x => x.ViewModelFactory( implementationViewModelFactoryType );
-		//	WhenOverriden_ShouldReturnOverridenImplementationType( typeof( IViewModelFactory<DummyViewModel, DummyViewModelProviderArgument> ), implementationViewModelFactoryType, getServiceToOverrideAction );
-		//}
 
 		[Test]
 		public void
-			ViewModelProviderArgumentsProvider_WhenOverriden_ShouldReturnOverridenImplementationViewModelProviderArgumentsProvider
+			ViewModelProviderArgumentsProvider_WhenOverridden_ShouldReturnOverriddenImplementationViewModelProviderArgumentsProvider
 			()
 		{
 			Type implementationViewModelProviderArgumentsProviderType = typeof ( DummyViewModelProviderArgumentsProvider );
 			Action<OverridableServicesContainer> getServiceToOverrideAction =
-				x => x.ViewModelProviderArgumentsProvider( implementationViewModelProviderArgumentsProviderType );
-			WhenOverriden_ShouldReturnOverridenImplementationType( typeof ( IViewModelProviderArgumentsProvider ),
+				x => x.ViewModelProviderArgumentsProvider<DummyViewModelProviderArgumentsProvider>( );
+			WhenOverridden_ShouldReturnOverriddenImplementationType( typeof ( IViewModelProviderArgumentsProvider ),
 																	implementationViewModelProviderArgumentsProviderType, getServiceToOverrideAction );
 		}
 
-		private static void WhenOverriden_ShouldReturnOverridenImplementationType( Type interfaceType,
-																					Type overridenImplementationType, Action<OverridableServicesContainer> getServiceToOverride )
+		private static void WhenOverridden_ShouldReturnOverriddenImplementationType( Type interfaceType,
+																					Type overriddenImplementationType, Action<OverridableServicesContainer> getServiceToOverride )
 		{
 			var configuration = new DIConfiguration();
 			var mappedTypes = configuration
@@ -378,7 +371,7 @@ namespace PseudoCQRS.Tests.Configuration
 				.Build();
 
 			Assert.IsTrue( mappedTypes.ContainsKey( interfaceType ) );
-			Assert.AreEqual( overridenImplementationType, mappedTypes[interfaceType] );
+			Assert.AreEqual( overriddenImplementationType, mappedTypes[interfaceType] );
 		}
 
 		#endregion
@@ -386,102 +379,102 @@ namespace PseudoCQRS.Tests.Configuration
 		#region Get Default Implementation Tests.
 
 		[Test]
-		public void CheckersExecutor_WhenNotOverriden_ShouldMapDefaultImplementationCheckersExecutorType()
+		public void CheckersExecutor_WhenNotOverridden_ShouldMapDefaultImplementationCheckersExecutorType()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( ICheckersExecuter ), typeof ( CheckersExecuter ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( ICheckersExecuter ), typeof ( CheckersExecuter ) );
 		}
 
 		[Test]
-		public void CheckersFinder_WhenNotOverriden_ShouldMapDefaultImplementationCheckersFinder()
+		public void CheckersFinder_WhenNotOverridden_ShouldMapDefaultImplementationCheckersFinder()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( ICheckersFinder ), typeof ( CheckersFinder ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( ICheckersFinder ), typeof ( CheckersFinder ) );
 		}
 
 		[Test]
-		public void PrerequisitesChecker_WhenNotOverriden_ShouldMapDefaultImplementationPrerequisitesChecker()
+		public void PrerequisitesChecker_WhenNotOverridden_ShouldMapDefaultImplementationPrerequisitesChecker()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( IPrerequisitesChecker ), typeof ( PrerequisitesChecker ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( IPrerequisitesChecker ), typeof ( PrerequisitesChecker ) );
 		}
 
 		[Test]
-		public void CommandExecutor_WhenNotOverriden_ShouldMapDefaultImplementationCommandExecutor()
+		public void CommandExecutor_WhenNotOverridden_ShouldMapDefaultImplementationCommandExecutor()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( ICommandExecutor ), typeof ( CommandExecutor ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( ICommandExecutor ), typeof ( CommandExecutor ) );
 		}
 
 		[Test]
-		public void MessageManager_WhenNotOverriden_ShouldMapDefaultImplementationMessageManager()
+		public void MessageManager_WhenNotOverridden_ShouldMapDefaultImplementationMessageManager()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( IMessageManager ), typeof ( SessionBasedMessageManager ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( IMessageManager ), typeof ( SessionBasedMessageManager ) );
 		}
 
 		[Test]
-		public void ReferrerProvider_WhenNotOverriden_ShouldMapDefaultImplementationReferrerProvider()
+		public void ReferrerProvider_WhenNotOverridden_ShouldMapDefaultImplementationReferrerProvider()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( IReferrerProvider ), typeof ( ReferrerProvider ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( IReferrerProvider ), typeof ( ReferrerProvider ) );
 		}
 
 		[Test]
-		public void ObjectLookupCache_WhenNotOverriden_ShouldMapDefaultImplementationObjectLookupCache()
+		public void ObjectLookupCache_WhenNotOverridden_ShouldMapDefaultImplementationObjectLookupCache()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( IObjectLookupCache ), typeof ( ObjectLookupCache ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( IObjectLookupCache ), typeof ( ObjectLookupCache ) );
 		}
 
 		[Test]
-		public void PropertyValueProviderFactory_WhenNotOverriden_ShouldMapDefaultImplementationPropertyValueProviderFactory()
+		public void PropertyValueProviderFactory_WhenNotOverridden_ShouldMapDefaultImplementationPropertyValueProviderFactory()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( IPropertyValueProviderFactory ),
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( IPropertyValueProviderFactory ),
 																typeof ( PropertyValueProviderFactory ) );
 		}
 
 		[Test]
-		public void AssemblyListProvider_WhenNotOverriden_ShouldMapDefaultImplementationAssemblyListProvider()
+		public void AssemblyListProvider_WhenNotOverridden_ShouldMapDefaultImplementationAssemblyListProvider()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( IAssemblyListProvider ), typeof ( AssemblyListProvider ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( IAssemblyListProvider ), typeof ( AssemblyListProvider ) );
 		}
 
 		[Test]
-		public void CommandBus_WhenNotOverriden_ShouldMapDefaultImplementationCommandBus()
+		public void CommandBus_WhenNotOverridden_ShouldMapDefaultImplementationCommandBus()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( ICommandBus ), typeof ( CommandBus ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( ICommandBus ), typeof ( CommandBus ) );
 		}
 
 		[Test]
-		public void CommandHandlerFinder_WhenNotOverriden_ShouldMapDefaultImplementationCommandHandlerFinder()
+		public void CommandHandlerFinder_WhenNotOverridden_ShouldMapDefaultImplementationCommandHandlerFinder()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( ICommandHandlerFinder ),
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( ICommandHandlerFinder ),
 																typeof ( CommandHandlerFinder ) );
 		}
 
 		[Test]
-		public void CommandHandlerProvider_WhenNotOverriden_ShouldMapDefaultImplementationCommandHandlerProvider()
+		public void CommandHandlerProvider_WhenNotOverridden_ShouldMapDefaultImplementationCommandHandlerProvider()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( ICommandHandlerProvider ),
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( ICommandHandlerProvider ),
 																typeof ( CommandHandlerProvider ) );
 		}
 
 		[Test]
-		public void EventPublisher_WhenNotOverriden_ShouldMapDefaultImplementationEventPublisher()
+		public void EventPublisher_WhenNotOverridden_ShouldMapDefaultImplementationEventPublisher()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( IEventPublisher ), typeof ( EventPublisher ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( IEventPublisher ), typeof ( EventPublisher ) );
 		}
 
 		[Test]
-		public void SubscriptionService_WhenNotOverriden_ShouldMapDefaultImplementationSubscriptionService()
+		public void SubscriptionService_WhenNotOverridden_ShouldMapDefaultImplementationSubscriptionService()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( ISubscriptionService ), typeof ( SubscriptionService ) );
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( ISubscriptionService ), typeof ( SubscriptionService ) );
 		}
 
 		[Test]
 		public void
-			ViewModelProviderArgumentsProvider_WhenNotOverriden_ShouldMapDefaultImplementationViewModelProviderArgumentsProvider()
+			ViewModelProviderArgumentsProvider_WhenNotOverridden_ShouldMapDefaultImplementationViewModelProviderArgumentsProvider()
 		{
-			WhenNotOverriden_ShouldReturnDefaultImplementation( typeof ( IViewModelProviderArgumentsProvider ),
+			WhenNotOverridden_ShouldReturnDefaultImplementation( typeof ( IViewModelProviderArgumentsProvider ),
 																typeof ( ViewModelProviderArgumentsProvider ) );
 		}
 
 
-		private static void WhenNotOverriden_ShouldReturnDefaultImplementation( Type interfaceType,
+		private static void WhenNotOverridden_ShouldReturnDefaultImplementation( Type interfaceType,
 																				Type defaultImplementationType )
 		{
 			var configuration = new DIConfiguration();
@@ -498,6 +491,9 @@ namespace PseudoCQRS.Tests.Configuration
 		[Test]
 		public void Build_ConfigureViewModelProvidersIn_ShouldMapAllViewModelProviders()
 		{
+			new DIConfiguration()
+				.SetImplementationType( x => x.CommandBus<DummyCommandBus>() );
+
 			var types = new DIConfiguration()
 				.ConfigureViewModelProvidersIn( this.GetType().Assembly )
 				.Build();

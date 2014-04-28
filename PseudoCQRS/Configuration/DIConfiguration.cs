@@ -36,7 +36,8 @@ namespace PseudoCQRS.Configuration
 		public Dictionary<Type, Type> Build()
 		{
 			var result = new Dictionary<Type, Type>();
-			result.AddRange( GetOverridenTypes() );
+
+			result.AddRange( GetOverriddenTypes() );
 			AddDefaultImplementations( result );
 			var viewModelProvidersTypes = GetViewModelProvidersTypes();
 			result.AddRange( viewModelProvidersTypes );
@@ -71,7 +72,7 @@ namespace PseudoCQRS.Configuration
 				mappings.Add( interfaceType, implementationType );
 		}
 
-		private Dictionary<Type, Type> GetOverridenTypes()
+		private Dictionary<Type, Type> GetOverriddenTypes()
 		{
 			var result = new Dictionary<Type, Type>();
 			foreach ( var @override in _overrides )
