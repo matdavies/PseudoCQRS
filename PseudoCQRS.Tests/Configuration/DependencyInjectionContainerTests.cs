@@ -102,5 +102,11 @@ namespace PseudoCQRS.Tests.Configuration
 			var classWithNoConstructor = _container.Resolve<ClassWithNoConstructor>();
 			Assert.IsNotNull( classWithNoConstructor );
 		}
+
+		[Test]
+		public void Resolve_AUnregisteredInterfaceType_ThrowAnException()
+		{
+			Assert.Throws<Exception>( () => _container.Resolve<IInterface>() );
+		}
 	}
 }

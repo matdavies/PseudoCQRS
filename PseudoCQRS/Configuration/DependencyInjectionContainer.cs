@@ -68,11 +68,6 @@ namespace PseudoCQRS.Configuration
 			if ( constructor != null )
 				result = CreateInstanceFromConstructor( constructor, concreateType );
 
-			//if ( constructors.Any() )
-			//	result = CreateInstanceFromConstructor( constructors.First(), concreateType );
-			//else
-			//	result = Activator.CreateInstance( concreateType );
-
 			return result;
 		}
 
