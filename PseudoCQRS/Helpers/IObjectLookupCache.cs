@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace PseudoCQRS.Helpers
+﻿namespace PseudoCQRS.Helpers
 {
 	public interface IObjectLookupCache
 	{

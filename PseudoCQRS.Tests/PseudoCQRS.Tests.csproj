@@ -106,6 +106,7 @@
     <Compile Include="CommandBusTests.cs" />
     <Compile Include="CommandHandlerFinderTests.cs" />
     <Compile Include="CommandHandlerProviderTests.cs" />
+    <Compile Include="Configuration\DependencyInjectionContainerTests.cs" />
     <Compile Include="Configuration\DIConfigurationTests.cs" />
     <Compile Include="Controllers\BaseReadControllerTests.cs" />
     <Compile Include="Controllers\Helpers\DummyCommandCommand.cs" />

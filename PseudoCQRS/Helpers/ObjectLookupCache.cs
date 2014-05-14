@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PseudoCQRS.Helpers
 {
-    public class ObjectLookupCache : IObjectLookupCache
+	public class ObjectLookupCache : IObjectLookupCache
 	{
 		private static readonly Dictionary<string, object> InternalCache;
 
@@ -15,15 +14,14 @@ namespace PseudoCQRS.Helpers
 		public T GetValue<T>( string key, T defaultValue )
 		{
 			if ( InternalCache.ContainsKey( key ) )
-				return (T)InternalCache[ key ];
+				return (T) InternalCache[key];
 
 			return defaultValue;
 		}
 
 		public void SetValue<T>( string key, T value )
 		{
-			InternalCache[ key ] = value;
+			InternalCache[key] = value;
 		}
-
 	}
 }
