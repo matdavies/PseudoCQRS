@@ -1,21 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
-<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd" >
-	<metadata>
-		<id> PseudoCQRS.Mvc5 </id>
-		<version> 4.1.0 </version>
-		<title> Pseudo CQRS Mvc5 </title>
-		<authors> Liquid Thinking </authors>
-		<projectUrl> https://github.com/LiquidThinking/PseudoCQRS </projectUrl>
-		<requireLicenseAcceptance> false </requireLicenseAcceptance>
-		<description> CQRS Framework </description>
-		<releaseNotes> Added DIConfiguration </releaseNotes>
-		<dependencies>
-			<dependency id="CommonServiceLocator" version="1.0"/>
-		</dependencies>
-	</metadata>
-	<files>
-		<file src="PseudoCQRS\bin\Mvc51\PseudoCQRS.dll" target="lib\net45\PseudoCQRS.dll"/>
-		<file src="PseudoCQRS\bin\Mvc51\PseudoCQRS.pdb" target="lib\net45\PseudoCQRS.pdb"/>
-	</files>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>PseudoCQRS.Mvc5</id>
+        <version>4.0.4</version>
+        <title>Pseudo CQRS Mvc5</title>
+        <authors>Liquid Thinking</authors>
+        <projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>CQRS Framework</description>
+        <releaseNotes>Changed so db session manager only called if action is not a child action</releaseNotes>
+        <dependencies>
+            <dependency id="CommonServiceLocator" version="1.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="PseudoCQRS\bin\Mvc51\PseudoCQRS.dll" target="lib\net45\PseudoCQRS.dll" />
+        <file src="PseudoCQRS\bin\Mvc51\PseudoCQRS.pdb" target="lib\net45\PseudoCQRS.pdb" />
+    </files>
 </package>
