@@ -1,3 +1,8 @@
+<a href="http://buildserver.spawtz.com:8000/viewType.html?buildTypeId=PseudoCQRS_Ci&guest=1">
+<img src="http://buildserver.spawtz.com:8000/app/rest/builds/buildType:(id:PseudoCQRS_Ci)/statusIcon"/>
+</a>
+
+
 PseudoCQRS
 ==========
 

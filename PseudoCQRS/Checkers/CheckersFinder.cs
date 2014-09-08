@@ -19,12 +19,11 @@ namespace PseudoCQRS.Checkers
 			foreach ( var attrib in instance.GetType().GetCustomAttributes( typeof( TAttribute ), true ) )
 			{
 				var checker = ServiceLocator.Current.GetInstance( ( (BaseCheckAttribute)attrib ).CheckerType );
-				if ( checker is TChecker )
-					result.Add( new CheckersFinderResult<TAttribute, TChecker>
-					{
-						Checker = (TChecker)checker,
-						Attribute = (TAttribute)attrib
-					} );
+				result.Add( new CheckersFinderResult<TAttribute, TChecker>
+				{
+					Checker = (TChecker)checker,
+					Attribute = (TAttribute)attrib
+				} );
 			}
 
 			return result;
