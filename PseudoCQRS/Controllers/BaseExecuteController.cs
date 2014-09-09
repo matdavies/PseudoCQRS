@@ -44,9 +44,7 @@ namespace PseudoCQRS.Controllers
             }
             else
             {
-                var errorMessage = String.Join( "\r\n", ModelState
-                                                            .Where( x => x.Value.Errors.Count > 0 )
-                                                            .Select( x => String.Join( "\r\n", x.Value.Errors.Select( y => String.IsNullOrEmpty( y.ErrorMessage ) ? y.Exception.ToString() : y.ErrorMessage ) ) ) );
+                var errorMessage = GetErrorMessage();
                 _messageManager.SetErrorMessage( errorMessage );
                 result = OnCompletion( viewModel, new CommandResult
                 {
@@ -55,6 +53,13 @@ namespace PseudoCQRS.Controllers
                 } );
             }
             return result;
+        }
+
+        protected virtual string GetErrorMessage()
+        {
+            return String.Join( "\r\n", ModelState
+                .Where( x => x.Value.Errors.Count > 0 )
+                .Select( x => String.Join( "\r\n", x.Value.Errors.Select( y => String.IsNullOrEmpty( y.ErrorMessage ) ? y.Exception.ToString() : y.ErrorMessage ) ) ) );
         }
     }
 }

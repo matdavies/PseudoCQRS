@@ -17,11 +17,21 @@ namespace PseudoCQRS.Controllers
 	        : this( ServiceLocator.Current.GetInstance<ICommandExecutor>() ) {}
 
 
-	    protected CommandResult ExecuteCommand(TViewModel viewModel)
+	    protected virtual CommandResult ExecuteCommand(TViewModel viewModel)
         {
-            var command = Mapper.Map<TViewModel, TCommand>(viewModel);
-            var result = _commandExecutor.ExecuteCommand(command);
+            var command = ConvertViewModelToCommand( viewModel );
+            var result = ExecuteCommand( command );
             return result;
         }
-    }
+
+	    private CommandResult ExecuteCommand( TCommand command )
+	    {
+	        return _commandExecutor.ExecuteCommand(command);
+	    }
+
+	    protected virtual TCommand ConvertViewModelToCommand( TViewModel viewModel )
+	    {
+	        return Mapper.Map<TViewModel, TCommand>(viewModel);
+	    }
+	}
 }
