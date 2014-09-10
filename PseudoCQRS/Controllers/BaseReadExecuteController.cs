@@ -39,13 +39,18 @@ namespace PseudoCQRS.Controllers
 		[AcceptVerbs( HttpVerbs.Get | HttpVerbs.Head )]
 		public virtual ActionResult Execute()
 		{
-			return GetViewResult( _viewModelFactory.GetViewModel() );
+			return GetViewResult( GetViewModel() );
 		}
 
-		[HttpPost]
+	    protected virtual TViewModel GetViewModel()
+	    {
+	        return _viewModelFactory.GetViewModel();
+	    }
+
+	    [HttpPost]
 		public virtual ActionResult Execute( FormCollection form )
 		{
-			var viewModel = _viewModelFactory.GetViewModel();
+			var viewModel = GetViewModel();
 			return TryUpdateModel( viewModel ) ? GetActionResult( viewModel ) : GetViewResult( viewModel );
 		}
 
