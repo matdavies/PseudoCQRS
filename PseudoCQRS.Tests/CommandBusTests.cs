@@ -89,6 +89,16 @@ namespace PseudoCQRS.Tests
 			}
 		}
 
+		[DbTransaction]
+		internal class CommandHandlerThatThrowsException : ICommandHandler<BlankSimpleTestCommand>
+		{
+			public CommandResult Handle( BlankSimpleTestCommand command )
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+
 		[Test]
 		public void ShouldOpenTransactionWhenDbTransactionAttributeIsApplied()
 		{
@@ -101,6 +111,17 @@ namespace PseudoCQRS.Tests
 		{
 			ExecuteArrangeAndAct( new CommandHandlerWithTransactionAttribute() );
 			_dbSessionManager.AssertWasCalled( x => x.CommitTransaction() );
+		}
+
+		[Test]
+		public void Execute_AHandlerThatThrowsAnException_RollsbackTransaction()
+		{
+			try
+			{
+				ExecuteArrangeAndAct( new CommandHandlerThatThrowsException() );
+			}
+			catch { }
+			_dbSessionManager.AssertWasCalled( x => x.RollbackTransaction() );
 		}
 	}
 }

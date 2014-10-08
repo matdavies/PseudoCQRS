@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using NUnit.Framework;
 using PseudoCQRS.Configuration;
 
@@ -98,5 +99,15 @@ namespace PseudoCQRS.Tests.Configuration
 		{
 			Assert.Throws<Exception>( () => _container.Resolve<IInterface>() );
 		}
+
+		[Test]
+		public void Resolve_ATypeThatHasAlreadyBeenInstantiated_ReturnsThePreviouslyInstantiatedInstance()
+		{
+			_container.Register<IInterface, Implementation>();
+			var implementation = _container.Resolve<IInterface>();
+			var secondImplementation = _container.Resolve<IInterface>();
+			Assert.IsTrue( implementation == secondImplementation );
+		}
+
 	}
 }

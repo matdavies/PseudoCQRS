@@ -110,9 +110,6 @@
     <Compile Include="Configuration\DependencyInjectionServiceLocatorTests.cs" />
     <Compile Include="Configuration\DIConfigurationTests.cs" />
     <Compile Include="Controllers\BaseReadControllerTests.cs" />
-    <Compile Include="Controllers\Helpers\DummyCommandCommand.cs" />
-    <Compile Include="Controllers\Helpers\DummyCommandController.cs" />
-    <Compile Include="Controllers\Helpers\DummyCommandViewModel.cs" />
     <Compile Include="Controllers\Helpers\DummyReadController.cs" />
     <Compile Include="Controllers\Helpers\DummyReadViewModel.cs" />
     <Compile Include="Controllers\Helpers\DummyReadViewModelProviderArgument.cs" />
@@ -125,7 +122,6 @@
     <Compile Include="Helpers\ObjectLookupCacheTests.cs" />
     <Compile Include="TestHelpers\HttpContextHelper.cs" />
     <Compile Include="Checkers\PreRequisitesCheckerTests.cs" />
-    <Compile Include="Controllers\BaseCommandControllerTests.cs" />
     <Compile Include="Controllers\BaseExecuteControllerTests.cs" />
     <Compile Include="Controllers\BaseReadExecuteControllerTests.cs" />
     <Compile Include="Controllers\CommandExecutorTests.cs" />

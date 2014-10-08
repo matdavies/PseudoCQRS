@@ -10,8 +10,6 @@ namespace PseudoCQRS.Tests
 	public class ViewModelProviderArgumentsProviderTests
 	{
 		private IPropertyValueProviderFactory _propertyValueProviderFactory;
-		private IPersistablePropertyValueProvider _persistablePropertyKeyValueProvider;
-
 
 		private IPropertyValueProviderFactory StubGetPropertyValueProviders()
 		{
