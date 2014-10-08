@@ -13,9 +13,7 @@ namespace PseudoCQRS.Tests.Configuration
 	{
 		public class DummyDependencyInjectionServiceLocator : DependencyInjectionServiceLocator
 		{
-			public DummyDependencyInjectionServiceLocator( IDependencyInjectionContainer container ) : base( container )
-			{
-			}
+			public DummyDependencyInjectionServiceLocator( IDependencyInjectionContainer container ) : base( container ) {}
 
 			public object CallDoGetInstance( Type serviceType, string key )
 			{
@@ -26,7 +24,6 @@ namespace PseudoCQRS.Tests.Configuration
 			{
 				return DoGetAllInstances( serviceType );
 			}
-
 		}
 
 		[Test]
@@ -46,7 +43,7 @@ namespace PseudoCQRS.Tests.Configuration
 			var serviceLocator = new DummyDependencyInjectionServiceLocator( container );
 			serviceLocator.CallDoGetAllInstances( this.GetType() );
 
-			container.AssertWasCalled( x => x.Resolve( this.GetType() ) );			
+			container.AssertWasCalled( x => x.Resolve( this.GetType() ) );
 		}
 	}
 }

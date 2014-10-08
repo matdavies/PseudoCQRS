@@ -23,7 +23,7 @@ namespace PseudoCQRS.Configuration
 
 		public void Register<TInterface, TImplementation>()
 		{
-			Register( typeof ( TInterface ), typeof ( TImplementation ) );
+			Register( typeof( TInterface ), typeof( TImplementation ) );
 		}
 
 		public void Register( IDictionary<Type, Type> mappings )
@@ -37,7 +37,7 @@ namespace PseudoCQRS.Configuration
 			object result;
 
 			if ( instances.ContainsKey( type ) )
-				result = instances[type];
+				result = instances[ type ];
 			else
 			{
 				result = CreateInstanceOfType( type );
@@ -49,7 +49,7 @@ namespace PseudoCQRS.Configuration
 
 		public TService Resolve<TService>() where TService : class
 		{
-			return Resolve( typeof ( TService ) ) as TService;
+			return Resolve( typeof( TService ) ) as TService;
 		}
 
 		private static void SaveRegisteredTypeInstance( Type type, object instance )
@@ -88,7 +88,7 @@ namespace PseudoCQRS.Configuration
 			if ( !isRegistered && type.IsInterface )
 				throw new Exception( String.Format( exceptionFormat, type.FullName ) );
 
-			var result = registrations.ContainsKey( type ) ? registrations[type] : type;
+			var result = registrations.ContainsKey( type ) ? registrations[ type ] : type;
 			return result;
 		}
 

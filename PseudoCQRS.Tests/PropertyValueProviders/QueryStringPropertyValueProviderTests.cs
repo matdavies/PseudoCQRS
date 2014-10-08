@@ -6,18 +6,18 @@ using PseudoCQRS.Tests.Helpers;
 
 namespace PseudoCQRS.Tests.PropertyValueProviders
 {
-    [TestFixture]
-    public class QueryStringPropertyValueProviderTests
-    {
-        private QueryStringPropertyValueProvider _valueProvider;
+	[TestFixture]
+	public class QueryStringPropertyValueProviderTests
+	{
+		private QueryStringPropertyValueProvider _valueProvider;
 
-        [SetUp]
-        public void Setup()
-        {
-            _valueProvider = new QueryStringPropertyValueProvider();
-        }
+		[SetUp]
+		public void Setup()
+		{
+			_valueProvider = new QueryStringPropertyValueProvider();
+		}
 
-        /*
+		/*
 		[Test]
 		public void GetKeyShouldReturnPropertyNameAsKey()
 		{
@@ -25,34 +25,34 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		}
         */
 
-        [Test]
-        public void HasValueShouldReturnTrueWhenQueryStringContainsKey()
-        {
-            const string key = "id";
-            const string value = "1324";
-            HttpContext.Current = HttpContextHelper.GetHttpContext( String.Format( "{0}={1}", key, value ) );
+		[Test]
+		public void HasValueShouldReturnTrueWhenQueryStringContainsKey()
+		{
+			const string key = "id";
+			const string value = "1324";
+			HttpContext.Current = HttpContextHelper.GetHttpContext( String.Format( "{0}={1}", key, value ) );
 
-            Assert.IsTrue( _valueProvider.HasValue<string>( key ) );
-        }
+			Assert.IsTrue( _valueProvider.HasValue<string>( key ) );
+		}
 
-        [Test]
-        public void HasValueShouldReturnFalseWhenQueryStringDoesNotContainKey()
-        {
-            const string key = "id";
+		[Test]
+		public void HasValueShouldReturnFalseWhenQueryStringDoesNotContainKey()
+		{
+			const string key = "id";
 
-            HttpContext.Current = HttpContextHelper.GetHttpContext();
+			HttpContext.Current = HttpContextHelper.GetHttpContext();
 
-            Assert.IsFalse( _valueProvider.HasValue<string>( key ) );
-        }
+			Assert.IsFalse( _valueProvider.HasValue<string>( key ) );
+		}
 
-        [Test]
-        public void GetValueShouldReturnValue()
-        {
-            const string key = "id";
-            const string value = "1324";
-            HttpContext.Current = HttpContextHelper.GetHttpContext( String.Format( "{0}={1}", key, value ) );
+		[Test]
+		public void GetValueShouldReturnValue()
+		{
+			const string key = "id";
+			const string value = "1324";
+			HttpContext.Current = HttpContextHelper.GetHttpContext( String.Format( "{0}={1}", key, value ) );
 
-            Assert.AreEqual( value, _valueProvider.GetValue<Object>( key, typeof ( string ) ) );
-        }
-    }
+			Assert.AreEqual( value, _valueProvider.GetValue<Object>( key, typeof( string ) ) );
+		}
+	}
 }

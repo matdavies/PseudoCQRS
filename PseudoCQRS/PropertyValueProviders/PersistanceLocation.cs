@@ -1,8 +1,8 @@
 ﻿namespace PseudoCQRS.PropertyValueProviders
 {
-    public enum PersistanceLocation
-    {
-        Cookie,
-        Session
-    }
+	public enum PersistanceLocation
+	{
+		Cookie,
+		Session
+	}
 }

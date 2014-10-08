@@ -42,12 +42,12 @@ namespace PseudoCQRS.Controllers
 			return GetViewResult( GetViewModel() );
 		}
 
-	    protected virtual TViewModel GetViewModel()
-	    {
-	        return _viewModelFactory.GetViewModel();
-	    }
+		protected virtual TViewModel GetViewModel()
+		{
+			return _viewModelFactory.GetViewModel();
+		}
 
-	    [HttpPost]
+		[HttpPost]
 		public virtual ActionResult Execute( FormCollection form )
 		{
 			var viewModel = GetViewModel();

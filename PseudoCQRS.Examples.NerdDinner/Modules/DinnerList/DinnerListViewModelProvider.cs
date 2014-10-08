@@ -46,14 +46,14 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerList
 
 		private static bool DinnerShouldBeIncluded( DinnerListArguments arguments, Dinner dinner )
 		{
-			return 
+			return
 				dinner.EventDate >= DateTime.Now.Date
-				&& 
-				( 
-					arguments.HostedByUserId == 0 
-					|| 
-					dinner.HostedBy.Id == arguments.HostedByUserId 
-				);
+				&&
+				(
+					arguments.HostedByUserId == 0
+					||
+					dinner.HostedBy.Id == arguments.HostedByUserId
+					);
 		}
 	}
 }

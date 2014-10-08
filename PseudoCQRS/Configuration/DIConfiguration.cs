@@ -48,22 +48,22 @@ namespace PseudoCQRS.Configuration
 
 		private static void AddDefaultImplementations( Dictionary<Type, Type> mappings )
 		{
-			SetImplementation( mappings, typeof ( ICheckersExecuter ), typeof ( CheckersExecuter ) );
-			SetImplementation( mappings, typeof ( ICheckersFinder ), typeof ( CheckersFinder ) );
-			SetImplementation( mappings, typeof ( IPrerequisitesChecker ), typeof ( PrerequisitesChecker ) );
-			SetImplementation( mappings, typeof ( ICommandExecutor ), typeof ( CommandExecutor ) );
-			SetImplementation( mappings, typeof ( IMessageManager ), typeof ( SessionBasedMessageManager ) );
-			SetImplementation( mappings, typeof ( IReferrerProvider ), typeof ( ReferrerProvider ) );
-			SetImplementation( mappings, typeof ( IObjectLookupCache ), typeof ( ObjectLookupCache ) );
-			SetImplementation( mappings, typeof ( IPropertyValueProviderFactory ), typeof ( PropertyValueProviderFactory ) );
-			SetImplementation( mappings, typeof ( IAssemblyListProvider ), typeof ( AssemblyListProvider ) );
-			SetImplementation( mappings, typeof ( ICommandBus ), typeof ( CommandBus ) );
-			SetImplementation( mappings, typeof ( ICommandHandlerFinder ), typeof ( CommandHandlerFinder ) );
-			SetImplementation( mappings, typeof ( ICommandHandlerProvider ), typeof ( CommandHandlerProvider ) );
-			SetImplementation( mappings, typeof ( IEventPublisher ), typeof ( EventPublisher ) );
-			SetImplementation( mappings, typeof ( ISubscriptionService ), typeof ( SubscriptionService ) );
-			SetImplementation( mappings, typeof ( IViewModelProviderArgumentsProvider ),
-								typeof ( ViewModelProviderArgumentsProvider ) );
+			SetImplementation( mappings, typeof( ICheckersExecuter ), typeof( CheckersExecuter ) );
+			SetImplementation( mappings, typeof( ICheckersFinder ), typeof( CheckersFinder ) );
+			SetImplementation( mappings, typeof( IPrerequisitesChecker ), typeof( PrerequisitesChecker ) );
+			SetImplementation( mappings, typeof( ICommandExecutor ), typeof( CommandExecutor ) );
+			SetImplementation( mappings, typeof( IMessageManager ), typeof( SessionBasedMessageManager ) );
+			SetImplementation( mappings, typeof( IReferrerProvider ), typeof( ReferrerProvider ) );
+			SetImplementation( mappings, typeof( IObjectLookupCache ), typeof( ObjectLookupCache ) );
+			SetImplementation( mappings, typeof( IPropertyValueProviderFactory ), typeof( PropertyValueProviderFactory ) );
+			SetImplementation( mappings, typeof( IAssemblyListProvider ), typeof( AssemblyListProvider ) );
+			SetImplementation( mappings, typeof( ICommandBus ), typeof( CommandBus ) );
+			SetImplementation( mappings, typeof( ICommandHandlerFinder ), typeof( CommandHandlerFinder ) );
+			SetImplementation( mappings, typeof( ICommandHandlerProvider ), typeof( CommandHandlerProvider ) );
+			SetImplementation( mappings, typeof( IEventPublisher ), typeof( EventPublisher ) );
+			SetImplementation( mappings, typeof( ISubscriptionService ), typeof( SubscriptionService ) );
+			SetImplementation( mappings, typeof( IViewModelProviderArgumentsProvider ),
+			                   typeof( ViewModelProviderArgumentsProvider ) );
 		}
 
 		private static void SetImplementation( Dictionary<Type, Type> mappings, Type interfaceType, Type implementationType )
@@ -87,18 +87,18 @@ namespace PseudoCQRS.Configuration
 
 		private Dictionary<Type, Type> GetViewModelProvidersTypes()
 		{
-			var viewModelProviderInterfaceType = typeof ( IViewModelProvider<,> );
+			var viewModelProviderInterfaceType = typeof( IViewModelProvider<,> );
 			var allViewModelProviderTypes = from assembly in _viewModelProvidersAssemblies
-											from type in assembly.GetTypes()
-											let viewModelProviderInterface = type.GetInterface( viewModelProviderInterfaceType.Name )
-											where viewModelProviderInterface != null
-											let genericArguments = viewModelProviderInterface.GetGenericArguments()
-											let interfaceGenericType = viewModelProviderInterfaceType.MakeGenericType( genericArguments )
-											select new
-											{
-												Interface = interfaceGenericType,
-												Implementation = type
-											};
+			                                from type in assembly.GetTypes()
+			                                let viewModelProviderInterface = type.GetInterface( viewModelProviderInterfaceType.Name )
+			                                where viewModelProviderInterface != null
+			                                let genericArguments = viewModelProviderInterface.GetGenericArguments()
+			                                let interfaceGenericType = viewModelProviderInterfaceType.MakeGenericType( genericArguments )
+			                                select new
+			                                {
+				                                Interface = interfaceGenericType,
+				                                Implementation = type
+			                                };
 
 			var result = allViewModelProviderTypes.ToDictionary( x => x.Interface, x => x.Implementation );
 			return result;
@@ -107,18 +107,17 @@ namespace PseudoCQRS.Configuration
 		private static Dictionary<Type, Type> GetViewModelFactoriesTypesFor( Dictionary<Type, Type> viewModelProvidersTypes )
 		{
 			var viewModelFactoriesTypes = from viewModelProviderMapping in viewModelProvidersTypes
-										let genericArguments = viewModelProviderMapping.Key.GetGenericArguments()
-										let interfaceType = typeof ( IViewModelFactory<,> ).MakeGenericType( genericArguments )
-										let implementationType = typeof ( ViewModelFactory<,> ).MakeGenericType( genericArguments )
-										select new
-										{
-											Interface = interfaceType,
-											Implementation = implementationType
-										};
+			                              let genericArguments = viewModelProviderMapping.Key.GetGenericArguments()
+			                              let interfaceType = typeof( IViewModelFactory<,> ).MakeGenericType( genericArguments )
+			                              let implementationType = typeof( ViewModelFactory<,> ).MakeGenericType( genericArguments )
+			                              select new
+			                              {
+				                              Interface = interfaceType,
+				                              Implementation = implementationType
+			                              };
 
 			var result = viewModelFactoriesTypes.ToDictionary( x => x.Interface, x => x.Implementation );
 			return result;
 		}
-
 	}
 }

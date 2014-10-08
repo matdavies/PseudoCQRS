@@ -1,13 +1,12 @@
 ﻿namespace PseudoCQRS.Controllers
 {
-	public class CommandExecutor : ICommandExecutor 
+	public class CommandExecutor : ICommandExecutor
 	{
-
 		private readonly ICommandBus _commandBus;
 		private readonly IMessageManager _messageManager;
 
-		public CommandExecutor( 
-			ICommandBus commandBus, 
+		public CommandExecutor(
+			ICommandBus commandBus,
 			IMessageManager messageManager )
 		{
 			_commandBus = commandBus;

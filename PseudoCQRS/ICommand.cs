@@ -1,6 +1,4 @@
 ﻿namespace PseudoCQRS
 {
-    public interface ICommand
-    {
-    }
+	public interface ICommand {}
 }

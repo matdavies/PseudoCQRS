@@ -4,8 +4,6 @@ namespace PseudoCQRS.Checkers
 {
 	public class ValidationCheckAttribute : BaseCheckAttribute
 	{
-
-		public ValidationCheckAttribute( Type checkerType ) : base( checkerType ) { }
-
+		public ValidationCheckAttribute( Type checkerType ) : base( checkerType ) {}
 	}
 }

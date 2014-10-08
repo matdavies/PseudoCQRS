@@ -9,16 +9,16 @@ using PseudoCQRS.Tests.Helpers;
 
 namespace PseudoCQRS.Tests.Controllers
 {
-    [TestFixture]
-    public class ReferrerProviderTests
-    {
-        [Test]
-        public void GetAbsoluteUri_Always_ReturnsUrlReferrerAbsoluteUri()
-        {
-            HttpContext.Current = HttpContextHelper.GetHttpContext();
+	[TestFixture]
+	public class ReferrerProviderTests
+	{
+		[Test]
+		public void GetAbsoluteUri_Always_ReturnsUrlReferrerAbsoluteUri()
+		{
+			HttpContext.Current = HttpContextHelper.GetHttpContext();
 
-            var uri = new ReferrerProvider().GetAbsoluteUri();
-            Assert.AreEqual( "http://localhost/", uri );
-        }
-    }
+			var uri = new ReferrerProvider().GetAbsoluteUri();
+			Assert.AreEqual( "http://localhost/", uri );
+		}
+	}
 }

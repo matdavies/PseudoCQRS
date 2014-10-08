@@ -7,7 +7,6 @@ namespace PseudoCQRS.ViewHelpers
 {
 	public static class MessageUtilities
 	{
-
 		public static MvcHtmlString GetErrorMessage( this HtmlHelper helper )
 		{
 			return GetMessage( true );
@@ -22,7 +21,7 @@ namespace PseudoCQRS.ViewHelpers
 			}
 			catch
 			{
-				throw new ApplicationException( "ServiceLocator is null. Did you call ServiceLocator.SetLocatorProvider( {arg} ) in application initialization code? " );				
+				throw new ApplicationException( "ServiceLocator is null. Did you call ServiceLocator.SetLocatorProvider( {arg} ) in application initialization code? " );
 			}
 
 			if ( messageManager == null )

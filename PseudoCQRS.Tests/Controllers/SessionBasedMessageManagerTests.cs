@@ -14,14 +14,14 @@ namespace PseudoCQRS.Tests.Controllers
 
 		private const string ErrorMessage = @"Error";
 		private const string SuccessMessage = @"Success";
-	
+
 		private SessionBasedMessageManager _sessionBasedMessageManager;
 
 		[SetUp]
 		public void Setup()
 		{
 			HttpContext.Current = HttpContextHelper.GetHttpContext();
-			_sessionBasedMessageManager = new SessionBasedMessageManager();			
+			_sessionBasedMessageManager = new SessionBasedMessageManager();
 		}
 
 		[Test]
@@ -55,7 +55,7 @@ namespace PseudoCQRS.Tests.Controllers
 			_sessionBasedMessageManager.SetSuccessMessage( SuccessMessage );
 			_sessionBasedMessageManager.SetErrorMessage( ErrorMessage );
 
-			Assert.AreEqual( SuccessMessage, _sessionBasedMessageManager.GetSuccessMessage() );		
+			Assert.AreEqual( SuccessMessage, _sessionBasedMessageManager.GetSuccessMessage() );
 		}
 
 		[Test]

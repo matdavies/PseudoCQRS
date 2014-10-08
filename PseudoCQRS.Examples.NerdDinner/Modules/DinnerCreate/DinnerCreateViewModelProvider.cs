@@ -6,8 +6,8 @@ using PseudoCQRS.Examples.NerdDinner.Infrastructure;
 
 namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerCreate
 {
-	public class DinnerCreateViewModelProvider : IViewModelProvider<DinnerCreateViewModel, EmptyViewModelProviderArgument> {
-
+	public class DinnerCreateViewModelProvider : IViewModelProvider<DinnerCreateViewModel, EmptyViewModelProviderArgument>
+	{
 		private readonly IRepository _repository;
 
 		public DinnerCreateViewModelProvider( IRepository repository )
@@ -20,7 +20,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerCreate
 			return new DinnerCreateViewModel
 			{
 				EventDate = DateTime.Today.ToShortDateString(),
-				Hosts =  _repository.GetAll<User>().ToDictionary( x => x.Id, x => x.Name )
+				Hosts = _repository.GetAll<User>().ToDictionary( x => x.Id, x => x.Name )
 			};
 		}
 	}

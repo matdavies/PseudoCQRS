@@ -7,16 +7,16 @@ namespace PseudoCQRS
 		private readonly ICommandHandlerFinder _commandHandlerFinder;
 		private readonly IObjectLookupCache _cache;
 
-        public CommandHandlerProvider(ICommandHandlerFinder commandHandlerFinder, IObjectLookupCache cache)
+		public CommandHandlerProvider( ICommandHandlerFinder commandHandlerFinder, IObjectLookupCache cache )
 		{
 			_commandHandlerFinder = commandHandlerFinder;
 			_cache = cache;
 		}
-		
+
 
 		public ICommandHandler<TCommand> GetCommandHandler<TCommand>()
 		{
-			var commandTypeFullName = typeof(TCommand).FullName;
+			var commandTypeFullName = typeof( TCommand ).FullName;
 
 			var handler = _cache.GetValue<ICommandHandler<TCommand>>( commandTypeFullName, null );
 			if ( handler == null )

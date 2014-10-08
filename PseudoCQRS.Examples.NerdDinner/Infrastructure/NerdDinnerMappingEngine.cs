@@ -1,5 +1,4 @@
-﻿
-using PseudoCQRS.Controllers;
+﻿using PseudoCQRS.Controllers;
 
 namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 {

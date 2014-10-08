@@ -4,6 +4,6 @@ namespace PseudoCQRS.Checkers
 {
 	public class AuthorizationCheckAttribute : BaseCheckAttribute
 	{
-		public AuthorizationCheckAttribute( Type checkerType ) : base( checkerType ) { }
+		public AuthorizationCheckAttribute( Type checkerType ) : base( checkerType ) {}
 	}
 }

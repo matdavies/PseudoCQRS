@@ -14,14 +14,14 @@ namespace PseudoCQRS.Helpers
 		public T GetValue<T>( string key, T defaultValue )
 		{
 			if ( InternalCache.ContainsKey( key ) )
-				return (T) InternalCache[key];
+				return (T)InternalCache[ key ];
 
 			return defaultValue;
 		}
 
 		public void SetValue<T>( string key, T value )
 		{
-			InternalCache[key] = value;
+			InternalCache[ key ] = value;
 		}
 	}
 }

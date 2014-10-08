@@ -23,8 +23,8 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		public void HasValueShouldReturnTrueWhenValueExists()
 		{
 			const string testKey = "MyTestKey";
-            const string fullKey = "System.String:" + testKey;
-            HttpContext.Current.Request.Cookies.Add(new HttpCookie(fullKey));
+			const string fullKey = "System.String:" + testKey;
+			HttpContext.Current.Request.Cookies.Add( new HttpCookie( fullKey ) );
 
 			Assert.IsTrue( _valueProvider.HasValue<string>( testKey ) );
 		}
@@ -33,18 +33,18 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		public void HasValueShouldReturnFalseWhenValueDoNotExists()
 		{
 			const string testKey = "MyTestKey";
-            const string fullKey = "System.String:" + testKey;
-            Assert.IsFalse(_valueProvider.HasValue<string>(fullKey));			
+			const string fullKey = "System.String:" + testKey;
+			Assert.IsFalse( _valueProvider.HasValue<string>( fullKey ) );
 		}
 
 		[Test]
 		public void GetValueShouldReturnValue()
 		{
 			const string testKey = "MyTestKey";
-            const string fullKey = "System.Object:" + testKey;
-            const string value = "12345";
+			const string fullKey = "System.Object:" + testKey;
+			const string value = "12345";
 			HttpContext.Current.Request.Cookies.Add( new HttpCookie( fullKey, value ) );
-			var retVal = _valueProvider.GetValue<Object>( testKey,typeof ( string ));
+			var retVal = _valueProvider.GetValue<Object>( testKey, typeof( string ) );
 
 			Assert.AreEqual( value, retVal );
 		}
@@ -53,13 +53,12 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		public void SetValueShouldSetValueInResponse()
 		{
 			const string testKey = "MyTestKey";
-		    const string fullKey = "System.String:" + testKey;
+			const string fullKey = "System.String:" + testKey;
 			const string value = "12345";
 			_valueProvider.SetValue<string>( testKey, value );
 
 			Assert.IsTrue( HttpContext.Current.Response.Cookies.AllKeys.Contains( fullKey ) );
-			Assert.AreEqual( value, HttpContext.Current.Response.Cookies[fullKey].Value );
-
+			Assert.AreEqual( value, HttpContext.Current.Response.Cookies[ fullKey ].Value );
 		}
 	}
 }

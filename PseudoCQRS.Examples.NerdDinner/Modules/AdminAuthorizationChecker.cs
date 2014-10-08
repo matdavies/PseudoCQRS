@@ -10,7 +10,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules
 	public class AdminAuthorizationChecker : IAuthorizationChecker
 	{
 		private readonly IRepository _repository;
-	
+
 		public AdminAuthorizationChecker( IRepository repository )
 		{
 			_repository = repository;

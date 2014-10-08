@@ -1,6 +1,4 @@
 ﻿namespace PseudoCQRS.Tests.Controllers.Helpers
 {
-	public class DummyExecuteCommand : ICommand
-	{
-	}
+	public class DummyExecuteCommand : ICommand {}
 }

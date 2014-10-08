@@ -19,7 +19,7 @@ namespace PseudoCQRS.Configuration
 
 		private void AddOverride<TInterface, TImplementation>()
 		{
-			_overrides.Add( typeof ( TInterface ), typeof ( TImplementation ) );
+			_overrides.Add( typeof( TInterface ), typeof( TImplementation ) );
 		}
 
 		public void CheckersExecutor<TCheckersExecutor>() where TCheckersExecutor : ICheckersExecuter

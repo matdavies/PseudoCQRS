@@ -14,10 +14,7 @@ namespace PseudoCQRS.Tests.Checkers
 		[AccessCheck( typeof( TestAccessChecker1 ), "TeamId" )]
 		[AccessCheck( typeof( TestAccessChecker2 ), "UserId" )]
 		[AccessCheck( typeof( TestAccessChecker3 ), "JobId" )]
-		public class TestCommandForCheckersFinder
-		{
-
-		}
+		public class TestCommandForCheckersFinder {}
 
 		public class TestValidationChecker : IValidationChecker<TestCommandForCheckersFinder>
 		{

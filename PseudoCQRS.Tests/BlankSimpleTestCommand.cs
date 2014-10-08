@@ -1,6 +1,4 @@
 ﻿namespace PseudoCQRS.Tests
 {
-	public class BlankSimpleTestCommand
-	{
-	}
+	public class BlankSimpleTestCommand {}
 }

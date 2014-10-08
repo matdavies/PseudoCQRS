@@ -19,20 +19,22 @@ namespace PseudoCQRS.Tests.Controllers
 			_messageManager = MockRepository.GenerateMock<IMessageManager>();
 
 			_commandExecutor = new CommandExecutor( _commandBus, _messageManager );
-			
 		}
 
-	[Test]
+		[Test]
 		public void ErrorMessageSetWhenCommandResultHasError()
 		{
-			_commandBus.Stub( 
-				x => x.Execute( Arg<DummyExecuteCommand>.Is.Anything ) )
-				.Return( new CommandResult() { ContainsError = true, Message = "Error" } );
+			_commandBus.Stub(
+			                 x => x.Execute( Arg<DummyExecuteCommand>.Is.Anything ) )
+			           .Return( new CommandResult()
+			           {
+				           ContainsError = true,
+				           Message = "Error"
+			           } );
 
 			_commandExecutor.ExecuteCommand( new DummyExecuteCommand() );
 
 			_messageManager.AssertWasCalled( x => x.SetErrorMessage( "Error" ) );
-
 		}
 
 
@@ -40,13 +42,16 @@ namespace PseudoCQRS.Tests.Controllers
 		public void ShouldSetSuccessMessageInMessageManager_WhenNoErrorReturnedFromCommandBus()
 		{
 			_commandBus.Stub(
-				x => x.Execute( Arg<DummyExecuteCommand>.Is.Anything ) )
-				.Return( new CommandResult() { ContainsError = false, Message = "Success" } );
+			                 x => x.Execute( Arg<DummyExecuteCommand>.Is.Anything ) )
+			           .Return( new CommandResult()
+			           {
+				           ContainsError = false,
+				           Message = "Success"
+			           } );
 
 			_commandExecutor.ExecuteCommand( new DummyExecuteCommand() );
 
 			_messageManager.AssertWasCalled( x => x.SetSuccessMessage( "Success" ) );
 		}
-
 	}
 }

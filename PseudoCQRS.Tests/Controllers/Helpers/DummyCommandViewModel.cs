@@ -1,4 +1,4 @@
 ﻿namespace PseudoCQRS.Tests.Controllers.Helpers
 {
-    public class DummyCommandViewModel {}
+	public class DummyCommandViewModel {}
 }

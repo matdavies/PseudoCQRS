@@ -18,7 +18,7 @@ namespace PseudoCQRS.Tests
 
 
 		// ReSharper disable once MemberCanBePrivate.Global
-		public class TestingEvent { }
+		public class TestingEvent {}
 
 		[SetUp]
 		public void Setup()
@@ -51,7 +51,11 @@ namespace PseudoCQRS.Tests
 
 			_subscriptionService
 				.Stub( x => x.GetSubscriptions<TestingEvent>() )
-				.Return( new List<IEventSubscriber<TestingEvent>> { mockedEventSubscriber1, mockedEventSubscriber2 } );
+				.Return( new List<IEventSubscriber<TestingEvent>>
+				{
+					mockedEventSubscriber1,
+					mockedEventSubscriber2
+				} );
 
 			_publisher.Publish<TestingEvent>( new TestingEvent() );
 
@@ -76,13 +80,13 @@ namespace PseudoCQRS.Tests
 
 		public class AsyncSubscriber2 : IEventSubscriber<TestingEvent>
 		{
-			public void Notify( TestingEvent @event )
+			public void Notify( TestingEvent @event ) {}
+
+			public bool IsAsynchronous
 			{
+				get { return true; }
 			}
-
-			public bool IsAsynchronous { get { return true;  } }
 		}
-
 
 
 		[Test]
@@ -91,7 +95,10 @@ namespace PseudoCQRS.Tests
 			_sharedStringBuilder = new StringBuilder();
 			_subscriptionService
 				.Stub( x => x.GetSubscriptions<TestingEvent>() )
-				.Return( new List<IEventSubscriber<TestingEvent>> { new AsyncSubscriber() } );
+				.Return( new List<IEventSubscriber<TestingEvent>>
+				{
+					new AsyncSubscriber()
+				} );
 
 			_sharedStringBuilder.Append( "Started, " );
 			_publisher.Publish<TestingEvent>( new TestingEvent() );
@@ -107,7 +114,10 @@ namespace PseudoCQRS.Tests
 			_sharedStringBuilder = new StringBuilder();
 			_subscriptionService
 				.Stub( x => x.GetSubscriptions<TestingEvent>() )
-				.Return( new List<IEventSubscriber<TestingEvent>> { new AsyncSubscriber() } );
+				.Return( new List<IEventSubscriber<TestingEvent>>
+				{
+					new AsyncSubscriber()
+				} );
 
 			_sharedStringBuilder.Append( "Started, " );
 			_publisher.PublishSynchronously<TestingEvent>( new TestingEvent() );
@@ -121,12 +131,15 @@ namespace PseudoCQRS.Tests
 		{
 			_subscriptionService
 				.Stub( x => x.GetSubscriptions<TestingEvent>() )
-				.Return( new List<IEventSubscriber<TestingEvent>> { new AsyncSubscriber(), new AsyncSubscriber2() } );
+				.Return( new List<IEventSubscriber<TestingEvent>>
+				{
+					new AsyncSubscriber(),
+					new AsyncSubscriber2()
+				} );
 			_publisher.Publish( new TestingEvent() );
 			Thread.Sleep( 2000 );
 			Console.WriteLine( _sharedStringBuilder.ToString() );
 			_dbSessionManager.AssertWasCalled( x => x.CloseSession(), x => x.Repeat.Twice() );
 		}
-		
 	}
 }

@@ -7,7 +7,6 @@ namespace PseudoCQRS
 	[AttributeUsage( AttributeTargets.Class, AllowMultiple = false, Inherited = true )]
 	public class DbSessionManagerAttribute : ActionFilterAttribute
 	{
-
 		public DbSessionManagerAttribute()
 		{
 			Order = 1;

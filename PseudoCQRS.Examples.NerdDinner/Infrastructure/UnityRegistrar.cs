@@ -32,8 +32,8 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 		private static void RegisterNonGenericImplementationsWithITypeName( IUnityContainer container, Assembly inAssembly )
 		{
 			var typesWithITypeInterfaces = inAssembly.GetTypes()
-												   .Where( x => x.IsClass && !x.IsAbstract && x.IsPublic )
-												   .Where( x => x.FindInterfaces( ( y, z ) => y.Name == "I" + x.Name, null ).Any() );
+			                                         .Where( x => x.IsClass && !x.IsAbstract && x.IsPublic )
+			                                         .Where( x => x.FindInterfaces( ( y, z ) => y.Name == "I" + x.Name, null ).Any() );
 
 			foreach ( var implementation in typesWithITypeInterfaces )
 			{

@@ -7,6 +7,5 @@
 
 		void SetSuccessMessage( string message );
 		string GetSuccessMessage();
-
 	}
 }

@@ -20,21 +20,13 @@ namespace PseudoCQRS.Tests.Configuration
 			_container.ClearAll();
 		}
 
-		public interface IInterface
-		{
-		}
+		public interface IInterface {}
 
-		public class Implementation : IInterface
-		{
-		}
+		public class Implementation : IInterface {}
 
-		public interface IInterface2
-		{
-		}
+		public interface IInterface2 {}
 
-		public class Implementation2 : IInterface2
-		{
-		}
+		public class Implementation2 : IInterface2 {}
 
 		public class ClassWithDependencies
 		{
@@ -49,9 +41,7 @@ namespace PseudoCQRS.Tests.Configuration
 			public IInterface2 Interface2 { get; private set; }
 		}
 
-		public class ClassWithNoConstructor
-		{
-		}
+		public class ClassWithNoConstructor {}
 
 		private DependencyInjectionContainer _container;
 
@@ -67,18 +57,18 @@ namespace PseudoCQRS.Tests.Configuration
 			_container.Register<IInterface, Implementation>();
 			var implementation = _container.Resolve<IInterface>();
 
-			AssertValidImplementationInstance( typeof ( Implementation ), implementation );
+			AssertValidImplementationInstance( typeof( Implementation ), implementation );
 		}
 
 		[Test]
 		public void CanRegisterMultipleDependencies()
 		{
-			var implementationType = typeof ( Implementation );
-			var implementation2Type = typeof ( Implementation2 );
+			var implementationType = typeof( Implementation );
+			var implementation2Type = typeof( Implementation2 );
 			_container.Register( new Dictionary<Type, Type>
 			{
-				{typeof ( IInterface ), implementationType},
-				{typeof ( IInterface2 ), implementation2Type}
+				{ typeof( IInterface ), implementationType },
+				{ typeof( IInterface2 ), implementation2Type }
 			} );
 
 			AssertValidImplementationInstance( implementationType, _container.Resolve<IInterface>() );

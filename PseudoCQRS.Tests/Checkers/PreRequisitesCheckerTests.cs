@@ -25,14 +25,13 @@ namespace PseudoCQRS.Tests.Checkers
 			bool validationCheckContainsError
 			)
 		{
+			var errorResult = new CheckResult()
+			{
+				ContainsError = true,
+				Message = "Error"
+			};
 
-		    var errorResult = new CheckResult()
-		    {
-		        ContainsError = true,
-		        Message = "Error"
-		    };
-
-		    var successResult = new CheckResult();
+			var successResult = new CheckResult();
 
 			_checkersExecuter
 				.Stub( x => x.ExecuteAuthorizationCheckers( Arg<BlankSimpleTestCommand>.Is.Anything ) )
@@ -47,7 +46,6 @@ namespace PseudoCQRS.Tests.Checkers
 				.Return( validationCheckContainsError ? errorResult : successResult );
 
 			return _prerequisitesChecker.Check( new BlankSimpleTestCommand() );
-
 		}
 
 		[Test]

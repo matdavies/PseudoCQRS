@@ -7,7 +7,6 @@ namespace PseudoCQRS
 {
 	public class PropertyInfoCacher
 	{
-
 		private readonly Dictionary<Type, Dictionary<string, PropertyInfo>> _propertiesCache = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
 		private readonly object _lockObj = new object();
 
