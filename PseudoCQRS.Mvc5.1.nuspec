@@ -2,14 +2,14 @@
 
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd" >
 	<metadata>
-		<id> PseudoCQRS.Mvc5 </id>
-		<version> 4.1.1 </version>
-		<title> Pseudo CQRS Mvc5 </title>
-		<authors> Liquid Thinking </authors>
-		<projectUrl> https://github.com/LiquidThinking/PseudoCQRS </projectUrl>
-		<requireLicenseAcceptance> false </requireLicenseAcceptance>
-		<description> CQRS Framework </description>
-		<releaseNotes> Added DIConfiguration </releaseNotes>
+		<id>PseudoCQRS.Mvc5</id>
+		<version>5.0.0-alpha1</version>
+		<title>Pseudo CQRS Mvc5</title>
+		<authors>Liquid Thinking</authors>
+		<projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>CQRS Framework</description>
+		<releaseNotes>Updated base controllers</releaseNotes>
 		<dependencies>
 			<dependency id="CommonServiceLocator" version="1.0"/>
 		</dependencies>
