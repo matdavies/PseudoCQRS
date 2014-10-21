@@ -58,6 +58,5 @@ namespace PseudoCQRS
 
 			return result;
 		}
-
 	}
 }

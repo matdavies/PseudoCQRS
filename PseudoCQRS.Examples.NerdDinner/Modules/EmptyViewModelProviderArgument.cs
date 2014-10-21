@@ -5,7 +5,5 @@ using System.Web;
 
 namespace PseudoCQRS.Examples.NerdDinner.Modules
 {
-	public class EmptyViewModelProviderArgument
-	{
-	}
+	public class EmptyViewModelProviderArgument {}
 }

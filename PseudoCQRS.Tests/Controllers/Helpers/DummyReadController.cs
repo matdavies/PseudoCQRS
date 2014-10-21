@@ -4,11 +4,9 @@ namespace PseudoCQRS.Tests.Controllers.Helpers
 {
 	public class DummyReadController : BaseReadController<DummyReadViewModel, DummyReadViewModelProviderArgument>
 	{
-		public DummyReadController( IViewModelFactory<DummyReadViewModel, DummyReadViewModelProviderArgument> viewModelFactory ) : base( viewModelFactory ) { }
+		public DummyReadController( IViewModelFactory<DummyReadViewModel, DummyReadViewModelProviderArgument> viewModelFactory ) : base( viewModelFactory ) {}
 
-	    public DummyReadController()
-	    {
-	    }
+		public DummyReadController() {}
 
 		public override string ViewPath
 		{

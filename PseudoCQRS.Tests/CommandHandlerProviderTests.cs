@@ -9,14 +9,14 @@ namespace PseudoCQRS.Tests
 	public class CommandHandlerProviderTests
 	{
 		private ICommandHandlerFinder _commandHandlerFinder;
-        private IObjectLookupCache _cache;
+		private IObjectLookupCache _cache;
 		private CommandHandlerProvider _provider;
 
 		[SetUp]
 		public void Setup()
 		{
 			_commandHandlerFinder = MockRepository.GenerateMock<ICommandHandlerFinder>();
-            _cache = MockRepository.GenerateMock<IObjectLookupCache>();
+			_cache = MockRepository.GenerateMock<IObjectLookupCache>();
 			_provider = new CommandHandlerProvider( _commandHandlerFinder, _cache );
 		}
 
@@ -36,7 +36,6 @@ namespace PseudoCQRS.Tests
 
 			return _provider.GetCommandHandler<BlankSimpleTestCommand>();
 		}
-
 
 
 		// WHEN: _keyValueProvider.GetValue is null
@@ -59,10 +58,9 @@ namespace PseudoCQRS.Tests
 			var result = ExecuteArrangeAndAct( commandHandlerFinderRetVal: handler );
 
 			_cache.AssertWasCalled( x => x.SetValue<ICommandHandler<BlankSimpleTestCommand>>(
-				Arg<string>.Is.Same( typeof( BlankSimpleTestCommand ).FullName ),
-				Arg<ICommandHandler<BlankSimpleTestCommand>>.Is.Anything )
-			);
-
+			                                                                                 Arg<string>.Is.Same( typeof( BlankSimpleTestCommand ).FullName ),
+			                                                                                 Arg<ICommandHandler<BlankSimpleTestCommand>>.Is.Anything )
+				);
 		}
 
 		// WHEN: _keyValueProvider.GetValue is not null
@@ -76,7 +74,5 @@ namespace PseudoCQRS.Tests
 
 			_commandHandlerFinder.AssertWasNotCalled( x => x.FindHandlerForCommand<BlankSimpleTestCommand>() );
 		}
-
-
 	}
 }

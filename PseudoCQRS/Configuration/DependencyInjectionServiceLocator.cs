@@ -23,7 +23,7 @@ namespace PseudoCQRS.Configuration
 
 		protected override IEnumerable<object> DoGetAllInstances( Type serviceType )
 		{
-			return new object[] {_container.Resolve( serviceType )};
+			return new object[] { _container.Resolve( serviceType ) };
 		}
 	}
 }

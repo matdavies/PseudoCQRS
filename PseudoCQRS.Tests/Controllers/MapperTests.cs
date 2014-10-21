@@ -9,9 +9,9 @@ namespace PseudoCQRS.Tests.Controllers
 	[TestFixture]
 	public class MapperTests
 	{
-		public class TestViewModel { }
+		public class TestViewModel {}
 
-		public class TestCommand { }
+		public class TestCommand {}
 
 		[SetUp]
 		public void Setup()

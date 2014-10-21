@@ -20,7 +20,7 @@ namespace PseudoCQRS.Checkers
 				var checkResult = checker.Check();
 				if ( checkResult.ContainsError )
 				{
-				    result = checkResult;
+					result = checkResult;
 					break;
 				}
 			}
@@ -45,7 +45,7 @@ namespace PseudoCQRS.Checkers
 
 		public CheckResult ExecuteValidationCheckers<T>( T instance )
 		{
-		    var result = new CheckResult();
+			var result = new CheckResult();
 
 			foreach ( var checker in _checkersFinder.FindValidationCheckers( instance ) )
 			{

@@ -7,20 +7,12 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 {
 	public class NerdDinnerDbSessionManager : IDbSessionManager
 	{
-		public void CloseSession()
-		{
-		}
+		public void CloseSession() {}
 
-		public void OpenTransaction()
-		{
-		}
+		public void OpenTransaction() {}
 
-		public void CommitTransaction()
-		{
-		}
+		public void CommitTransaction() {}
 
-		public void RollbackTransaction()
-		{
-		}
+		public void RollbackTransaction() {}
 	}
 }

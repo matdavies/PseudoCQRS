@@ -7,7 +7,6 @@ namespace PseudoCQRS
 	[AttributeUsage( AttributeTargets.Class, AllowMultiple = false, Inherited = false )]
 	public class DbTransactionAttribute : ActionFilterAttribute
 	{
-
 		public DbTransactionAttribute()
 		{
 			Order = 2;

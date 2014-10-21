@@ -5,22 +5,17 @@ namespace PseudoCQRS.Tests.Controllers.Helpers
 {
 	public class DummyReadExecuteController : BaseReadExecuteController<DummyReadExecuteViewModel, DummyReadExecuteViewModelArgs, DummyReadExecuteCommand>
 	{
-		public DummyReadExecuteController( 
-			ICommandExecutor commandExecutor, 
+		public DummyReadExecuteController(
+			ICommandExecutor commandExecutor,
 			IViewModelFactory<DummyReadExecuteViewModel, DummyReadExecuteViewModelArgs> viewModelFactory )
-			: base( commandExecutor, viewModelFactory)
-		{
-		}
+			: base( commandExecutor, viewModelFactory ) {}
 
-	    public DummyReadExecuteController()
-	    {
-	        
-	    }
+		public DummyReadExecuteController() {}
 
 		public override ActionResult OnFailureExecution( DummyReadExecuteViewModel viewModel )
 		{
 			var actionResult = base.OnFailureExecution( viewModel );
-			TempData["Error"] = "Failed";
+			TempData[ "Error" ] = "Failed";
 			return actionResult;
 		}
 

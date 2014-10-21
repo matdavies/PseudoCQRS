@@ -43,7 +43,6 @@ namespace PseudoCQRS
 					subscriber.Notify( @event );
 				}
 			}
-
 		}
 	}
 }

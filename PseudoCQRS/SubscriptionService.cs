@@ -9,11 +9,11 @@ namespace PseudoCQRS
 {
 	public class SubscriptionService : ISubscriptionService
 	{
-        private readonly IObjectLookupCache _cache;
+		private readonly IObjectLookupCache _cache;
 		private readonly IEventSubscriberAssembliesProvider _eventSubscriberAssembliesProvider;
 
 		public SubscriptionService(
-            IObjectLookupCache cache, 
+			IObjectLookupCache cache,
 			IEventSubscriberAssembliesProvider eventSubscriberAssembliesProvider )
 		{
 			_cache = cache;
@@ -29,9 +29,9 @@ namespace PseudoCQRS
 			if ( subscribers == null )
 			{
 				subscribers = ( from assembly in _eventSubscriberAssembliesProvider.GetEventSubscriberAssemblies()
-				                from t in assembly.GetImplementationsOf( typeof ( IEventSubscriber<> ), typeof ( T ) )
+				                from t in assembly.GetImplementationsOf( typeof( IEventSubscriber<> ), typeof( T ) )
 				                select t ).ToList();
-					
+
 				if ( subscribers.Any() )
 					_cache.SetValue<IEnumerable<Type>>( typeFullName, subscribers );
 			}

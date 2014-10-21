@@ -11,7 +11,7 @@ namespace PseudoCQRS.ExtensionMethods
 		public static IEnumerable<Type> GetImplementationsOf( this Assembly assembly, Type genericType, Type genericArgumentType )
 		{
 			return assembly.GetTypes().Where( x => x.GetInterfaces().Any( y =>
-					y.IsGenericType && y.GetGenericTypeDefinition() == genericType && y.GetGenericArguments().First() == genericArgumentType ) );
+				                                                              y.IsGenericType && y.GetGenericTypeDefinition() == genericType && y.GetGenericArguments().First() == genericArgumentType ) );
 		}
 	}
 }

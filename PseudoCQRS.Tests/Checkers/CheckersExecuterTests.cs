@@ -32,7 +32,10 @@ namespace PseudoCQRS.Tests.Checkers
 
 			_checkersFinder
 				.Stub( x => x.FindAuthorizationCheckers( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( new List<IAuthorizationChecker> { mockedAuthorizationChecker } );
+				.Return( new List<IAuthorizationChecker>
+				{
+					mockedAuthorizationChecker
+				} );
 
 			return _checkersExecuter.ExecuteAuthorizationCheckers( Arg<BlankSimpleTestCommand>.Is.Anything );
 		}

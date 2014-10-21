@@ -15,7 +15,7 @@ namespace PseudoCQRS.Tests
 		private IServiceLocator _mockedServiceLocator;
 		private IEventSubscriberAssembliesProvider _eventSubscriberAssembliesProvider;
 
-        private IObjectLookupCache _cache;
+		private IObjectLookupCache _cache;
 		private SubscriptionService _service;
 
 		[SetUp]
@@ -31,7 +31,7 @@ namespace PseudoCQRS.Tests
 
 			ServiceLocator.SetLocatorProvider( () => _mockedServiceLocator );
 
-            _cache = MockRepository.GenerateMock<IObjectLookupCache>();
+			_cache = MockRepository.GenerateMock<IObjectLookupCache>();
 
 			_service = new SubscriptionService( _cache, _eventSubscriberAssembliesProvider );
 		}
@@ -45,7 +45,7 @@ namespace PseudoCQRS.Tests
 			_cache.AssertWasCalled( x => x.GetValue<IEnumerable<Type>>( typeof( TestingEvent ).FullName, null ) );
 		}
 
-		
+
 		// WHEN: _cache.GetValue returns null
 		// WHEN: GetImplementationsOf returns 0
 		// EXPECT: Return a list with 0 items
@@ -87,7 +87,10 @@ namespace PseudoCQRS.Tests
 			_cache
 				.Stub( x => x.GetValue<IEnumerable<Type>>( String.Empty, null ) )
 				.IgnoreArguments()
-				.Return( new List<Type> { typeof( EventWithNoSubscribers ) } );
+				.Return( new List<Type>
+				{
+					typeof( EventWithNoSubscribers )
+				} );
 
 			var result = _service.GetSubscriptions<EventWithNoSubscribers>();
 
@@ -107,8 +110,10 @@ namespace PseudoCQRS.Tests
 	}
 
 
-	public class EventWithNoSubscribers { }
-	public class TestingEvent { }
+	public class EventWithNoSubscribers {}
+
+	public class TestingEvent {}
+
 	public class TestingEventSubscriber : IEventSubscriber<TestingEvent>
 	{
 		public void Notify( TestingEvent @event )
@@ -121,7 +126,4 @@ namespace PseudoCQRS.Tests
 			get { throw new NotImplementedException(); }
 		}
 	}
-
-
-
 }

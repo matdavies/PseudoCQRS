@@ -7,7 +7,7 @@ namespace PseudoCQRS.PropertyValueProviders
 {
 	public class FormDataPropertyValueProvider : BasePropertyValueProvider, IPropertyValueProvider
 	{
-	    private string GetKey( Type objectType, string propertyName )
+		private string GetKey( Type objectType, string propertyName )
 		{
 			return propertyName;
 		}
@@ -21,9 +21,9 @@ namespace PseudoCQRS.PropertyValueProviders
 			return hasValue;
 		}
 
-		public object GetValue<T>(  string key, Type propertyType )
+		public object GetValue<T>( string key, Type propertyType )
 		{
-		    object val = HttpContext.Current.Request.Form[ GetKey( propertyType, key ) ];
+			object val = HttpContext.Current.Request.Form[ GetKey( propertyType, key ) ];
 			if ( PropertyIsListAndValueIsNull( propertyType, val ) )
 				return GetEmptyListProperty( propertyType );
 
@@ -40,7 +40,6 @@ namespace PseudoCQRS.PropertyValueProviders
 			var containedType = propertyType.GetGenericArguments()[ 0 ];
 			var emptyList = (IList)Activator.CreateInstance( ( typeof( List<> ).MakeGenericType( containedType ) ) );
 			return emptyList;
-
 		}
 	}
 }

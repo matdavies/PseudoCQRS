@@ -11,6 +11,5 @@ namespace PseudoCQRS.Checkers
 		{
 			PropertyName = propertyName;
 		}
-
 	}
 }

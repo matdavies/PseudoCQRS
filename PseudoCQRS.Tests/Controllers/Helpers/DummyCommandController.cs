@@ -6,8 +6,5 @@ using PseudoCQRS.Controllers;
 
 namespace PseudoCQRS.Tests.Controllers.Helpers
 {
-
-    public class DummyCommandController : BaseCommandController<DummyCommandViewModel, DummyCommandCommand>
-    {
-    }
+	public class DummyCommandController : BaseCommandController<DummyCommandViewModel, DummyCommandCommand> {}
 }

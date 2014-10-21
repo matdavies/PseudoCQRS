@@ -47,6 +47,5 @@ namespace PseudoCQRS.Tests
 			attribute.OnResultExecuted( new ResultExecutedContext() );
 			_dbSessionManager.AssertWasCalled( x => x.CloseSession() );
 		}
-
 	}
 }

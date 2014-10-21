@@ -8,9 +8,9 @@ namespace PseudoCQRS.Tests
 	[TestFixture]
 	public class ViewModelFactoryTests
 	{
-		public class TestViewModel { }
+		public class TestViewModel {}
 
-		public class TestViewModelProviderArgument { }
+		public class TestViewModelProviderArgument {}
 
 		private IViewModelProvider<TestViewModel, TestViewModelProviderArgument> _viewModelProvider;
 		private IViewModelProviderArgumentsProvider _viewModelProviderArgumentsProvider;
@@ -34,7 +34,11 @@ namespace PseudoCQRS.Tests
 		{
 			_prerequisitesChecker
 				.Stub( x => x.Check( Arg<TestViewModelProviderArgument>.Is.Anything ) )
-				.Return( new CheckResult { ContainsError = true, Message =  "Error" } );
+				.Return( new CheckResult
+				{
+					ContainsError = true,
+					Message = "Error"
+				} );
 
 			Assert.Throws<ArgumentException>( () => _viewModelFactory.GetViewModel() );
 		}
@@ -53,7 +57,6 @@ namespace PseudoCQRS.Tests
 			var viewModel = _viewModelFactory.GetViewModel();
 
 			Assert.IsNotNull( viewModel );
-
 		}
 	}
 }

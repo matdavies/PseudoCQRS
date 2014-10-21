@@ -15,7 +15,7 @@ namespace PseudoCQRS.Tests.Controllers
 		private IServiceLocator _mockedServiceLocator;
 		private ICommandExecutor _commandExecutor;
 		private IMessageManager _messageManager;
-	    private IReferrerProvider _referrerProvider;
+		private IReferrerProvider _referrerProvider;
 		private DummyExecuteController _controller;
 
 
@@ -31,31 +31,31 @@ namespace PseudoCQRS.Tests.Controllers
 
 			_commandExecutor = MockRepository.GenerateMock<ICommandExecutor>();
 			_messageManager = MockRepository.GenerateMock<IMessageManager>();
-		    _referrerProvider = MockRepository.GenerateMock<IReferrerProvider>();
+			_referrerProvider = MockRepository.GenerateMock<IReferrerProvider>();
 			_controller = new DummyExecuteController( _commandExecutor, _messageManager, _referrerProvider );
 
 			var routeData = new RouteData();
 			routeData.Values.Add( "controller", "DummyDeleteFile" );
-			_controller.ControllerContext = new ControllerContext { RouteData = routeData };
-
+			_controller.ControllerContext = new ControllerContext
+			{
+				RouteData = routeData
+			};
 		}
 
-        [Test]
-        public void HasSetAllDependencies()
-        {
-            var commandExecutor = MockRepository.GenerateMock<ICommandExecutor>();
+		[Test]
+		public void HasSetAllDependencies()
+		{
+			var commandExecutor = MockRepository.GenerateMock<ICommandExecutor>();
 
-            var locator = MockRepository.GenerateMock<IServiceLocator>();
-            locator
-                .Stub(x => x.GetInstance<ICommandExecutor>())
-                .Return(commandExecutor);
+			var locator = MockRepository.GenerateMock<IServiceLocator>();
+			locator
+				.Stub( x => x.GetInstance<ICommandExecutor>() )
+				.Return( commandExecutor );
 
-            ServiceLocator.SetLocatorProvider(() => locator);
-            var controller = new DummyCommandController();
+			ServiceLocator.SetLocatorProvider( () => locator );
+			var controller = new DummyCommandController();
 
-            HasSetAllDependenciesControllerHelper.AssertFieldsAreNotNull(controller);
-        }
-
-
+			HasSetAllDependenciesControllerHelper.AssertFieldsAreNotNull( controller );
+		}
 	}
 }

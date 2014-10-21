@@ -9,7 +9,6 @@ namespace PseudoCQRS.Examples.NerdDinner.Modules.DinnerCreate
 {
 	public class DinnerCreateController : BaseReadExecuteController<DinnerCreateViewModel, EmptyViewModelProviderArgument, DinnerCreateCommand>
 	{
-
 		public override string ViewPath
 		{
 			get { return "Dinner/Create"; }

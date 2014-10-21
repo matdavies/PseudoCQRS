@@ -33,7 +33,11 @@ namespace PseudoCQRS.Tests
 
 			_prerequisitesChecker
 				.Stub( x => x.Check( Arg<BlankSimpleTestCommand>.Is.Anything ) )
-				.Return( String.IsNullOrEmpty( commandPreHandleResult ) ? new CheckResult() : new CheckResult() { ContainsError =  true, Message = commandPreHandleResult } );
+				.Return( String.IsNullOrEmpty( commandPreHandleResult ) ? new CheckResult() : new CheckResult()
+				{
+					ContainsError = true,
+					Message = commandPreHandleResult
+				} );
 
 			return _bus.Execute( new BlankSimpleTestCommand() );
 		}
@@ -74,7 +78,6 @@ namespace PseudoCQRS.Tests
 			var result = ExecuteArrangeAndAct( handler, "Error" );
 
 			Assert.IsTrue( result.ContainsError );
-
 		}
 
 		[DbTransaction]
@@ -99,8 +102,5 @@ namespace PseudoCQRS.Tests
 			ExecuteArrangeAndAct( new CommandHandlerWithTransactionAttribute() );
 			_dbSessionManager.AssertWasCalled( x => x.CommitTransaction() );
 		}
-
-
-
 	}
 }

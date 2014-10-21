@@ -29,7 +29,6 @@ namespace PseudoCQRS.Tests.ViewHelpers
 				_serviceLocator
 					.Stub( x => x.GetInstance<IMessageManager>() )
 					.Return( _messageManager );
-
 		}
 
 		[Test]
@@ -42,7 +41,7 @@ namespace PseudoCQRS.Tests.ViewHelpers
 		public void ShouldReturnErrorWhenMessageManagerIsNotRegisteredInDiContainer()
 		{
 			const string errorMessage = "Error MEssage";
-			Arrange( );
+			Arrange();
 			_messageManager
 				.Stub( x => x.GetErrorMessage() )
 				.Return( errorMessage );
@@ -63,7 +62,6 @@ namespace PseudoCQRS.Tests.ViewHelpers
 
 			var retVal = MessageUtilities.GetErrorMessage( new HtmlHelper( new ViewContext(), new ViewPage() ) );
 			Assert.AreEqual( errorMessage, retVal.ToHtmlString() );
-
 		}
 	}
 }

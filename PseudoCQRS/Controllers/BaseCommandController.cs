@@ -8,30 +8,30 @@ namespace PseudoCQRS.Controllers
 	{
 		private readonly ICommandExecutor _commandExecutor;
 
-		protected BaseCommandController( ICommandExecutor commandExecutor  )
+		protected BaseCommandController( ICommandExecutor commandExecutor )
 		{
 			_commandExecutor = commandExecutor;
 		}
 
-	    public BaseCommandController()
-	        : this( ServiceLocator.Current.GetInstance<ICommandExecutor>() ) {}
+		public BaseCommandController()
+			: this( ServiceLocator.Current.GetInstance<ICommandExecutor>() ) {}
 
 
-	    protected virtual CommandResult ExecuteCommand(TViewModel viewModel)
-        {
-            var command = ConvertViewModelToCommand( viewModel );
-            var result = ExecuteCommand( command );
-            return result;
-        }
+		protected virtual CommandResult ExecuteCommand( TViewModel viewModel )
+		{
+			var command = ConvertViewModelToCommand( viewModel );
+			var result = ExecuteCommand( command );
+			return result;
+		}
 
-	    private CommandResult ExecuteCommand( TCommand command )
-	    {
-	        return _commandExecutor.ExecuteCommand(command);
-	    }
+		private CommandResult ExecuteCommand( TCommand command )
+		{
+			return _commandExecutor.ExecuteCommand( command );
+		}
 
-	    protected virtual TCommand ConvertViewModelToCommand( TViewModel viewModel )
-	    {
-	        return Mapper.Map<TViewModel, TCommand>(viewModel);
-	    }
+		protected virtual TCommand ConvertViewModelToCommand( TViewModel viewModel )
+		{
+			return Mapper.Map<TViewModel, TCommand>( viewModel );
+		}
 	}
 }

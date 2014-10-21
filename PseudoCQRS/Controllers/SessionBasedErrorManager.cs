@@ -43,6 +43,5 @@ namespace PseudoCQRS.Controllers
 			HttpContext.Current.Session.Remove( key );
 			return retVal;
 		}
-
 	}
 }

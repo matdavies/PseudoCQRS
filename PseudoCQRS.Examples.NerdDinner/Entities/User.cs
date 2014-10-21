@@ -1,4 +1,4 @@
-﻿	using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,10 +12,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Entities
 		public string Password { get; protected set; }
 		public bool IsAdministrator { get; protected set; }
 
-		public User()
-		{
-			
-		}
+		public User() {}
 
 		public User( string name, string username, string password, bool isAdministrator )
 		{

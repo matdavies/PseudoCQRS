@@ -1,7 +1,7 @@
 ﻿namespace PseudoCQRS.Controllers
 {
-    public interface IReferrerProvider
-    {
-        string GetAbsoluteUri();
-    }
+	public interface IReferrerProvider
+	{
+		string GetAbsoluteUri();
+	}
 }

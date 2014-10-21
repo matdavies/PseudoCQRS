@@ -7,15 +7,15 @@ namespace PseudoCQRS
 	public class CommandHandlerFinder : ICommandHandlerFinder
 	{
 		private readonly IServiceLocator _serviceLocator;
-	    private readonly IAssemblyListProvider _assembliesListProvider;
+		private readonly IAssemblyListProvider _assembliesListProvider;
 
 		public CommandHandlerFinder( IServiceLocator serviceLocator, IAssemblyListProvider assembliesListProvider )
 		{
-		    _serviceLocator = serviceLocator;
-		    _assembliesListProvider = assembliesListProvider;
+			_serviceLocator = serviceLocator;
+			_assembliesListProvider = assembliesListProvider;
 		}
 
-	    public ICommandHandler<TCommand> FindHandlerForCommand<TCommand>()
+		public ICommandHandler<TCommand> FindHandlerForCommand<TCommand>()
 		{
 			ICommandHandler<TCommand> result = default( ICommandHandler<TCommand> );
 
@@ -29,14 +29,14 @@ namespace PseudoCQRS
 			return result;
 		}
 
-	    private Type GetCommandHandlerType( Type handlerInheritingFromType )
-	    {
-            var commandHandlerType = _assembliesListProvider
-                .GetAssemblies()
-                .SelectMany( x => x.GetTypes() )
-                .SingleOrDefault( x => x.GetInterfaces().Any( y => y == handlerInheritingFromType ) );
+		private Type GetCommandHandlerType( Type handlerInheritingFromType )
+		{
+			var commandHandlerType = _assembliesListProvider
+				.GetAssemblies()
+				.SelectMany( x => x.GetTypes() )
+				.SingleOrDefault( x => x.GetInterfaces().Any( y => y == handlerInheritingFromType ) );
 
-	        return commandHandlerType;
-	    }
+			return commandHandlerType;
+		}
 	}
 }

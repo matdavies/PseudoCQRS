@@ -48,7 +48,6 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 
 			if ( obj.Id == 0 )
 			{
-
 				int nextId = list.Any() ? list.Max( x => x.Id ) + 1 : 1;
 				obj.Id = nextId;
 			}
@@ -56,7 +55,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 				list.RemoveAll( x => x.Id == obj.Id );
 
 			list.Add( obj );
-			
+
 			return obj.Id;
 		}
 	}

@@ -17,7 +17,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			HttpContext.Current = HttpContextHelper.GetHttpContext();
 		}
 
-        /*
+		/*
 		[Test]
 		public void GetKeyShouldReturnPropertyName()
 		{
@@ -31,7 +31,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		{
 			const string key = "id";
 			const string value = "1324";
-			HttpContext.Current.Request.RequestContext.RouteData.Values.Add(key, value);
+			HttpContext.Current.Request.RequestContext.RouteData.Values.Add( key, value );
 
 			Assert.IsTrue( _valueProvider.HasValue<string>( key ) );
 		}
@@ -51,10 +51,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			const string value = "1324";
 			HttpContext.Current.Request.RequestContext.RouteData.Values.Add( key, value );
 
-			Assert.AreEqual( value, _valueProvider.GetValue<object>( key,typeof( string ) ) );
-
+			Assert.AreEqual( value, _valueProvider.GetValue<object>( key, typeof( string ) ) );
 		}
-
-
 	}
 }
