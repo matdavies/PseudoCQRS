@@ -149,6 +149,7 @@
     <Compile Include="IAssemblyListProvider.cs" />
     <Compile Include="IDbSessionManager.cs" />
     <Compile Include="IEventSubscriberAssembliesProvider.cs" />
+    <Compile Include="IHttpContextWrapper.cs" />
     <Compile Include="IViewModelFactory.cs" />
     <Compile Include="IViewModelProvider.cs" />
     <Compile Include="Controllers\Mapper.cs" />
