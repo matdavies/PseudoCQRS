@@ -95,7 +95,10 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+        <Reference Include="System.Web.Mvc, Version=3.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>packages\Microsoft.AspNet.Mvc.3.0.50813.1\lib\net40\System.Web.Mvc.dll</HintPath>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -154,6 +157,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PseudoCQRS.Mvc\PseudoCQRS.Mvc.csproj">
+      <Project>{02bdb9cb-e298-44b2-9c71-04ff9d9bcd60}</Project>
+      <Name>PseudoCQRS.Mvc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PseudoCQRS\PseudoCQRS.csproj">
       <Project>{7fc22cf5-db6d-4d85-a4fa-40915d4dbd3b}</Project>
       <Name>PseudoCQRS</Name>
