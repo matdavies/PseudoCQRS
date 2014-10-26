@@ -90,7 +90,10 @@
     </When>
     <When Condition="'$(Configuration)|$(Platform)' == 'Mvc4|AnyCPU'">
       <ItemGroup>
-        <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+        <Reference Include="System.Web.Mvc">
+          <HintPath>packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
       </ItemGroup>
     </When>
     <Otherwise>
