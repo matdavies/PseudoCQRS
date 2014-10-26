@@ -55,8 +55,8 @@
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mvc51|AnyCPU'">
-    <OutputPath>bin\Mvc51\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mvc5|AnyCPU'">
+    <OutputPath>bin\Mvc5\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -81,7 +81,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <Choose>
-    <When Condition="'$(Configuration)|$(Platform)' == 'Mvc51|AnyCPU'">
+    <When Condition="'$(Configuration)|$(Platform)' == 'Mvc5|AnyCPU'">
       <ItemGroup>
         <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
           <SpecificVersion>False</SpecificVersion>

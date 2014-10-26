@@ -1,12 +1,17 @@
-﻿using System.Web;
-
-namespace PseudoCQRS.Controllers
+﻿namespace PseudoCQRS.Controllers
 {
 	public class ReferrerProvider : IReferrerProvider
 	{
+		private readonly IHttpContextWrapper _httpContextWrapper;
+
+		public ReferrerProvider( IHttpContextWrapper httpContextWrapper )
+		{
+			_httpContextWrapper = httpContextWrapper;
+		}
+
 		public string GetAbsoluteUri()
 		{
-			return HttpContext.Current.Request.UrlReferrer.AbsoluteUri;
+			return _httpContextWrapper.GetUrlReferrerAbsoluteUri();
 		}
 	}
 }
