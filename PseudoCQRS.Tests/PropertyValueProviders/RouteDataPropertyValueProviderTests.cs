@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using PseudoCQRS.PropertyValueProviders;
 using PseudoCQRS.Tests.Helpers;
+using HttpContextWrapper = PseudoCQRS.Mvc.HttpContextWrapper;
 
 namespace PseudoCQRS.Tests.PropertyValueProviders
 {
@@ -9,21 +10,15 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 	public class RouteDataPropertyValueProviderTests
 	{
 		private RouteDataPropertyValueProvider _valueProvider;
+		private IHttpContextWrapper _wrapper;
 
 		[SetUp]
 		public void Setup()
 		{
-			_valueProvider = new RouteDataPropertyValueProvider();
+			_wrapper = new HttpContextWrapper();
+			_valueProvider = new RouteDataPropertyValueProvider( _wrapper );
 			HttpContext.Current = HttpContextHelper.GetHttpContext();
 		}
-
-		/*
-		[Test]
-		public void GetKeyShouldReturnPropertyName()
-		{
-			CommonPropertyValueProviderTests.GetKeyShouldReturnPropertyNameAsKey( _valueProvider );
-		}
-        */
 
 
 		[Test]
@@ -51,7 +46,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			const string value = "1324";
 			HttpContext.Current.Request.RequestContext.RouteData.Values.Add( key, value );
 
-			Assert.AreEqual( value, _valueProvider.GetValue<object>( key, typeof( string ) ) );
+			Assert.AreEqual( value, _valueProvider.GetValue<object>( key, typeof(string) ) );
 		}
 	}
 }

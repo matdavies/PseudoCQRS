@@ -4,7 +4,7 @@
 	<metadata>
 		<id>PseudoCQRS</id>
 		<version>4.2.0</version>
-		<title>Pseudo CQRS Mvc3</title>
+		<title>Pseudo CQRS</title>
 		<authors>Liquid Thinking</authors>
 		<projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,12 +12,10 @@
 		<releaseNotes>Moved Mvc stuff in separate package so that PseudoCQRS can be use in other environments.</releaseNotes>
 		<dependencies>
 			<dependency id="CommonServiceLocator" version="1.0"/>
-			<dependency id="PseudoCQRS" version="4.2.0"/>
-			<dependency id="Microsoft.AspNet.Mvc" version="3.0.50813.1"/>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.Mvc.dll" target="lib\net40\PseudoCQRS.Mvc.dll"/>
-		<file src="PseudoCQRS\bin\Mvc3\PseudoCQRS.Mvc.pdb" target="lib\net40\PseudoCQRS.Mvc.pdb"/>
+		<file src="PseudoCQRS\bin\Release\PseudoCQRS.dll" target="lib\net40\PseudoCQRS.dll"/>
+		<file src="PseudoCQRS\bin\Release\PseudoCQRS.pdb" target="lib\net40\PseudoCQRS.pdb"/>
 	</files>
 </package>

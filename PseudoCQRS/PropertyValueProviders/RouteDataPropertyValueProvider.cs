@@ -1,18 +1,31 @@
 ﻿using System;
-using System.Web;
+using Microsoft.Practices.ServiceLocation;
 
 namespace PseudoCQRS.PropertyValueProviders
 {
 	public class RouteDataPropertyValueProvider : BasePropertyValueProvider, IPropertyValueProvider
 	{
+		private readonly IHttpContextWrapper _httpContextWrapper;
+
+		public RouteDataPropertyValueProvider()
+			:this(ServiceLocator.Current.GetInstance<IHttpContextWrapper>())
+		{
+
+		}
+
+		public RouteDataPropertyValueProvider( IHttpContextWrapper httpContextWrapper )
+		{
+			_httpContextWrapper = httpContextWrapper;
+		}
+
 		public bool HasValue<T>( string key )
 		{
-			return HttpContext.Current.Request.RequestContext.RouteData.Values.ContainsKey( key );
+			return _httpContextWrapper.ContainsRouteDataItem( key );
 		}
 
 		public object GetValue<T>( string key, Type propertyType )
 		{
-			return ConvertValue( HttpContext.Current.Request.RequestContext.RouteData.Values[ key ].ToString(), propertyType );
+			return ConvertValue( _httpContextWrapper.GetRouteDataItem( key ).ToString(), propertyType );
 		}
 	}
 }

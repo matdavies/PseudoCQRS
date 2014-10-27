@@ -3,6 +3,7 @@ using System.Web;
 using NUnit.Framework;
 using PseudoCQRS.PropertyValueProviders;
 using PseudoCQRS.Tests.Helpers;
+using HttpContextWrapper = PseudoCQRS.Mvc.HttpContextWrapper;
 
 namespace PseudoCQRS.Tests.PropertyValueProviders
 {
@@ -10,20 +11,16 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 	public class QueryStringPropertyValueProviderTests
 	{
 		private QueryStringPropertyValueProvider _valueProvider;
+		private IHttpContextWrapper _httpContextWrapper;
 
 		[SetUp]
 		public void Setup()
 		{
-			_valueProvider = new QueryStringPropertyValueProvider();
+			HttpContext.Current = HttpContextHelper.GetHttpContext();
+			_httpContextWrapper = new HttpContextWrapper();
+			_valueProvider = new QueryStringPropertyValueProvider( _httpContextWrapper );
 		}
 
-		/*
-		[Test]
-		public void GetKeyShouldReturnPropertyNameAsKey()
-		{
-			CommonPropertyValueProviderTests.GetKeyShouldReturnPropertyNameAsKey( _valueProvider );
-		}
-        */
 
 		[Test]
 		public void HasValueShouldReturnTrueWhenQueryStringContainsKey()

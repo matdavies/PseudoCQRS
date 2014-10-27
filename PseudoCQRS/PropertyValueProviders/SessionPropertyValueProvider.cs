@@ -1,11 +1,24 @@
 ﻿using System;
-using System.Web;
+using Microsoft.Practices.ServiceLocation;
 
 namespace PseudoCQRS.PropertyValueProviders
 {
 	public class SessionPropertyValueProvider : BasePropertyValueProvider, IPropertyValueProvider, IPersistablePropertyValueProvider
 	{
 		private const string KeyFormat = "{0}:{1}";
+
+		private readonly IHttpContextWrapper _httpContextWrapper;
+
+		public SessionPropertyValueProvider()
+			:this(ServiceLocator.Current.GetInstance<IHttpContextWrapper>())
+		{
+
+		}
+
+		public SessionPropertyValueProvider( IHttpContextWrapper httpContextWrapper )
+		{
+			_httpContextWrapper = httpContextWrapper;
+		}
 
 		private string GetKey( Type objectType, string propertyName )
 		{
@@ -14,17 +27,17 @@ namespace PseudoCQRS.PropertyValueProviders
 
 		public bool HasValue<T>( string key )
 		{
-			return HttpContext.Current.Session[ GetKey( typeof( T ), key ) ] != null;
+			return _httpContextWrapper.ContainsSessionItem( GetKey( typeof( T ), key ) );
 		}
 
 		public object GetValue<T>( string key, Type propertyType )
 		{
-			return ConvertValue( HttpContext.Current.Session[ GetKey( typeof( T ), key ) ].ToString(), propertyType );
+			return ConvertValue( _httpContextWrapper.GetSessionItem(  GetKey( typeof( T ), key ) ).ToString(), propertyType );
 		}
 
 		public void SetValue<T>( string key, object value )
 		{
-			HttpContext.Current.Session[ GetKey( typeof( T ), key ) ] = value.ToString();
+			_httpContextWrapper.SetSessionItem( GetKey( typeof( T ), key ) , value.ToString() );
 		}
 	}
 }

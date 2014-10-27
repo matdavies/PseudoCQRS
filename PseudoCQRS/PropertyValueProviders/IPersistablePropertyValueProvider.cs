@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PseudoCQRS.PropertyValueProviders
+﻿namespace PseudoCQRS.PropertyValueProviders
 {
 	public interface IPersistablePropertyValueProvider
 	{

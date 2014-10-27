@@ -2,20 +2,22 @@
 
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd" >
 	<metadata>
-		<id> PseudoCQRS.Mvc5 </id>
-		<version> 4.1.1 </version>
-		<title> Pseudo CQRS Mvc5 </title>
-		<authors> Liquid Thinking </authors>
-		<projectUrl> https://github.com/LiquidThinking/PseudoCQRS </projectUrl>
-		<requireLicenseAcceptance> false </requireLicenseAcceptance>
-		<description> CQRS Framework </description>
-		<releaseNotes> Added DIConfiguration </releaseNotes>
+		<id>PseudoCQRS.Mvc5</id>
+		<version>4.2.0</version>
+		<title>Pseudo CQRS Mvc5</title>
+		<authors>Liquid Thinking</authors>
+		<projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>CQRS Framework</description>
+		<releaseNotes>Moved Mvc stuff in separate package so that PseudoCQRS can be use in other environments.</releaseNotes>
 		<dependencies>
 			<dependency id="CommonServiceLocator" version="1.0"/>
+			<dependency id="PseudoCQRS" version="4.2.0"/>
+			<dependency id="Microsoft.AspNet.Mvc" version="5.0.0" />
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="PseudoCQRS\bin\Mvc5\PseudoCQRS.dll" target="lib\net45\PseudoCQRS.dll"/>
-		<file src="PseudoCQRS\bin\Mvc5\PseudoCQRS.pdb" target="lib\net45\PseudoCQRS.pdb"/>
+		<file src="PseudoCQRS\bin\Mvc5\PseudoCQRS.Mvc.dll" target="lib\net45\PseudoCQRS.Mvc.dll"/>
+		<file src="PseudoCQRS\bin\Mvc5\PseudoCQRS.Mvc.pdb" target="lib\net45\PseudoCQRS.Mvc.pdb"/>
 	</files>
 </package>

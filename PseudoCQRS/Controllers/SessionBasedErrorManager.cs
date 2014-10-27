@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 
 namespace PseudoCQRS.Controllers
 {
@@ -36,12 +35,16 @@ namespace PseudoCQRS.Controllers
 
 		private void SetMessage( string key, string message )
 		{
-			_httpContextWrapper.SessionSetItem( key, message );
+			_httpContextWrapper.SetSessionItem( key, message );
 		}
 
 		private string GetMessage( string key )
 		{
-			var retVal = _httpContextWrapper.SessionGetItem( key ).ToString();
+			var sessionItem = _httpContextWrapper.GetSessionItem( key );
+			string retVal = String.Empty;
+			if ( sessionItem != null )
+				retVal = sessionItem.ToString();
+
 			_httpContextWrapper.SessionRemoveItem( key );
 			return retVal;
 		}

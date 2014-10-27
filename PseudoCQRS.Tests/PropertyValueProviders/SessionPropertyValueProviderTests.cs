@@ -1,37 +1,31 @@
 ﻿using System;
-using System.Web;
 using NUnit.Framework;
 using PseudoCQRS.PropertyValueProviders;
-using PseudoCQRS.Tests.Helpers;
+using Rhino.Mocks;
 
 namespace PseudoCQRS.Tests.PropertyValueProviders
 {
 	[TestFixture]
 	public class SessionPropertyValueProviderTests
 	{
+		private IHttpContextWrapper _httpContextWrapper;
 		private SessionPropertyValueProvider _valueProvider;
 
 		[SetUp]
 		public void Setup()
 		{
-			HttpContext.Current = HttpContextHelper.GetHttpContext();
-			_valueProvider = new SessionPropertyValueProvider();
+			_httpContextWrapper = MockRepository.GenerateMock<IHttpContextWrapper>();
+			_valueProvider = new SessionPropertyValueProvider( _httpContextWrapper );
 		}
-
-		/*
-		[Test]
-		public void GetKeyShouldCreateCorrectly()
-		{
-			CommonPropertyValueProviderTests.GetKeyShouldReturnAccordingToFormat( _valueProvider );
-		}
-        */
 
 		[Test]
 		public void HasValueShouldReturnTrueWhenValueExists()
 		{
 			const string testKey = "MyTestKey";
 			const string fullKey = "System.String:" + testKey;
-			HttpContext.Current.Session[ fullKey ] = "";
+			_httpContextWrapper
+				.Stub( x => x.ContainsSessionItem( fullKey ) )
+				.Return( true );
 
 			Assert.IsTrue( _valueProvider.HasValue<string>( testKey ) );
 		}
@@ -49,7 +43,10 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			const string testKey = "MyTestKey";
 			const string fullKey = "System.Object:" + testKey;
 			const string value = "12345";
-			HttpContext.Current.Session[ fullKey ] = value;
+
+			_httpContextWrapper
+				.Stub( x => x.GetSessionItem( fullKey ) )
+				.Return( value );
 
 			var retVal = _valueProvider.GetValue<Object>( testKey, typeof( string ) );
 
@@ -62,9 +59,12 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			const string testKey = "MyTestKey";
 			const string fullKey = "System.String:" + testKey;
 			const string value = "12345";
+
+			_httpContextWrapper.Stub( x => x.SetSessionItem( fullKey, value ) );
+
 			_valueProvider.SetValue<string>( testKey, value );
 
-			Assert.IsTrue( (string)HttpContext.Current.Session[ fullKey ] == value );
+			_httpContextWrapper.AssertWasCalled( x => x.SetSessionItem( fullKey, value ) );
 		}
 	}
 }

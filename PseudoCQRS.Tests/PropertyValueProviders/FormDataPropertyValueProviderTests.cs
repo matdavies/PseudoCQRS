@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Web;
 using NUnit.Framework;
+using PseudoCQRS.Mvc;
 using PseudoCQRS.PropertyValueProviders;
 using PseudoCQRS.Tests.Helpers;
+using HttpContextWrapper = PseudoCQRS.Mvc.HttpContextWrapper;
 
 namespace PseudoCQRS.Tests.PropertyValueProviders
 {
@@ -16,7 +18,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		[SetUp]
 		public void Setup()
 		{
-			_valueProvider = new FormDataPropertyValueProvider();
+			_valueProvider = new FormDataPropertyValueProvider(new HttpContextWrapper());
 			HttpContext.Current = HttpContextHelper.GetHttpContext();
 		}
 

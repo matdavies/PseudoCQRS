@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		PseudoCQRS.Mvc3.nuspec = PseudoCQRS.Mvc3.nuspec
 		PseudoCQRS.Mvc4.nuspec = PseudoCQRS.Mvc4.nuspec
 		PseudoCQRS.Mvc5.nuspec = PseudoCQRS.Mvc5.nuspec
+		PseudoCQRS.nuspec = PseudoCQRS.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PseudoCQRS.Examples.NerdDinner", "PseudoCQRS.Examples.NerdDinner\PseudoCQRS.Examples.NerdDinner.csproj", "{34058F10-7AAE-49EA-A560-FC5ECC5ED964}"

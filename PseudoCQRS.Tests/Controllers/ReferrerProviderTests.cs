@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
+﻿using System.Web;
 using NUnit.Framework;
 using PseudoCQRS.Controllers;
 using PseudoCQRS.Tests.Helpers;
+using Rhino.Mocks;
+using HttpContextWrapper = PseudoCQRS.Mvc.HttpContextWrapper;
 
 namespace PseudoCQRS.Tests.Controllers
 {
@@ -16,9 +14,12 @@ namespace PseudoCQRS.Tests.Controllers
 		public void GetAbsoluteUri_Always_ReturnsUrlReferrerAbsoluteUri()
 		{
 			HttpContext.Current = HttpContextHelper.GetHttpContext();
+			var httpContextWrapper = new HttpContextWrapper();
 
-			var uri = new ReferrerProvider().GetAbsoluteUri();
-			Assert.AreEqual( "http://localhost/", uri );
+			const string expected = "http://localhost/";
+
+			var uri = new ReferrerProvider( httpContextWrapper ).GetAbsoluteUri();
+			Assert.AreEqual( expected, uri );
 		}
 	}
 }

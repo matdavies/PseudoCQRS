@@ -1,18 +1,28 @@
 ﻿using System;
-using System.Web;
+using Microsoft.Practices.ServiceLocation;
 
 namespace PseudoCQRS.PropertyValueProviders
 {
 	public class QueryStringPropertyValueProvider : BasePropertyValueProvider, IPropertyValueProvider
 	{
+		private readonly IHttpContextWrapper _httpContextWrapper;
+
+		public QueryStringPropertyValueProvider()
+			: this( ServiceLocator.Current.GetInstance<IHttpContextWrapper>() ) {}
+
+		public QueryStringPropertyValueProvider( IHttpContextWrapper httpContextWrapper )
+		{
+			_httpContextWrapper = httpContextWrapper;
+		}
+
 		public bool HasValue<T>( string key )
 		{
-			return HttpContext.Current.Request.QueryString[ key ] != null;
+			return _httpContextWrapper.ContainsQueryStringItem( key );
 		}
 
 		public object GetValue<T>( string key, Type propertyType )
 		{
-			return ConvertValue( HttpContext.Current.Request.QueryString[ key ], propertyType );
+			return ConvertValue( _httpContextWrapper.GetQueryStringItem( key ), propertyType );
 		}
 	}
 }
