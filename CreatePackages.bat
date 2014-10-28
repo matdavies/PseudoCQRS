@@ -5,6 +5,7 @@
 
 if ERRORLEVEL 1 goto eof
 
+nuget pack PseudoCQRS.nuspec
 nuget pack PseudoCQRS.Mvc3.nuspec
 nuget pack PseudoCQRS.Mvc4.nuspec
 nuget pack PseudoCQRS.Mvc5.nuspec
