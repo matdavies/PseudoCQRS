@@ -159,7 +159,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
-d:
 cd "$(SolutionDir)"
 "$(SolutionDir)CreatePackages.bat"
 )</PostBuildEvent>

@@ -1,7 +1,7 @@
 @echo off
-"%systemroot%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" "PseudoCQRS\PseudoCQRS.csproj" /v:normal /t:Rebuild /p:Configuration=Mvc3
-"%systemroot%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" "PseudoCQRS\PseudoCQRS.csproj" /v:normal /t:Rebuild /p:Configuration=Mvc4
-"%systemroot%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" "PseudoCQRS\PseudoCQRS.csproj" /v:normal /t:Rebuild /p:Configuration=Mvc5
+"%systemroot%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" "PseudoCQRS.Mvc\PseudoCQRS.Mvc.csproj" /v:normal /t:Rebuild /p:Configuration=Mvc3
+"%systemroot%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" "PseudoCQRS.Mvc\PseudoCQRS.Mvc.csproj" /v:normal /t:Rebuild /p:Configuration=Mvc4
+"%systemroot%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" "PseudoCQRS.Mvc\PseudoCQRS.Mvc.csproj" /v:normal /t:Rebuild /p:Configuration=Mvc5
 
 if ERRORLEVEL 1 goto eof
 

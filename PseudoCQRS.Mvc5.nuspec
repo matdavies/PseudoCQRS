@@ -17,7 +17,7 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="PseudoCQRS\bin\Mvc5\PseudoCQRS.Mvc.dll" target="lib\net45\PseudoCQRS.Mvc.dll"/>
-		<file src="PseudoCQRS\bin\Mvc5\PseudoCQRS.Mvc.pdb" target="lib\net45\PseudoCQRS.Mvc.pdb"/>
+		<file src="PseudoCQRS.Mvc\bin\Mvc5\PseudoCQRS.Mvc.dll" target="lib\net45\PseudoCQRS.Mvc.dll"/>
+		<file src="PseudoCQRS.Mvc\bin\Mvc5\PseudoCQRS.Mvc.pdb" target="lib\net45\PseudoCQRS.Mvc.pdb"/>
 	</files>
 </package>
