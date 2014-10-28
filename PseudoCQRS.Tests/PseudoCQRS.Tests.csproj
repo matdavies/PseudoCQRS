@@ -83,11 +83,11 @@
   <Choose>
     <When Condition="'$(Configuration)|$(Platform)' == 'Mvc5|AnyCPU'">
       <ItemGroup>
-				<Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-					<Private>True</Private>
-					<HintPath>packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
-				</Reference>
-			</ItemGroup>
+        <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+          <Private>True</Private>
+          <HintPath>packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+        </Reference>
+      </ItemGroup>
     </When>
     <When Condition="'$(Configuration)|$(Platform)' == 'Mvc4|AnyCPU'">
       <ItemGroup>
@@ -127,7 +127,7 @@
     <Compile Include="Controllers\ReferrerProviderTests.cs" />
     <Compile Include="Controllers\SessionBasedMessageManagerTests.cs" />
     <Compile Include="Controllers\MapperTests.cs" />
-    <Compile Include="DbAttributesTests.cs" />
+    <Compile Include="DbSessionManagerAttributeTests.cs" />
     <Compile Include="AssemblyListProviderTests.cs" />
     <Compile Include="Helpers\ObjectLookupCacheTests.cs" />
     <Compile Include="TestHelpers\HttpContextHelper.cs" />

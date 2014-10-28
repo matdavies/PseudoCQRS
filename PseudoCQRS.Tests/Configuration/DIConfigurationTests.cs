@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
 using PseudoCQRS.Checkers;
 using PseudoCQRS.Configuration;
 using PseudoCQRS.Controllers;
 using PseudoCQRS.Helpers;
+using PseudoCQRS.Mvc;
 using PseudoCQRS.PropertyValueProviders;
 
 namespace PseudoCQRS.Tests.Configuration
@@ -512,5 +514,12 @@ namespace PseudoCQRS.Tests.Configuration
 			Assert.IsTrue( types.ContainsKey( interfaceType ) );
 			Assert.AreEqual( implementationType, types[ interfaceType ] );
 		}
-	}
+
+		[Test]
+		public void AddDefaultImplementations_ShouldAddMappingForHttpContextWrapper()
+		{
+			var result = new DIConfiguration().Build();
+			Assert.IsTrue( result.Any( x => x.Key == typeof( IHttpContextWrapper ) && x.Value == typeof( HttpContextWrapper ) ) );
+		}
+    }
 }

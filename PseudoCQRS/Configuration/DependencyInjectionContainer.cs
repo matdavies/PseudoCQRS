@@ -54,7 +54,7 @@ namespace PseudoCQRS.Configuration
 
 		private static void SaveRegisteredTypeInstance( Type type, object instance )
 		{
-			if ( registrations.ContainsKey( type ) )
+			if ( !registrations.ContainsKey( type ) )
 				instances.Add( type, instance );
 		}
 

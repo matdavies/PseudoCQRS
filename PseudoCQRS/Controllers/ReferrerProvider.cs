@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.ServiceLocation;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Practices.ServiceLocation;
 
 namespace PseudoCQRS.Controllers
 {
@@ -6,6 +7,7 @@ namespace PseudoCQRS.Controllers
 	{
 		private readonly IHttpContextWrapper _httpContextWrapper;
 
+		[ExcludeFromCodeCoverage]
 		public ReferrerProvider()
 			: this( ServiceLocator.Current.GetInstance<IHttpContextWrapper>() ) {}
 

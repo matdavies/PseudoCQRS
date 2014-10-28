@@ -64,6 +64,22 @@ namespace PseudoCQRS.Configuration
 			SetImplementation( mappings, typeof( ISubscriptionService ), typeof( SubscriptionService ) );
 			SetImplementation( mappings, typeof( IViewModelProviderArgumentsProvider ),
 			                   typeof( ViewModelProviderArgumentsProvider ) );
+
+			var types = FindImplementationsInOtherPseduoCQRSAssemblies();
+			foreach ( var type in types )
+				SetImplementation( mappings, type.Key, type.Value );
+		}
+
+		private static Dictionary<Type, Type> FindImplementationsInOtherPseduoCQRSAssemblies()
+		{
+			var mvcAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where( x => x.FullName.Contains( "PseudoCQRS." ) );
+			var types = ( from mvcAssembly in mvcAssemblies
+			              from type in mvcAssembly.GetTypes()
+			              where typeof( IImplementationsFinder ).IsAssignableFrom( type )
+			              let instance = Activator.CreateInstance( type ) as IImplementationsFinder
+			              select instance.FindImplementations() ).SelectMany( x => x ).ToDictionary( x => x.Key, x => x.Value );
+
+			return types;
 		}
 
 		private static void SetImplementation( Dictionary<Type, Type> mappings, Type interfaceType, Type implementationType )

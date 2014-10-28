@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using PseudoCQRS.Checkers;
 using Rhino.Mocks;
+using Rhino.Mocks.Constraints;
 
 namespace PseudoCQRS.Tests
 {
@@ -89,6 +90,8 @@ namespace PseudoCQRS.Tests
 			}
 		}
 
+
+
 		[Test]
 		public void ShouldOpenTransactionWhenDbTransactionAttributeIsApplied()
 		{
@@ -101,6 +104,29 @@ namespace PseudoCQRS.Tests
 		{
 			ExecuteArrangeAndAct( new CommandHandlerWithTransactionAttribute() );
 			_dbSessionManager.AssertWasCalled( x => x.CommitTransaction() );
+		}
+
+		[Test]
+		public void Execute_HasTransactionAttributeAndOnError_RollbackTransaction()
+		{
+			_commandHandlerProvider
+			.Stub( x => x.GetCommandHandler<BlankSimpleTestCommand>() )
+			.Return( new CommandHandlerWithTransactionAttribute() );
+
+			_prerequisitesChecker
+				.Stub( x => x.Check( Arg<BlankSimpleTestCommand>.Is.Anything ) )
+				.Throw( new Exception( "Test Exception" ) );
+
+			try
+			{
+				_bus.Execute( new BlankSimpleTestCommand() );
+			}
+			catch ( Exception )
+			{				
+			}
+			_dbSessionManager.AssertWasCalled( x => x.RollbackTransaction() );
+
+
 		}
 	}
 }

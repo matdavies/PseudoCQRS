@@ -98,5 +98,16 @@ namespace PseudoCQRS.Tests.Configuration
 		{
 			Assert.Throws<Exception>( () => _container.Resolve<IInterface>() );
 		}
+
+		[Test]
+		public void WhenResolveIsCalledForSecondTime_ReturnsSameInstance()
+		{
+			_container.Register<IInterface, Implementation>();
+			_container.Register<IInterface2, Implementation2>();
+
+			var firstInstance = _container.Resolve<ClassWithDependencies>();
+			var secondInstance = _container.Resolve<ClassWithDependencies>();
+			Assert.AreEqual( firstInstance, secondInstance );
+		}
 	}
 }

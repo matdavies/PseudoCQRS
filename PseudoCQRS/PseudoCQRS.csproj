@@ -103,6 +103,7 @@
     <Compile Include="Configuration\DependencyInjectionServiceLocator.cs" />
     <Compile Include="Configuration\DIConfiguration.cs" />
     <Compile Include="Configuration\IDependencyInjectionContainer.cs" />
+    <Compile Include="Configuration\IImplementationsFinder.cs" />
     <Compile Include="Configuration\OverridableServicesContainer.cs" />
     <Compile Include="Controllers\CommandExecutor.cs" />
     <Compile Include="Controllers\ICommandExecutor.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Controllers\IViewModelToCommandMappingEngine.cs" />
     <Compile Include="Checkers\IPrerequisitesChecker.cs" />
     <Compile Include="AssemblyListProvider.cs" />
+    <Compile Include="DbTransactionAttribute.cs" />
     <Compile Include="ExtensionMethods\DictionaryExtentionMethods.cs" />
     <Compile Include="ExtensionMethods\ReflectionExtensionMethods.cs" />
     <Compile Include="Helpers\IObjectLookupCache.cs" />

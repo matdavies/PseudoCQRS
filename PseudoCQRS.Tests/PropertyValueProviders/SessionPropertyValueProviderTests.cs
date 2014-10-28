@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Web;
 using NUnit.Framework;
 using PseudoCQRS.PropertyValueProviders;
-using Rhino.Mocks;
+using PseudoCQRS.Tests.Helpers;
+using HttpContextWrapper = PseudoCQRS.Mvc.HttpContextWrapper;
 
 namespace PseudoCQRS.Tests.PropertyValueProviders
 {
@@ -14,7 +16,8 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		[SetUp]
 		public void Setup()
 		{
-			_httpContextWrapper = MockRepository.GenerateMock<IHttpContextWrapper>();
+			HttpContext.Current = HttpContextHelper.GetHttpContext();
+			_httpContextWrapper = new HttpContextWrapper();
 			_valueProvider = new SessionPropertyValueProvider( _httpContextWrapper );
 		}
 
@@ -23,9 +26,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		{
 			const string testKey = "MyTestKey";
 			const string fullKey = "System.String:" + testKey;
-			_httpContextWrapper
-				.Stub( x => x.ContainsSessionItem( fullKey ) )
-				.Return( true );
+			HttpContext.Current.Session[ fullKey ] = "";
 
 			Assert.IsTrue( _valueProvider.HasValue<string>( testKey ) );
 		}
@@ -43,12 +44,9 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			const string testKey = "MyTestKey";
 			const string fullKey = "System.Object:" + testKey;
 			const string value = "12345";
+			HttpContext.Current.Session[ fullKey ] = value;
 
-			_httpContextWrapper
-				.Stub( x => x.GetSessionItem( fullKey ) )
-				.Return( value );
-
-			var retVal = _valueProvider.GetValue<Object>( testKey, typeof( string ) );
+			var retVal = _valueProvider.GetValue<Object>( testKey, typeof(string) );
 
 			Assert.AreEqual( value, retVal );
 		}
@@ -59,12 +57,9 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			const string testKey = "MyTestKey";
 			const string fullKey = "System.String:" + testKey;
 			const string value = "12345";
-
-			_httpContextWrapper.Stub( x => x.SetSessionItem( fullKey, value ) );
-
 			_valueProvider.SetValue<string>( testKey, value );
 
-			_httpContextWrapper.AssertWasCalled( x => x.SetSessionItem( fullKey, value ) );
+			Assert.IsTrue( (string)HttpContext.Current.Session[ fullKey ] == value );
 		}
 	}
 }
