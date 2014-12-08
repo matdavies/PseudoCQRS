@@ -3,6 +3,7 @@ using System.Web;
 using NUnit.Framework;
 using PseudoCQRS.Controllers;
 using PseudoCQRS.Tests.Helpers;
+using HttpContextWrapper = PseudoCQRS.Mvc.HttpContextWrapper;
 
 namespace PseudoCQRS.Tests.Controllers
 {
@@ -16,12 +17,14 @@ namespace PseudoCQRS.Tests.Controllers
 		private const string SuccessMessage = @"Success";
 
 		private SessionBasedMessageManager _sessionBasedMessageManager;
+		private IHttpContextWrapper _httpContextWrapper;
 
 		[SetUp]
 		public void Setup()
 		{
 			HttpContext.Current = HttpContextHelper.GetHttpContext();
-			_sessionBasedMessageManager = new SessionBasedMessageManager();
+			_httpContextWrapper = new HttpContextWrapper();
+			_sessionBasedMessageManager = new SessionBasedMessageManager( _httpContextWrapper );
 		}
 
 		[Test]

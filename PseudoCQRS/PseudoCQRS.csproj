@@ -56,8 +56,8 @@
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mvc51|AnyCPU'">
-    <OutputPath>bin\Mvc51\</OutputPath>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Mvc5|AnyCPU' ">
+    <OutputPath>bin\Mvc5\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -68,38 +68,17 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <Choose>
-    <When Condition="'$(Configuration)|$(Platform)' == 'Mvc51|AnyCPU'">
-      <ItemGroup>
-        <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-          <HintPath>..\lib\System.Web.Mvc.dll</HintPath>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="'$(Configuration)|$(Platform)' == 'Mvc4|AnyCPU'">
-      <ItemGroup>
-        <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
   <ItemGroup>
     <Compile Include="Attributes\PersistAttribute.cs" />
     <Compile Include="Checkers\BaseCheckAttribute.cs" />
@@ -124,24 +103,18 @@
     <Compile Include="Configuration\DependencyInjectionServiceLocator.cs" />
     <Compile Include="Configuration\DIConfiguration.cs" />
     <Compile Include="Configuration\IDependencyInjectionContainer.cs" />
+    <Compile Include="Configuration\IImplementationsFinder.cs" />
     <Compile Include="Configuration\OverridableServicesContainer.cs" />
-    <Compile Include="Controllers\BaseCommandController.cs" />
-    <Compile Include="Controllers\BaseExecuteController.cs" />
-    <Compile Include="Controllers\BaseReadController.cs" />
-    <Compile Include="Controllers\BaseReadExecuteController.cs" />
     <Compile Include="Controllers\CommandExecutor.cs" />
     <Compile Include="Controllers\ICommandExecutor.cs" />
     <Compile Include="Controllers\IReferrerProvider.cs" />
-    <Compile Include="Controllers\IViewPath.cs" />
     <Compile Include="Controllers\ReferrerProvider.cs" />
     <Compile Include="Controllers\SessionBasedErrorManager.cs" />
-    <Compile Include="Controllers\ExtensionMethods\ControllerExtensionMethods.cs" />
     <Compile Include="Controllers\IMessageManager.cs" />
     <Compile Include="Controllers\IViewModelToCommandMappingEngine.cs" />
-    <Compile Include="DbSessionManagerAttribute.cs" />
-    <Compile Include="DbTransactionAttribute.cs" />
     <Compile Include="Checkers\IPrerequisitesChecker.cs" />
     <Compile Include="AssemblyListProvider.cs" />
+    <Compile Include="DbTransactionAttribute.cs" />
     <Compile Include="ExtensionMethods\DictionaryExtentionMethods.cs" />
     <Compile Include="ExtensionMethods\ReflectionExtensionMethods.cs" />
     <Compile Include="Helpers\IObjectLookupCache.cs" />
@@ -149,6 +122,7 @@
     <Compile Include="IAssemblyListProvider.cs" />
     <Compile Include="IDbSessionManager.cs" />
     <Compile Include="IEventSubscriberAssembliesProvider.cs" />
+    <Compile Include="IHttpContextWrapper.cs" />
     <Compile Include="IViewModelFactory.cs" />
     <Compile Include="IViewModelProvider.cs" />
     <Compile Include="Controllers\Mapper.cs" />
@@ -177,7 +151,6 @@
     <Compile Include="PropertyValueProviders\SessionPropertyValueProvider.cs" />
     <Compile Include="Checkers\ValidationCheckAttribute.cs" />
     <Compile Include="SubscriptionService.cs" />
-    <Compile Include="ViewHelpers\MessageUtilities.cs" />
     <Compile Include="ViewModelProviderArgumentsProvider.cs" />
     <Compile Include="ViewModelFactory.cs" />
   </ItemGroup>
@@ -188,7 +161,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
-d:
 cd "$(SolutionDir)"
 "$(SolutionDir)CreatePackages.bat"
 )</PostBuildEvent>

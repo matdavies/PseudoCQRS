@@ -55,8 +55,8 @@
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mvc51|AnyCPU'">
-    <OutputPath>bin\Mvc51\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mvc5|AnyCPU'">
+    <OutputPath>bin\Mvc5\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -81,21 +81,28 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <Choose>
-    <When Condition="'$(Configuration)|$(Platform)' == 'Mvc51|AnyCPU'">
+    <When Condition="'$(Configuration)|$(Platform)' == 'Mvc5|AnyCPU'">
       <ItemGroup>
-        <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-          <HintPath>..\lib\System.Web.Mvc.dll</HintPath>
+        <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+          <Private>True</Private>
+          <HintPath>packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
         </Reference>
       </ItemGroup>
     </When>
     <When Condition="'$(Configuration)|$(Platform)' == 'Mvc4|AnyCPU'">
       <ItemGroup>
-        <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+        <Reference Include="System.Web.Mvc">
+          <HintPath>packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
       </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+        <Reference Include="System.Web.Mvc, Version=3.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>packages\Microsoft.AspNet.Mvc.3.0.50813.1\lib\net40\System.Web.Mvc.dll</HintPath>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -120,7 +127,7 @@
     <Compile Include="Controllers\ReferrerProviderTests.cs" />
     <Compile Include="Controllers\SessionBasedMessageManagerTests.cs" />
     <Compile Include="Controllers\MapperTests.cs" />
-    <Compile Include="DbAttributesTests.cs" />
+    <Compile Include="DbSessionManagerAttributeTests.cs" />
     <Compile Include="AssemblyListProviderTests.cs" />
     <Compile Include="Helpers\ObjectLookupCacheTests.cs" />
     <Compile Include="TestHelpers\HttpContextHelper.cs" />
@@ -151,9 +158,15 @@
     <Compile Include="ViewModelProviderArgumentsProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PseudoCQRS.Mvc\PseudoCQRS.Mvc.csproj">
+      <Project>{02bdb9cb-e298-44b2-9c71-04ff9d9bcd60}</Project>
+      <Name>PseudoCQRS.Mvc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PseudoCQRS\PseudoCQRS.csproj">
       <Project>{7fc22cf5-db6d-4d85-a4fa-40915d4dbd3b}</Project>
       <Name>PseudoCQRS</Name>

@@ -1,12 +1,21 @@
 ﻿using System.Linq;
+using Microsoft.Practices.ServiceLocation;
 using NUnit.Framework;
 using PseudoCQRS.PropertyValueProviders;
+using Rhino.Mocks;
 
 namespace PseudoCQRS.Tests.PropertyValueProviders
 {
 	[TestFixture]
 	public class PropertyValueProviderFactoryTests
 	{
+		[SetUp]
+		public void Setup()
+		{
+			var serviceLocator = MockRepository.GenerateMock<IServiceLocator>();
+			ServiceLocator.SetLocatorProvider( () => serviceLocator );
+		}
+
 		[Test]
 		public void ShouldReturnAllPropertyValueProviders()
 		{

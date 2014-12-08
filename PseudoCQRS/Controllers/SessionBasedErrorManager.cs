@@ -1,12 +1,17 @@
 ﻿using System;
-using System.Web;
 
 namespace PseudoCQRS.Controllers
 {
 	public class SessionBasedMessageManager : IMessageManager
 	{
+		private readonly IHttpContextWrapper _httpContextWrapper;
 		private const string ErrorKey = "SessionBasedMessageManager_ErrorKey";
 		private const string SuccessKey = "SessionBasedMessageManager_SuccessKey";
+
+		public SessionBasedMessageManager( IHttpContextWrapper httpContextWrapper )
+		{
+			_httpContextWrapper = httpContextWrapper;
+		}
 
 		public void SetErrorMessage( string message )
 		{
@@ -28,19 +33,19 @@ namespace PseudoCQRS.Controllers
 			return GetMessage( SuccessKey );
 		}
 
-		private static void SetMessage( string key, string message )
+		private void SetMessage( string key, string message )
 		{
-			if ( HttpContext.Current != null )
-				HttpContext.Current.Session[ key ] = message;
+			_httpContextWrapper.SetSessionItem( key, message );
 		}
 
-		private static string GetMessage( string key )
+		private string GetMessage( string key )
 		{
-			if ( HttpContext.Current == null || HttpContext.Current.Session[ key ] == null )
-				return String.Empty;
+			var sessionItem = _httpContextWrapper.GetSessionItem( key );
+			string retVal = String.Empty;
+			if ( sessionItem != null )
+				retVal = sessionItem.ToString();
 
-			var retVal = HttpContext.Current.Session[ key ].ToString();
-			HttpContext.Current.Session.Remove( key );
+			_httpContextWrapper.SessionRemoveItem( key );
 			return retVal;
 		}
 	}

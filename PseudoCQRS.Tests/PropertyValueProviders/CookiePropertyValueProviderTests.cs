@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Web;
 using NUnit.Framework;
+using PseudoCQRS.Mvc;
 using PseudoCQRS.PropertyValueProviders;
 using PseudoCQRS.Tests.Helpers;
+using HttpContextWrapper = PseudoCQRS.Mvc.HttpContextWrapper;
 
 namespace PseudoCQRS.Tests.PropertyValueProviders
 {
@@ -16,7 +18,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 		public void Setup()
 		{
 			HttpContext.Current = HttpContextHelper.GetHttpContext();
-			_valueProvider = new CookiePropertyValueProvider();
+			_valueProvider = new CookiePropertyValueProvider(new HttpContextWrapper());
 		}
 
 		[Test]

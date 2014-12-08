@@ -1,10 +1,25 @@
 ﻿using System;
-using System.Web;
+using Microsoft.Practices.ServiceLocation;
 
 namespace PseudoCQRS.PropertyValueProviders
 {
-	public class CookiePropertyValueProvider : BasePropertyValueProvider, IPropertyValueProvider, IPersistablePropertyValueProvider
+	public class CookiePropertyValueProvider : BasePropertyValueProvider,
+		IPropertyValueProvider,
+		IPersistablePropertyValueProvider
 	{
+		private readonly IHttpContextWrapper _httpContextWrapper;
+
+		public CookiePropertyValueProvider()
+			: this( ServiceLocator.Current.GetInstance<IHttpContextWrapper>() )
+		{
+			
+		}
+
+		public CookiePropertyValueProvider( IHttpContextWrapper httpContextWrapper )
+		{
+			_httpContextWrapper = httpContextWrapper;
+		}
+
 		private const string KeyFormat = @"{0}:{1}";
 
 		private string GetKey( Type objectType, string propertyName )
@@ -14,17 +29,18 @@ namespace PseudoCQRS.PropertyValueProviders
 
 		public bool HasValue<T>( string key )
 		{
-			return HttpContext.Current.Request.Cookies[ GetKey( typeof( T ), key ) ] != null;
+			return _httpContextWrapper.RequestContainsCookie( GetKey( typeof ( T ), key ) );
 		}
 
 		public object GetValue<T>( string key, Type propertyType )
 		{
-			return ConvertValue( HttpContext.Current.Request.Cookies[ GetKey( typeof( T ), key ) ].Value, propertyType );
+			string value = _httpContextWrapper.RequestGetCookieValue( GetKey( typeof ( T ), key ) );
+			return ConvertValue( value, propertyType );
 		}
 
 		public void SetValue<T>( string key, object value )
 		{
-			HttpContext.Current.Response.Cookies.Set( new HttpCookie( GetKey( typeof( T ), key ), value.ToString() ) );
+			_httpContextWrapper.ResponseSetCookie( GetKey( typeof ( T ), key ), value.ToString() );
 		}
 	}
 }

@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Web;
+using Microsoft.Practices.ServiceLocation;
 
 namespace PseudoCQRS.PropertyValueProviders
 {
 	public class FormDataPropertyValueProvider : BasePropertyValueProvider, IPropertyValueProvider
 	{
+		private readonly IHttpContextWrapper _httpContextWrapper;
+
+		public FormDataPropertyValueProvider()
+			: this( ServiceLocator.Current.GetInstance<IHttpContextWrapper>() ) {}
+
+		public FormDataPropertyValueProvider( IHttpContextWrapper httpContextWrapper )
+		{
+			_httpContextWrapper = httpContextWrapper;
+		}
+
 		private string GetKey( Type objectType, string propertyName )
 		{
 			return propertyName;
@@ -14,8 +24,8 @@ namespace PseudoCQRS.PropertyValueProviders
 
 		public bool HasValue<T>( string key )
 		{
-			var hasValue = HttpContext.Current.Request.Form[ key ] != null;
-			if ( !hasValue && HttpContext.Current.Request.Form[ key + "_Exists" ] != null )
+			var hasValue = _httpContextWrapper.ContainsFormItem( key );
+			if ( !hasValue && _httpContextWrapper.ContainsFormItem( key + "_Exists" ) )
 				hasValue = true;
 
 			return hasValue;
@@ -23,7 +33,7 @@ namespace PseudoCQRS.PropertyValueProviders
 
 		public object GetValue<T>( string key, Type propertyType )
 		{
-			object val = HttpContext.Current.Request.Form[ GetKey( propertyType, key ) ];
+			object val = _httpContextWrapper.GetFormItem( GetKey( propertyType, key ) );
 			if ( PropertyIsListAndValueIsNull( propertyType, val ) )
 				return GetEmptyListProperty( propertyType );
 

@@ -3,28 +3,23 @@ using System.Web;
 using NUnit.Framework;
 using PseudoCQRS.PropertyValueProviders;
 using PseudoCQRS.Tests.Helpers;
+using HttpContextWrapper = PseudoCQRS.Mvc.HttpContextWrapper;
 
 namespace PseudoCQRS.Tests.PropertyValueProviders
 {
 	[TestFixture]
 	public class SessionPropertyValueProviderTests
 	{
+		private IHttpContextWrapper _httpContextWrapper;
 		private SessionPropertyValueProvider _valueProvider;
 
 		[SetUp]
 		public void Setup()
 		{
 			HttpContext.Current = HttpContextHelper.GetHttpContext();
-			_valueProvider = new SessionPropertyValueProvider();
+			_httpContextWrapper = new HttpContextWrapper();
+			_valueProvider = new SessionPropertyValueProvider( _httpContextWrapper );
 		}
-
-		/*
-		[Test]
-		public void GetKeyShouldCreateCorrectly()
-		{
-			CommonPropertyValueProviderTests.GetKeyShouldReturnAccordingToFormat( _valueProvider );
-		}
-        */
 
 		[Test]
 		public void HasValueShouldReturnTrueWhenValueExists()
@@ -51,7 +46,7 @@ namespace PseudoCQRS.Tests.PropertyValueProviders
 			const string value = "12345";
 			HttpContext.Current.Session[ fullKey ] = value;
 
-			var retVal = _valueProvider.GetValue<Object>( testKey, typeof( string ) );
+			var retVal = _valueProvider.GetValue<Object>( testKey, typeof(string) );
 
 			Assert.AreEqual( value, retVal );
 		}

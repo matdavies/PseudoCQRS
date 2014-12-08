@@ -12,7 +12,7 @@ namespace PseudoCQRS.Examples.NerdDinner.Infrastructure
 		{
 			return new List<Assembly>
 			{
-				this.GetType().Assembly
+				this.GetType().Assembly  
 			};
 		}
 	}

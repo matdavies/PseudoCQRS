@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PseudoCQRS.Checkers
+﻿namespace PseudoCQRS.Checkers
 {
 	public class CheckersExecuter : ICheckersExecuter
 	{

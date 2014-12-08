@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace PseudoCQRS
 {
@@ -6,7 +7,8 @@ namespace PseudoCQRS
 	{
 		public static bool HasTransactionAttribute<T>( this ICommandHandler<T> commandHandler )
 		{
-			return commandHandler.GetType().GetCustomAttributes( typeof( DbTransactionAttribute ), false ).Any();
+			var attributeType = typeof( DbTransactionAttribute );
+			return commandHandler.GetType().GetCustomAttributes( attributeType , false ).Any();
 		}
 	}
 }
