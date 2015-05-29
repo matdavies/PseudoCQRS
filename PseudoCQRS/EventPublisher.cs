@@ -30,9 +30,10 @@ namespace PseudoCQRS
 			{
 				if ( doAsync && subscriber.IsAsynchronous )
 				{
+					var eventSubscriber = subscriber;
 					var t = new Thread( () =>
 					{
-						subscriber.Notify( @event );
+						eventSubscriber.Notify( @event );
 						_dbSessionManager.CloseSession();
 					} );
 					t.Start();
