@@ -16,9 +16,10 @@ namespace PseudoCQRS.Tests
 
 		private static StringBuilder _sharedStringBuilder = new StringBuilder();
 
-
 		// ReSharper disable once MemberCanBePrivate.Global
-		public class TestingEvent {}
+		public class TestingEvent
+		{
+		}
 
 		[SetUp]
 		public void Setup()
@@ -63,7 +64,6 @@ namespace PseudoCQRS.Tests
 			mockedEventSubscriber2.AssertWasCalled( x => x.Notify( Arg<TestingEvent>.Is.Anything ) );
 		}
 
-
 		public class AsyncSubscriber : IEventSubscriber<TestingEvent>
 		{
 			public void Notify( TestingEvent @event )
@@ -80,14 +80,15 @@ namespace PseudoCQRS.Tests
 
 		public class AsyncSubscriber2 : IEventSubscriber<TestingEvent>
 		{
-			public void Notify( TestingEvent @event ) {}
+			public void Notify( TestingEvent @event )
+			{
+			}
 
 			public bool IsAsynchronous
 			{
 				get { return true; }
 			}
 		}
-
 
 		[Test]
 		public void CanNotifyAsynchronousSubscriber()
@@ -140,6 +141,54 @@ namespace PseudoCQRS.Tests
 			Thread.Sleep( 2000 );
 			Console.WriteLine( _sharedStringBuilder.ToString() );
 			_dbSessionManager.AssertWasCalled( x => x.CloseSession(), x => x.Repeat.Twice() );
+		}
+
+		public class DummyEventForTestingCanRunSubscribers
+		{
+		}
+
+		public class EventSubscriberWhichAlwaysRun : IEventSubscriber<DummyEventForTestingCanRunSubscribers>
+		{
+			public void Notify( DummyEventForTestingCanRunSubscribers @event ) => NotifiedSubscribersForTestingCanRunSubscribers.Add( this.GetType() );
+
+			public bool IsAsynchronous { get; } = false;
+		}
+
+		public class EventSubscriberWhichCanDecideButRunRunAlways : IEventSubscriber<DummyEventForTestingCanRunSubscribers>, IEventSubscriberRunnable<DummyEventForTestingCanRunSubscribers>
+		{
+			public void Notify( DummyEventForTestingCanRunSubscribers @event ) => NotifiedSubscribersForTestingCanRunSubscribers.Add( this.GetType() );
+
+			public bool IsAsynchronous { get; } = false;
+			public bool CanRun( DummyEventForTestingCanRunSubscribers @event ) => true;
+		}
+
+		public class EventSubscriberWhichCanDecideButNeverRuns : IEventSubscriber<DummyEventForTestingCanRunSubscribers>, IEventSubscriberRunnable<DummyEventForTestingCanRunSubscribers>
+		{
+			public void Notify( DummyEventForTestingCanRunSubscribers @event ) => NotifiedSubscribersForTestingCanRunSubscribers.Add( this.GetType() );
+
+			public bool IsAsynchronous { get; } = false;
+			public bool CanRun( DummyEventForTestingCanRunSubscribers @event ) => false;
+		}
+
+		private static readonly List<Type> NotifiedSubscribersForTestingCanRunSubscribers = new List<Type>();
+
+		[Test]
+		public void CheckIfSubscriberIsRunnableBeforeNotifyingThem()
+		{
+			_subscriptionService
+				.Stub( x => x.GetSubscriptions<DummyEventForTestingCanRunSubscribers>() )
+				.Return( new List<IEventSubscriber<DummyEventForTestingCanRunSubscribers>>
+				{
+					new EventSubscriberWhichAlwaysRun(),
+					new EventSubscriberWhichCanDecideButRunRunAlways(),
+					new EventSubscriberWhichCanDecideButNeverRuns(),
+
+				} );
+			_publisher.Publish( new DummyEventForTestingCanRunSubscribers() );
+
+			Assert.AreEqual( 2, NotifiedSubscribersForTestingCanRunSubscribers.Count );
+			Assert.Contains( typeof( EventSubscriberWhichAlwaysRun ), NotifiedSubscribersForTestingCanRunSubscribers );
+			Assert.Contains( typeof( EventSubscriberWhichCanDecideButRunRunAlways ), NotifiedSubscribersForTestingCanRunSubscribers );
 		}
 	}
 }

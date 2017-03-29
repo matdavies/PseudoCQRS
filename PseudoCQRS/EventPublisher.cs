@@ -33,14 +33,16 @@ namespace PseudoCQRS
 					var eventSubscriber = subscriber;
 					var t = new Thread( () =>
 					{
-						eventSubscriber.Notify( @event );
+						if ( ( eventSubscriber as IEventSubscriberRunnable<T> )?.CanRun( @event ) ?? true )
+							eventSubscriber.Notify( @event );
 						_dbSessionManager.CloseSession();
 					} );
 					t.Start();
 				}
 				else
 				{
-					subscriber.Notify( @event );
+					if ( ( subscriber as IEventSubscriberRunnable<T> )?.CanRun( @event ) ?? true )
+						subscriber.Notify( @event );
 				}
 			}
 		}
