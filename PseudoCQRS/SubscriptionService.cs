@@ -28,10 +28,7 @@ namespace PseudoCQRS
 			var subscribers = _cache.GetValue<IEnumerable<Type>>( typeFullName, null );
 			if ( subscribers == null )
 			{
-				subscribers = ( from assembly in _eventSubscriberAssembliesProvider.GetEventSubscriberAssemblies()
-				                from t in assembly.GetImplementationsOf( typeof( IEventSubscriber<> ), typeof( T ) )
-				                select t ).ToList();
-
+				subscribers = GetSubscribers<T>();
 				if ( subscribers.Any() )
 					_cache.SetValue<IEnumerable<Type>>( typeFullName, subscribers );
 			}
@@ -40,6 +37,13 @@ namespace PseudoCQRS
 				result.Add( ServiceLocator.Current.GetInstance( subscriberType ) as IEventSubscriber<T> );
 
 			return result;
+		}
+
+		protected virtual List<Type> GetSubscribers<T>()
+		{
+			return ( from assembly in _eventSubscriberAssembliesProvider.GetEventSubscriberAssemblies()
+					 from t in assembly.GetImplementationsOf( typeof( IEventSubscriber<> ), typeof( T ) )
+					 select t ).ToList();
 		}
 	}
 }

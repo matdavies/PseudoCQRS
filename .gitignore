@@ -227,3 +227,4 @@ Backup*/
 UpgradeLog*.XML
 
 /packages/
+**/.vs/*

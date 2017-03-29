@@ -16,6 +16,8 @@ namespace PseudoCQRS.Controllers
 		public BaseCommandController()
 			: this( ServiceLocator.Current.GetInstance<ICommandExecutor>() ) {}
 
+		public abstract ActionResult OnSuccessfulExecution( TViewModel viewModel, CommandResult commandResult );
+		public abstract ActionResult OnFailureExecution( TViewModel viewModel, CommandResult commandResult );
 
 		protected virtual CommandResult ExecuteCommand( TViewModel viewModel )
 		{
@@ -32,6 +34,12 @@ namespace PseudoCQRS.Controllers
 		protected virtual TCommand ConvertViewModelToCommand( TViewModel viewModel )
 		{
 			return Mapper.Map<TViewModel, TCommand>( viewModel );
+		}
+
+		protected ActionResult ExecuteCommandAndGetActionResult( TViewModel viewModel )
+		{
+			var commandResult = ExecuteCommand( viewModel );
+			return commandResult.ContainsError ? OnFailureExecution( viewModel, commandResult ) : OnSuccessfulExecution( viewModel, commandResult );
 		}
 	}
 }

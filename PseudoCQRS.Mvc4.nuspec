@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd" >
 	<metadata>
 		<id>PseudoCQRS.Mvc4</id>
-		<version>4.2.0</version>
+		<version>5.0.1</version>
 		<title>Pseudo CQRS Mvc4</title>
 		<authors>Liquid Thinking</authors>
 		<projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
@@ -12,8 +12,8 @@
 		<releaseNotes>Moved Mvc stuff in separate package so that PseudoCQRS can be use in other environments.</releaseNotes>
 		<dependencies>
 			<dependency id="CommonServiceLocator" version="1.0"/>
-			<dependency id="PseudoCQRS" version="4.2.0"/>
-			<dependency id="Microsoft.AspNet.Mvc" version="[4.0.0,5.0.0)" />
+      <dependency id="PseudoCQRS" version="[5.0.0,6.0.0)"/>
+      <dependency id="Microsoft.AspNet.Mvc" version="[4.0.0,5.0.0)" />
 		</dependencies>
 	</metadata>
 	<files>

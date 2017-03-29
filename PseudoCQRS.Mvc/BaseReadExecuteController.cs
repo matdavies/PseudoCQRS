@@ -12,7 +12,10 @@ namespace PseudoCQRS.Controllers
 
 		public abstract string ViewPath { get; }
 
-		public abstract ActionResult OnSuccessfulExecution( TViewModel viewModel, CommandResult commandResult );
+		public override ActionResult OnFailureExecution( TViewModel viewModel, CommandResult commandResult )
+		{
+			return View( this.GetView(), viewModel );
+		}
 
 
 		protected BaseReadExecuteController(
@@ -23,7 +26,7 @@ namespace PseudoCQRS.Controllers
 			_viewModelFactory = viewModelFactory;
 		}
 
-		public BaseReadExecuteController()
+		protected BaseReadExecuteController()
 			: this(
 				ServiceLocator.Current.GetInstance<ICommandExecutor>(),
 				ServiceLocator.Current.GetInstance<IViewModelFactory<TViewModel, TArgs>>() ) {}
@@ -31,8 +34,7 @@ namespace PseudoCQRS.Controllers
 
 		protected virtual ActionResult GetActionResult( TViewModel viewModel )
 		{
-			var result = ExecuteCommand( viewModel );
-			return result.ContainsError ? OnFailureExecution( viewModel ) : OnSuccessfulExecution( viewModel, result );
+			return ExecuteCommandAndGetActionResult( viewModel );
 		}
 
 
@@ -55,11 +57,6 @@ namespace PseudoCQRS.Controllers
 		}
 
 		protected virtual ViewResult GetViewResult( TViewModel viewModel )
-		{
-			return View( this.GetView(), viewModel );
-		}
-
-		public virtual ActionResult OnFailureExecution( TViewModel viewModel )
 		{
 			return View( this.GetView(), viewModel );
 		}

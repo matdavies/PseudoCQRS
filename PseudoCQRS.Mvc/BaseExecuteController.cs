@@ -20,13 +20,18 @@ namespace PseudoCQRS.Controllers
 			_referrerProvider = referrerProvider;
 		}
 
-		public BaseExecuteController()
+		protected BaseExecuteController()
 			: this(
 				ServiceLocator.Current.GetInstance<ICommandExecutor>(),
 				ServiceLocator.Current.GetInstance<IMessageManager>(),
 				ServiceLocator.Current.GetInstance<IReferrerProvider>() ) {}
 
-		public virtual ActionResult OnCompletion( TViewModel viewModel, CommandResult commandResult )
+		public override ActionResult OnSuccessfulExecution( TViewModel viewModel, CommandResult commandResult )
+		{
+			return Redirect( _referrerProvider.GetAbsoluteUri() );
+		}
+
+		public override ActionResult OnFailureExecution( TViewModel viewModel, CommandResult commandResult )
 		{
 			return Redirect( _referrerProvider.GetAbsoluteUri() );
 		}
@@ -34,23 +39,35 @@ namespace PseudoCQRS.Controllers
 		[HttpPost]
 		public virtual ActionResult Execute( TViewModel viewModel )
 		{
-			ActionResult result;
-			if ( ModelState.IsValid )
-			{
-				var commandResult = ExecuteCommand( viewModel );
-				result = OnCompletion( viewModel, commandResult );
-			}
-			else
+			if ( !ModelState.IsValid )
 			{
 				var errorMessage = GetErrorMessage();
 				_messageManager.SetErrorMessage( errorMessage );
-				result = OnCompletion( viewModel, new CommandResult
+				return OnFailureExecution( viewModel, new CommandResult
 				{
 					ContainsError = true,
 					Message = errorMessage
 				} );
 			}
-			return result;
+
+			return ExecuteCommandAndGetActionResult( viewModel );
+			//ActionResult result;
+			//if ( ModelState.IsValid )
+			//{
+			//	var commandResult = ExecuteCommand( viewModel );
+			//	result = OnCompletion( viewModel, commandResult );
+			//}
+			//else
+			//{
+			//	var errorMessage = GetErrorMessage();
+			//	_messageManager.SetErrorMessage( errorMessage );
+			//	result = OnCompletion( viewModel, new CommandResult
+			//	{
+			//		ContainsError = true,
+			//		Message = errorMessage
+			//	} );
+			//}
+			//return result;
 		}
 
 		protected virtual string GetErrorMessage()

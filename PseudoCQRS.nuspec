@@ -3,13 +3,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd" >
 	<metadata>
 		<id>PseudoCQRS</id>
-		<version>4.2.0</version>
+		<version>5.0.1</version>
 		<title>Pseudo CQRS</title>
 		<authors>Liquid Thinking</authors>
 		<projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>CQRS Framework</description>
-		<releaseNotes>Moved Mvc stuff in separate package so that PseudoCQRS can be use in other environments.</releaseNotes>
+		<releaseNotes>Extracted code to virtual GetSubscribers method</releaseNotes>
 		<dependencies>
 			<dependency id="CommonServiceLocator" version="1.0"/>
 		</dependencies>
