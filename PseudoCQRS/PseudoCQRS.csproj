@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArgumentBindingException.cs" />
     <Compile Include="Attributes\PersistAttribute.cs" />
     <Compile Include="Checkers\BaseCheckAttribute.cs" />
     <Compile Include="Checkers\CheckersExecuter.cs" />

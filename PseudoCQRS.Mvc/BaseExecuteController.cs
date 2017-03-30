@@ -50,24 +50,7 @@ namespace PseudoCQRS.Controllers
 				} );
 			}
 
-			return ExecuteCommandAndGetActionResult( viewModel );
-			//ActionResult result;
-			//if ( ModelState.IsValid )
-			//{
-			//	var commandResult = ExecuteCommand( viewModel );
-			//	result = OnCompletion( viewModel, commandResult );
-			//}
-			//else
-			//{
-			//	var errorMessage = GetErrorMessage();
-			//	_messageManager.SetErrorMessage( errorMessage );
-			//	result = OnCompletion( viewModel, new CommandResult
-			//	{
-			//		ContainsError = true,
-			//		Message = errorMessage
-			//	} );
-			//}
-			//return result;
+			return ExecuteCommandAndGetActionResult( viewModel );			
 		}
 
 		protected virtual string GetErrorMessage()

@@ -3,8 +3,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd" >
 	<metadata>
 		<id>PseudoCQRS.Mvc4</id>
-		<version>5.0.1</version>
-		<title>Pseudo CQRS Mvc4</title>
+    <version>5.0.2</version>
+    <title>Pseudo CQRS Mvc4</title>
 		<authors>Liquid Thinking</authors>
 		<projectUrl>https://github.com/LiquidThinking/PseudoCQRS</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
