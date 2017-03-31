@@ -34,7 +34,14 @@ namespace PseudoCQRS.PropertyValueProviders
 					return null;
 			}
 
-			return Convert.ChangeType( value, propertyType );
+			try
+			{
+				return Convert.ChangeType( value, propertyType );
+			}
+			catch ( Exception exception )
+			{
+				throw new ArgumentBindingException( value, propertyType, exception );
+			}
 		}
 	}
 }

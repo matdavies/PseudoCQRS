@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
 using Microsoft.Practices.ServiceLocation;
 using PseudoCQRS.Controllers.ExtensionMethods;
 
@@ -46,7 +49,14 @@ namespace PseudoCQRS.Controllers
 
 		protected virtual TViewModel GetViewModel()
 		{
-			return _viewModelFactory.GetViewModel();
+			try
+			{
+				return _viewModelFactory.GetViewModel();
+			}
+			catch ( ArgumentBindingException exception )
+			{
+				throw new HttpException( 404, exception.Message, exception.InnerException );
+			}
 		}
 
 		[HttpPost]
