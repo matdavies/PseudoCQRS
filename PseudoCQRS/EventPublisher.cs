@@ -1,4 +1,7 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
 
 namespace PseudoCQRS
 {
@@ -6,11 +9,13 @@ namespace PseudoCQRS
 	{
 		private readonly ISubscriptionService _subscriptionService;
 		private readonly IDbSessionManager _dbSessionManager;
+		private readonly ILogger _logger;
 
-		public EventPublisher( ISubscriptionService subscriptionService, IDbSessionManager dbSessionManager )
+		public EventPublisher( ISubscriptionService subscriptionService, IDbSessionManager dbSessionManager, ILogger logger )
 		{
 			_subscriptionService = subscriptionService;
 			_dbSessionManager = dbSessionManager;
+			_logger = logger;
 		}
 
 		public void Publish<T>( T @event )
@@ -33,8 +38,18 @@ namespace PseudoCQRS
 					var eventSubscriber = subscriber;
 					var t = new Thread( () =>
 					{
-						eventSubscriber.Notify( @event );
-						_dbSessionManager.CloseSession();
+						try
+						{
+							eventSubscriber.Notify( @event );
+						}
+						catch ( Exception )
+						{
+							string message = $@"Error occurred when the following subcriber '{eventSubscriber.GetType().FullName}' was notified about event '{@event.GetType()}'";
+							_logger.Log( message, @event );
+						} finally
+						{
+							_dbSessionManager.CloseSession();
+						}
 					} );
 					t.Start();
 				}

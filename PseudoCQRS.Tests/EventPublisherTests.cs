@@ -13,6 +13,7 @@ namespace PseudoCQRS.Tests
 		private ISubscriptionService _subscriptionService;
 		private IDbSessionManager _dbSessionManager;
 		private EventPublisher _publisher;
+		private ILogger _logger;
 
 		private static StringBuilder _sharedStringBuilder = new StringBuilder();
 
@@ -25,7 +26,9 @@ namespace PseudoCQRS.Tests
 		{
 			_subscriptionService = MockRepository.GenerateMock<ISubscriptionService>();
 			_dbSessionManager = MockRepository.GenerateMock<IDbSessionManager>();
-			_publisher = new EventPublisher( _subscriptionService, _dbSessionManager );
+			_logger = MockRepository.GenerateMock<ILogger>();
+
+			_publisher = new EventPublisher( _subscriptionService, _dbSessionManager, _logger );
 		}
 
 		// EXPECT: Call _subscriptionService.GetSubscriptions
