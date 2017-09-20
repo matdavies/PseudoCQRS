@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>PseudoCQRS</id>
-        <version>7.0.2</version>
+        <version>7.0.3</version>
         <title>PseudoCQRS</title>
         <authors>Liquid Thinking</authors>
         <owners>Liquid Thinking</owners>
@@ -17,7 +17,6 @@
             </group>
             <group targetFramework=".NETStandard2.0">
                 <dependency id="System.ComponentModel" version="4.3.0" exclude="Build,Analyzers" />
-                <dependency id="Microsoft.AspNetCore.Http.Features" version="2.0.0" exclude="Build,Analyzers" />
             </group>
         </dependencies>
     </metadata>
