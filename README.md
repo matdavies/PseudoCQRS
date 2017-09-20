@@ -3,8 +3,7 @@
 </a>
 
 
-PseudoCQRS
-==========
+# PseudoCQRS
 
 Pseudo CQRS is a asp.net mvc based framework to create web applications using the CQRS pattern (http://martinfowler.com/bliki/CQRS.html). PseudoCQRS is not a true CQRS implementation, hence the name PseudoCQRS. PseudoCQRS can be used in an existing mvc project as it does not require you to make any changes to your persistence mechanism, as it does not require you to use event sourcing.
 
@@ -15,3 +14,6 @@ The CQRS pattern also describes an event notification system whereby you can cre
 For a detailed description of the usage of PseudoCQRS, please see the wiki.  There is also a sample application included in the source.
 
 Give it a try and shout if you need help.
+
+# Packaging
+To create the NuGet packages run CreatePackages.ps1

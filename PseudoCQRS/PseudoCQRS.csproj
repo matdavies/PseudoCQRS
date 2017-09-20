@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
     <Configurations>Debug;Release</Configurations>
-		<VersionPrefix>7.0.3</VersionPrefix>
+    <VersionPrefix>7.0.4</VersionPrefix>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
