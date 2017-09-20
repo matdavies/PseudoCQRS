@@ -42,10 +42,10 @@ namespace PseudoCQRS
 						{
 							eventSubscriber.Notify( @event );
 						}
-						catch ( Exception )
+						catch ( Exception ex )
 						{
 							string message = $@"Error occurred when the following subcriber '{eventSubscriber.GetType().FullName}' was notified about event '{@event.GetType()}'";
-							_logger.Log( message, @event );
+							_logger.Log( message, ex, @event );
 						} finally
 						{
 							_dbSessionManager.CloseSession();

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text;
-using Microsoft.AspNetCore.Http;
-
-namespace PseudoCQRS.Controllers
+﻿namespace PseudoCQRS.Controllers
 {
 	public class SessionBasedMessageManager : IMessageManager
 	{
