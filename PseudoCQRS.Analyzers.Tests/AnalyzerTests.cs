@@ -231,5 +231,35 @@ namespace PseudoCQRS.Analyzers.Tests
 			VerifyCSharpDiagnostic( new[] { source, PseudoCQRSTypes } );
 
 		}
+
+		[Fact]
+		public void ForClassWhichHasProperties_DoesNotThrowException()
+		{
+			var source = @"
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Diagnostics;
+	using PseudoCQRS;
+	
+
+    namespace ConsoleApplication1
+    {
+		public class SomeType : IAsyncCommandHandler<object>
+        {   
+			protected int _id;
+			public int Id
+			{
+				get { return _id; }
+				set { _id = value; }
+			}
+        }
+    }";
+			VerifyCSharpDiagnostic( new[] { source, PseudoCQRSTypes } );
+
+		}
+
 	}
 }
