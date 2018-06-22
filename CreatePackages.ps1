@@ -4,8 +4,8 @@ if($PackMvc -eq 'y'){
     $MvcCoreVersion = Read-Host -Prompt 'PseudoCQRS MvcCore version to pack'
 }
 
-$pseudoCQRSCsprojPath = 'PseudoCQRS\PseudoCQRS.csproj'
-$pseudoCQRSNuspecPath = 'PseudoCQRS.nuspec'
+$pseudoCQRSCsprojPath = $PSScriptRoot + '\PseudoCQRS\PseudoCQRS.csproj'
+$pseudoCQRSNuspecPath = $PSScriptRoot + '\PseudoCQRS.nuspec'
 
 $pseudoCQRSCsproj = [xml](Get-Content $pseudoCQRSCsprojPath)
 $pseudoCQRSCsproj.Project.PropertyGroup.VersionPrefix = $Version.ToString()
